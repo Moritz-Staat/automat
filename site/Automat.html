@@ -9,10 +9,10 @@
 <body>
 <div class="container">
     <div>
-        <svg viewbox="0 0 100 20">
+        <svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient id="gradient">
-                    <stop color="#000"/>
+                    <stop offset="0" stop-color="#fff"/> <!-- Ändere die Farbe hier auf weiß -->
                 </linearGradient>
                 <pattern id="wave" x="0" y="-0.5" width="100%" height="100%" patternUnits="userSpaceOnUse">
                     <path id="wavePath" d="M-40 9 Q-30 7 -20 9 T0 9 T20 9 T40 9 T60 9 T80 9 T100 9 T120 9 V20 H-40z" mask="url(#mask)" fill="url(#gradient)">
@@ -28,7 +28,7 @@
                 </pattern>
             </defs>
             <text text-anchor="middle" x="50" y="15" font-size="17" fill="white" fill-opacity="0.1">Das Quiz!</text>
-            <text text-anchor="middle" x="50" y="15" font-size="17" fill="url(#wave)"  fill-opacity="1">Das Quiz!</text>
+            <text text-anchor="middle" x="50" y="15" font-size="17" fill="url(#wave)" fill-opacity="1">Das Quiz!</text>
         </svg>
     </div>
     <div class="quiz-options">

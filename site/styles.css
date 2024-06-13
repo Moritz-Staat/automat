@@ -1,0 +1,71 @@
+body, .container, .quiz-options, .quiz-link, .quiz-image, .h1, .h2 {
+    text-align: center;
+}
+
+.quiz-options {
+    margin-top: 20px;
+}
+
+.quiz-link {
+    display: block;
+    margin: 100px auto;
+}
+
+.quiz-image {
+    border: 3px solid #62b55a;
+    border-radius: 18px;
+    width: 350px;
+    transition: border-color 0.3s ease;
+}
+
+.quiz-image:hover {
+    border-color: #ff0000;
+}
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+/*Schrift einfügen*/
+@font-face {
+    font-family: 'Roboto';
+    src: local('Roboto'), url('Roboto-Regular-webfont.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: local('Roboto'), url('Roboto-Italic-webfont.woff') format('woff');
+    font-weight: 400;
+    font-style: italic;
+}
+
+.container{
+    width: 1000px;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    background: linear-gradient(to bottom right, #7a7a7a, #ffffff);
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-size: cover;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+svg {
+    font-weight: bold;
+    max-width: 900px;
+    height: 100%;
+}
+

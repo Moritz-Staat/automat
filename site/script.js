@@ -1,11 +1,18 @@
 let timeout;
 
 function showScreensaver() {
-    document.getElementById('screensaver').classList.remove('hidden');
+    const screensaver = document.getElementById('screensaver');
+    const video = document.getElementById('screensaverVideo');
+    screensaver.classList.remove('hidden');
+    video.play();
 }
 
 function hideScreensaver() {
-    document.getElementById('screensaver').classList.add('hidden');
+    const screensaver = document.getElementById('screensaver');
+    const video = document.getElementById('screensaverVideo');
+    screensaver.classList.add('hidden');
+    video.pause();
+    video.currentTime = 0; // Optional: Video von vorne abspielen
 }
 
 function resetTimer() {

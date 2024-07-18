@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Automat</title>
+    <style>
+        fieldset {
+            border: 1px solid #000;
+            padding: 10px;
+            margin: 10px;
+        }
+        button {
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Automat</h2>
+
+<p>Formular sendet POST:</p>
+
+<fieldset name="">
+    <legend>RELAIS (1):</legend>
+    <p><code>http://192.168.0.120/Start?param={0|1}</code></p>
+    <button onclick="doPost('1', 'http://192.168.0.120/Start')">param=1</button>
+    <button onclick="doPost('0', 'http://192.168.0.120/Start')">param=0</button>
+</fieldset>
+
+<fieldset>
+    <legend>RELAIS (2):</legend>
+    <p><code>http://192.168.0.120/Beginner?param={0|1}</code></p>
+    <button onclick="doPost('1', 'http://192.168.0.120/Beginner')">param=1</button>
+    <button onclick="doPost('0', 'http://192.168.0.120/Beginner')">param=0</button>
+</fieldset>
+
+<fieldset>
+    <legend>RELAIS (3):</legend>
+    <p><code>http://192.168.0.120/Expert?param={0|1}</code></p>
+    <button onclick="doPost('1', 'http://192.168.0.120/Expert')">param=1</button>
+    <button onclick="doPost('0', 'http://192.168.0.120/Expert')">param=0</button>
+</fieldset>
+
+<fieldset>
+    <legend>RELAIS (4):</legend>
+    <p><code>http://192.168.0.120/Hyper?param={0|1}</code></p>
+    <button onclick="doPost('1', 'http://192.168.0.120/Hyper')">param=1</button>
+    <button onclick="doPost('0', 'http://192.168.0.120/Hyper')">param=0</button>
+</fieldset>
+
+<fieldset>
+    <legend>RELAIS (5):</legend>
+    <p><code>http://192.168.0.120/Register?param={0|1}</code></p>
+    <button onclick="doPost('1', 'http://192.168.0.120/Register')">param=1</button>
+    <button onclick="doPost('0', 'http://192.168.0.120/Register')">param=0</button>
+</fieldset>
+
+<script>
+    function doPost(value, endpoint) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", endpoint + '?param=' + value, true);
+        xhr.send();
+    }
+</script>
+
+</body>
+</html>

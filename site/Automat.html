@@ -11,7 +11,7 @@
     <div>
 
 
-        
+
         <svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
             <defs>
                 <linearGradient id="gradient">
@@ -53,6 +53,33 @@
         Your browser does not support the video tag.
     </video>
 </div>
+
+<button id="openPopup">Kontaktformular öffnen</button>
+
+<div id="popupForm" class="popup hidden">
+    <div class="popup-header">
+        <span id="closePopup" class="close-btn">&times;</span>
+        <h2>Kontaktformular</h2>
+    </div>
+    <form id="popupFormContent">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">E-Mail:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="comments">Anmerkungen:</label>
+        <textarea id="comments" name="comments"></textarea>
+
+        <label>
+            <input type="checkbox" id="privacy" required> Ich akzeptiere die <a href="#">Datenschutzerklärung</a>
+        </label>
+
+        <button type="submit">Absenden</button>
+    </form>
+</div>
+
+
 
 <script src="script.js"></script>
 </body>

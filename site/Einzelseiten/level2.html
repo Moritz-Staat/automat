@@ -7,10 +7,21 @@
     <link rel="stylesheet" href="stylelevel1.css">
 </head>
 <body>
+<div id="wholepage">
 <div class="container">
     <div class="quiz-container">
         <iframe src="https://staging.intranet.wus-technik.com/automat-testing/" frameborder="0"></iframe>
     </div>
+</div>
+<img src="WuS_Logo.svg" alt="Code-falsch" class="logo" id="logo">
+<div id="pinModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Bitte geben Sie den PIN ein:</p>
+        <input type="password" id="pinInput" maxlength="20">
+        <button id="submitPin">Eingeben</button>
+    </div>
+</div>
 </div>
 
 <script src="javalevel2.js"></script>

@@ -26,30 +26,44 @@ document.addEventListener('keydown', resetTimer);
 
 resetTimer();
 
-document.addEventListener('DOMContentLoaded', function() {
-    var openPopupImg = document.getElementById('openPopup');
-    var closePopupBtn = document.getElementById('closePopup');
-    var popup = document.getElementById('popupForm');
 
-    openPopupImg.addEventListener('click', function() {
-        popup.style.display = 'block';
-    });
+/* Laden und Ausfüllen des PIN Formulars */
+document.getElementById('logo').onclick = function() {
+    document.getElementById('pinModal').style.display = 'block';
+}
 
-    closePopupBtn.addEventListener('click', function() {
-        popup.style.display = 'none';
-    });
+document.getElementsByClassName('close')[0].onclick = function() {
+    closeModal();
+}
 
-    // Schließen beim Klicken außerhalb des Popups
-    window.addEventListener('click', function(event) {
-        if (event.target == popup) {
-            popup.style.display = 'none';
-        }
-    });
+window.onclick = function(event) {
+    if (event.target == document.getElementById('pinModal')) {
+        closeModal();
+    }
+}
 
-    // Form submission handler (prevent default form submission for demo purposes)
-    document.getElementById('popupFormContent').addEventListener('submit', function(event) {
-        event.preventDefault();
-        alert('Formular abgesendet!');
-        popup.style.display = 'none';
-    });
-});
+document.getElementById('submitPin').onclick = function() {
+    const pinInput = document.getElementById('pinInput');
+    if (pinInput.value === '151107') {
+        alert('PIN korrekt! Relais wird ausgelöst.');
+        doPost('1', 'http://192.168.0.120/Start');
+        closeModal();
+    } else {
+        pinInput.classList.add('error');
+        setTimeout(() => {
+            pinInput.classList.remove('error');
+            closeModal();
+        }, 1000);
+    }
+}
+
+function doPost(param, url) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", url + "?param=" + param, true);
+    xhr.send();
+}
+
+function closeModal() {
+    document.getElementById('pinInput').value = '';
+    document.getElementById('pinModal').style.display = 'none';
+}

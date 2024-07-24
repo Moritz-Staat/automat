@@ -67,30 +67,15 @@
         Your browser does not support the video tag.
     </video>
 </div>
-
-<img id="openPopup" src="../Images/Geschenk.png" alt="Geschenk" class="popup-trigger"">
-
-<div id="popupForm" class="popup hidden">
-    <div class="popup-header">
-        <span id="closePopup" class="close-btn">&times;</span>
-        <h2 class="h2formular">Kontaktformular</h2>
+<img src="../Images/WuS_Logo.svg" alt="Code-falsch" class="logo" id="logo">
+<div id="pinModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>Bitte geben Sie den PIN ein:</p>
+        <input type="password" id="pinInput" maxlength="20">
+        <button id="submitPin">Eingeben</button>
     </div>
-    <form id="popupFormContent">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-
-        <label for="email">E-Mail:</label>
-        <input type="email" id="email" name="email" required>
-
-        <label for="comments">Interessen:</label>
-        <textarea id="comments" name="comments"></textarea>
-
-        <label>
-            <input type="checkbox" id="privacy" required> Ich akzeptiere die <a href="#">Datenschutzerklärung</a>
-        </label>
-
-        <button type="submit">Absenden</button>
-    </form>
+</div>
 </div>
 
 

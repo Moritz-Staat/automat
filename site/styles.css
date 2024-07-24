@@ -1,4 +1,4 @@
-body, .container, .quiz-options, .quiz-link, .quiz-image, .h1, .h2 {
+body, .container, .quiz-options, .quiz-link, .quiz3container, .quiz2container, .quiz1container, .h1, .h2 {
     text-align: center;
 }
 
@@ -11,16 +11,6 @@ body, .container, .quiz-options, .quiz-link, .quiz-image, .h1, .h2 {
     margin: 100px auto;
 }
 
-.quiz-image {
-    border: 3px solid #62b55a;
-    border-radius: 18px;
-    width: 350px;
-    transition: border-color 0.3s ease;
-}
-
-.quiz-image:hover {
-    border-color: #ff0000;
-}
 body {
     font-family: 'Roboto', sans-serif;
 }
@@ -159,4 +149,26 @@ svg {
     right: 20px;
     width: 100px;
     cursor: pointer;
+}
+
+/* Flexbox für Quiz-Bilder */
+.quiz-options {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.quiz-link {
+    text-align: center;
+}
+
+.quiz3container, .quiz2container, .quiz1container {
+    width: 300px;
+    height: 800px;
+    border: 3px solid #62b55a;
+    border-radius: 18px;
+    transition: border-color 0.3s ease;
+}
+.quiz3container:hover, .quiz2container:hover, .quiz1container:hover {
+    border-color: #ff0000;
 }

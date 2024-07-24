@@ -18,7 +18,7 @@ function hideScreensaver() {
 function resetTimer() {
     hideScreensaver();
     clearTimeout(timeout);
-    timeout = setTimeout(showScreensaver, 10000); // 10 Sekunden
+    timeout = setTimeout(showScreensaver, 20000); // 10 Sekunden
 }
 
 document.addEventListener('mousemove', resetTimer);

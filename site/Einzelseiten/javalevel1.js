@@ -19,9 +19,8 @@ document.getElementById('submitPin').onclick = function() {
         doPost('1', 'http://192.168.0.120/Start');
         closeModal();
     } else {
-        pinInput.classList.add('error');
+        showError();
         setTimeout(() => {
-            pinInput.classList.remove('error');
             closeModal();
         }, 1000);
     }
@@ -36,4 +35,9 @@ function doPost(param, url) {
 function closeModal() {
     document.getElementById('pinInput').value = '';
     document.getElementById('pinModal').style.display = 'none';
+    document.getElementById('errorOverlay').style.display = 'none';
+}
+
+function showError() {
+    document.getElementById('errorOverlay').style.display = 'flex';
 }

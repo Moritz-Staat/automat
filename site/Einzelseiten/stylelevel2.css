@@ -49,3 +49,7 @@ iframe {
     justify-content: center;
     align-items: center;
 }
+/* Stil für die rote Umrandung bei falschem PIN */
+.error-border {
+    border: 2px solid red;
+}

@@ -19,11 +19,11 @@ document.getElementById('submitPin').onclick = function() {
         doPost('1', 'http://192.168.0.120/Start');
         closeModal();
     } else {
-        pinInput.classList.add('error');
+        pinInput.classList.add('error-border');
         setTimeout(() => {
-            pinInput.classList.remove('error');
+            pinInput.classList.remove('error-border');
             closeModal();
-        }, 1000);
+        }, 2000);
     }
 }
 

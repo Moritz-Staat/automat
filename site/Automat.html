@@ -35,18 +35,33 @@
         </svg>
     </div>
     <div class="quiz-options">
-        <a href="https://staging.intranet.wus-technik.com/level-1/" target="_blank" class="quiz-link">
-            <img src="../Images/logo.jpg" alt="Quiz 1" class="quiz1container">
-        </a>
-        <a href="https://staging.intranet.wus-technik.com/level-2/" target="_blank" class="quiz-link">
-            <img src="../Images/logo.jpg" alt="Quiz 2" class="quiz2container">
-        </a>
-        <a href="https://staging.intranet.wus-technik.com/level-3/" target="_blank" class="quiz-link">
-            <img src="../Images/logo.jpg" alt="Quiz 3" class="quiz3container">
-        </a>
+        <div class="level1">
+            <h1> Anfänger </h1>
+            <a href="https://www.wus-technik.com" class="level1link">
+                <button id="buttonlevel1" class="button1">Level 1</button>
+            </a>
+            <img src="../Images/grünebirne.svg" alt="Fehler 1" class="my-svg">
+        </div>
+
+        <div class="level2">
+            <h1> Fortgeschritten </h1>
+            <a href="https://www.wus-technik.com" class="level2link">
+                <button id="buttonlevel2" class="button2">Level 2</button>
+            </a>
+            <img src="../Images/orangebirne.svg" alt="Fehler 1" class="my-svg">
+        </div>
+
+        <div class="level3">
+            <h1> Profi </h1>
+            <a href="https://www.wus-technik.com" class="level3link">
+                <button id="buttonlevel3" class="button3">Level 3</button>
+            </a>
+            <img src="../Images/rotebirne.svg" alt="Fehler 1" class="my-svg">
+        </div>
+
     </div>
 </div>
-<h2 class="h2"> Gewinne coole Preise!</h2>
+<h2 class="schriftunten"> Gewinne coole Preise!</h2>
 <div id="screensaver" class="hidden">
     <video id="screensaverVideo" autoplay muted loop>
         <source src="../Images/NewProject.mp4" type="video/mp4">
@@ -59,7 +74,7 @@
 <div id="popupForm" class="popup hidden">
     <div class="popup-header">
         <span id="closePopup" class="close-btn">&times;</span>
-        <h2>Kontaktformular</h2>
+        <h2 class="h2formular">Kontaktformular</h2>
     </div>
     <form id="popupFormContent">
         <label for="name">Name:</label>
@@ -68,7 +83,7 @@
         <label for="email">E-Mail:</label>
         <input type="email" id="email" name="email" required>
 
-        <label for="comments">Anmerkungen:</label>
+        <label for="comments">Interessen:</label>
         <textarea id="comments" name="comments"></textarea>
 
         <label>

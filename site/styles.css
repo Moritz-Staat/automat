@@ -79,9 +79,10 @@ svg {
     height: 100%;
     object-fit: cover;
 }
-.h2{
+.schriftunten {
     font-size:60px !important;
     color: white;
+    margin-top: 200px;
 }
 
 /* Popup-Formular-Styling */
@@ -91,7 +92,7 @@ svg {
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 20px;
-    background-color: white;
+    background-color: #d0cccc;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     display: none;
@@ -133,13 +134,18 @@ svg {
 .popup button {
     margin-top: 15px;
     padding: 10px;
-    background-color: #007BFF;
+    background-color: #62b55a;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
-
+label a {
+    color: red;
+}
+.h2formular {
+    text-align: right !important;
+}
 .hidden {
     display: none;
 }
@@ -162,13 +168,35 @@ svg {
     text-align: center;
 }
 
-.quiz3container, .quiz2container, .quiz1container {
+.level3, .level2, .level1 {
+    position:relative;
     width: 300px;
     height: 800px;
     border: 3px solid #62b55a;
     border-radius: 18px;
     transition: border-color 0.3s ease;
+    background-color: white;
+    margin-top: 100px;
 }
-.quiz3container:hover, .quiz2container:hover, .quiz1container:hover {
-    border-color: #ff0000;
+
+
+.button1, .button2, .button3 {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 80px;
+    background-color: #1dc51d;
+    color: gray;
+    border: 3px solid darkgreen;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
 }
+

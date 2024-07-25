@@ -16,6 +16,7 @@ body {
 }
 
 /*Schrift einfügen*/
+@import url('Roboto.css');
 @font-face {
     font-family: 'Roboto';
     src: local('Roboto'), url('Roboto-Regular-webfont.woff') format('woff');

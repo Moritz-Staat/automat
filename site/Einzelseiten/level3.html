@@ -24,9 +24,22 @@
 <div id="pinModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <p>Bitte geben Sie den PIN ein:</p>
-        <input type="password" id="pinInput" maxlength="20">
-        <button id="submitPin">Eingeben</button>
+        <p>Bitte geben Sie Ihre PIN ein:</p>
+        <input type="password" id="pinInput" readonly>
+        <div id="numpad">
+            <button class="num">1</button>
+            <button class="num">2</button>
+            <button class="num">3</button>
+            <button class="num">4</button>
+            <button class="num">5</button>
+            <button class="num">6</button>
+            <button class="num">7</button>
+            <button class="num">8</button>
+            <button class="num">9</button>
+            <button class="num">0</button>
+            <button id="backspace">⌫</button>
+            <button id="submitPin">Eingabe</button>
+        </div>
     </div>
 </div>
 

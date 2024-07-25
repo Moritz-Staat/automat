@@ -27,20 +27,20 @@ document.addEventListener('keydown', resetTimer);
 resetTimer();
 
 
-/* Laden und Ausfüllen des PIN Formulars */
 document.getElementById('logo').onclick = function() {
     document.getElementById('pinModal').style.display = 'block';
-}
+    document.getElementById('wholepage').classList.add('blurred');
+};
 
 document.getElementsByClassName('close')[0].onclick = function() {
     closeModal();
-}
+};
 
 window.onclick = function(event) {
     if (event.target == document.getElementById('pinModal')) {
         closeModal();
     }
-}
+};
 
 document.getElementById('submitPin').onclick = function() {
     const pinInput = document.getElementById('pinInput');
@@ -49,13 +49,25 @@ document.getElementById('submitPin').onclick = function() {
         doPost('1', 'http://192.168.0.120/Start');
         closeModal();
     } else {
-        pinInput.classList.add('error');
+        pinInput.classList.add('error-border');
         setTimeout(() => {
-            pinInput.classList.remove('error');
+            pinInput.classList.remove('error-border');
             closeModal();
-        }, 1000);
+        }, 2000);
     }
-}
+};
+
+document.querySelectorAll('#numpad .num').forEach(button => {
+    button.onclick = function() {
+        const pinInput = document.getElementById('pinInput');
+        pinInput.value += button.innerText;
+    };
+});
+
+document.getElementById('backspace').onclick = function() {
+    const pinInput = document.getElementById('pinInput');
+    pinInput.value = pinInput.value.slice(0, -1);
+};
 
 function doPost(param, url) {
     const xhr = new XMLHttpRequest();
@@ -66,4 +78,5 @@ function doPost(param, url) {
 function closeModal() {
     document.getElementById('pinInput').value = '';
     document.getElementById('pinModal').style.display = 'none';
+    document.getElementById('wholepage').classList.remove('blurred');
 }

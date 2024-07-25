@@ -1,17 +1,17 @@
 document.getElementById('logo').onclick = function() {
     document.getElementById('pinModal').style.display = 'block';
     document.getElementById('wholepage').classList.add('blurred');
-}
+};
 
 document.getElementsByClassName('close')[0].onclick = function() {
     closeModal();
-}
+};
 
 window.onclick = function(event) {
     if (event.target == document.getElementById('pinModal')) {
         closeModal();
     }
-}
+};
 
 document.getElementById('submitPin').onclick = function() {
     const pinInput = document.getElementById('pinInput');
@@ -26,7 +26,19 @@ document.getElementById('submitPin').onclick = function() {
             closeModal();
         }, 2000);
     }
-}
+};
+
+document.querySelectorAll('#numpad .num').forEach(button => {
+    button.onclick = function() {
+        const pinInput = document.getElementById('pinInput');
+        pinInput.value += button.innerText;
+    };
+});
+
+document.getElementById('backspace').onclick = function() {
+    const pinInput = document.getElementById('pinInput');
+    pinInput.value = pinInput.value.slice(0, -1);
+};
 
 function doPost(param, url) {
     const xhr = new XMLHttpRequest();
@@ -39,7 +51,9 @@ function closeModal() {
     document.getElementById('pinModal').style.display = 'none';
     document.getElementById('wholepage').classList.remove('blurred');
 }
- /* Nach Beenden des Quizzes Zurück Verlinken zur Startseite*/
+
+
+/* Nach Beenden des Quizzes Zurück Verlinken zur Startseite*/
 window.addEventListener('message', (event) => {
     if (event.data === 'prizeCollected') {
         doPost('1', 'http://192.168.0.120/Register');

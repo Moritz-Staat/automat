@@ -7,57 +7,60 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="container">
-    <div>
-        <svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <linearGradient id="gradient">
-                    <stop offset="0" stop-color="#fff"/>
-                </linearGradient>
-                <pattern id="wave" x="0" y="-0.5" width="100%" height="100%" patternUnits="userSpaceOnUse">
-                    <path id="wavePath" d="M-40 9 Q-30 7 -20 9 T0 9 T20 9 T40 9 T60 9 T80 9 T100 9 T120 9 V20 H-40z" mask="url(#mask)" fill="url(#gradient)">
-                        <animateTransform
-                                attributeName="transform"
-                                begin="0s"
-                                dur="1.5s"
-                                type="translate"
-                                from="0,0"
-                                to="40,0"
-                                repeatCount="indefinite" />
-                    </path>
-                </pattern>
-            </defs>
-            <text text-anchor="middle" x="50" y="15" font-size="17" fill="white" fill-opacity="0.1">Das Quiz!</text>
-            <text text-anchor="middle" x="50" y="15" font-size="17" fill="url(#wave)" fill-opacity="1">Das Quiz!</text>
-        </svg>
+<div id="wholepage">
+    <div class="container">
+        <div>
+            <svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="gradient">
+                        <stop offset="0" stop-color="#fff"/>
+                    </linearGradient>
+                    <pattern id="wave" x="0" y="-0.5" width="100%" height="100%" patternUnits="userSpaceOnUse">
+                        <path id="wavePath" d="M-40 9 Q-30 7 -20 9 T0 9 T20 9 T40 9 T60 9 T80 9 T100 9 T120 9 V20 H-40z" mask="url(#mask)" fill="url(#gradient)">
+                            <animateTransform
+                                    attributeName="transform"
+                                    begin="0s"
+                                    dur="1.5s"
+                                    type="translate"
+                                    from="0,0"
+                                    to="40,0"
+                                    repeatCount="indefinite" />
+                        </path>
+                    </pattern>
+                </defs>
+                <text text-anchor="middle" x="50" y="15" font-size="17" fill="white" fill-opacity="0.1">Das Quiz!</text>
+                <text text-anchor="middle" x="50" y="15" font-size="17" fill="url(#wave)" fill-opacity="1">Das Quiz!</text>
+            </svg>
+        </div>
+        <div class="quiz-options">
+            <div class="level1">
+                <h1> Anfänger </h1>
+                <a href="Einzelseiten/level1.html" class="level1link">
+                    <img src="../Images/grünebirne.svg" alt="Fehler 1" class="my-svg">
+                </a>
+
+            </div>
+
+            <div class="level2">
+                <h1> Fortgeschritten </h1>
+                <a href="Einzelseiten/level2.html" class="level2link">
+                    <img src="../Images/orangebirne.svg" alt="Fehler 1" class="my-svg">
+                </a>
+
+            </div>
+
+            <div class="level3">
+                <h1> Profi </h1>
+                <a href="Einzelseiten/level3.html" class="level3link">
+                    <img src="../Images/rotebirne.svg" alt="Fehler 1" class="my-svg">
+                </a>
+            </div>
+
+        </div>
     </div>
-    <div class="quiz-options">
-        <div class="level1">
-            <h1> Anfänger </h1>
-            <a href="Einzelseiten/level1.html" class="level1link">
-                <img src="../Images/grünebirne.svg" alt="Fehler 1" class="my-svg">
-            </a>
-
-        </div>
-
-        <div class="level2">
-            <h1> Fortgeschritten </h1>
-            <a href="Einzelseiten/level2.html" class="level2link">
-                <img src="../Images/orangebirne.svg" alt="Fehler 1" class="my-svg">
-            </a>
-
-        </div>
-
-        <div class="level3">
-            <h1> Profi </h1>
-            <a href="Einzelseiten/level3.html" class="level3link">
-                <img src="../Images/rotebirne.svg" alt="Fehler 1" class="my-svg">
-            </a>
-        </div>
-
-    </div>
+    <h2 class="schriftunten"> Gewinne coole Preise!</h2>
 </div>
-<h2 class="schriftunten"> Gewinne coole Preise!</h2>
+
 <div id="screensaver" class="hidden">
     <video id="screensaverVideo" autoplay muted loop>
         <source src="../Images/NewProject.mp4" type="video/mp4">
@@ -68,9 +71,22 @@
 <div id="pinModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <p>Bitte geben Sie den PIN ein:</p>
-        <input type="password" id="pinInput" maxlength="20">
-        <button id="submitPin">Eingeben</button>
+        <p>Bitte geben Sie Ihre PIN ein:</p>
+        <input type="password" id="pinInput" readonly>
+        <div id="numpad">
+            <button class="num">1</button>
+            <button class="num">2</button>
+            <button class="num">3</button>
+            <button class="num">4</button>
+            <button class="num">5</button>
+            <button class="num">6</button>
+            <button class="num">7</button>
+            <button class="num">8</button>
+            <button class="num">9</button>
+            <button class="num">0</button>
+            <button id="backspace">⌫</button>
+            <button id="submitPin">Eingabe</button>
+        </div>
     </div>
 </div>
 </div>

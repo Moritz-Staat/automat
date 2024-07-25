@@ -1,5 +1,6 @@
 document.getElementById('logo').onclick = function() {
     document.getElementById('pinModal').style.display = 'block';
+    document.getElementById('wholepage').classList.add('blurred');
 }
 
 document.getElementsByClassName('close')[0].onclick = function() {
@@ -36,4 +37,5 @@ function doPost(param, url) {
 function closeModal() {
     document.getElementById('pinInput').value = '';
     document.getElementById('pinModal').style.display = 'none';
+    document.getElementById('wholepage').classList.remove('blurred');
 }

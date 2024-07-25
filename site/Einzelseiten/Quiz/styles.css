@@ -6,6 +6,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
+    flex-direction: column;
 }
 
 #quiz-container {
@@ -16,6 +17,24 @@ body {
     width: 100%;
     max-width: 800px;
     text-align: center;
+    position: relative;
+}
+/* Fortschrittsbalken stylen*/
+#progress-container {
+    background: #e0e0e0;
+    border-radius: 5px;
+    height: 10px; 
+    margin-top: 20px;
+    width: 100%;
+    max-width: 800px;
+}
+
+#progress-bar {
+    background: #62b55a;
+    height: 100%;
+    width: 0%;
+    border-radius: 5px;
+    transition: width 0.3s;
 }
 
 #question-container {

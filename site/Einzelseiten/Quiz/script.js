@@ -29,7 +29,6 @@ const questions = [
         ],
         image: null
     },
-    // Füge weitere 47 Fragen hier hinzu ...
     {
         question: "Welcher Fluss fließt durch Paris?",
         answers: [
@@ -108,6 +107,9 @@ function showQuestion(question) {
         button.addEventListener('click', () => selectAnswer(button, answer.correct));
         answerButtonsElement.appendChild(button);
     });
+
+    // Fortschrittsanzeige aktualisieren
+    updateProgressBar();
 }
 
 function selectAnswer(button, correct) {
@@ -176,6 +178,12 @@ function showResults() {
     resultButton.classList.add('btn');
     resultButton.addEventListener('click', buttonOnClick);
     questionContainer.appendChild(resultButton);
+}
+
+function updateProgressBar() {
+    const progressBar = document.getElementById('progress-bar');
+    const progressPercentage = ((currentQuestionIndex + 1) / shuffledQuestions.length) * 100;
+    progressBar.style.width = `${progressPercentage}%`;
 }
 
 function doPost(param, url) {

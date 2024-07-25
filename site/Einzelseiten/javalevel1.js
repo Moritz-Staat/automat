@@ -39,3 +39,20 @@ function closeModal() {
     document.getElementById('pinModal').style.display = 'none';
     document.getElementById('wholepage').classList.remove('blurred');
 }
+ /* Nach Beenden des Quizzes Zurück Verlinken zur Startseite*/
+window.addEventListener('message', (event) => {
+    if (event.data === 'prizeCollected') {
+        doPost('1', 'http://192.168.0.120/Register');
+        setTimeout(() => {
+            window.location.href = '../Automat.html';
+        }, 3000);
+    } else if (event.data === 'quizFailed') {
+        window.location.href = '../Automat.html';
+    }
+});
+
+function doPost(param, url) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", url + "?param=" + param, true);
+    xhr.send();
+}

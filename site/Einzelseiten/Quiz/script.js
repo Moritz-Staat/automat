@@ -152,16 +152,13 @@ function showResults() {
         imageUrl = 'pass.jpg';
         buttonText = 'Preis abholen';
         buttonOnClick = () => {
-            doPost('1', 'http://192.168.0.120/Register');
-            setTimeout(() => {
-                window.location.href = '../../automat.html';
-            }, 3000);
+            window.parent.postMessage('prizeCollected', '*');
         };
     } else {
         imageUrl = 'fail.jpg';
         buttonText = 'Zurück zum Start';
         buttonOnClick = () => {
-            window.location.href = '../../automat.html';
+            window.parent.postMessage('quizFailed', '*');
         };
     }
 
@@ -179,8 +176,6 @@ function showResults() {
     resultButton.classList.add('btn');
     resultButton.addEventListener('click', buttonOnClick);
     questionContainer.appendChild(resultButton);
-
-    alert(`Dein Ergebnis: ${correctAnswers} von ${shuffledQuestions.length} (${score}%)`);
 }
 
 function doPost(param, url) {

@@ -72,3 +72,14 @@ body {
     background-color: #cccccc;
     cursor: not-allowed;
 }
+
+#result-image {
+    display: block;
+    margin: 10px auto;
+    max-width: 300px;
+}
+
+#result-text {
+    font-size: 1.2em;
+    margin: 10px 0;
+}

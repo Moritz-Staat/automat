@@ -148,16 +148,32 @@ function showResults() {
     const score = (correctAnswers / shuffledQuestions.length) * 100;
     questionText.innerText = `Dein Ergebnis: ${correctAnswers} von ${shuffledQuestions.length} (${score}%)`;
 
-    let imageUrl, buttonText, buttonOnClick;
+    let imageUrl, buttonText, buttonOnClick, resultText;
 
-    if (score >= 80) {
-        imageUrl = 'pass.jpg';
+    if (correctAnswers >= 9) {
+        imageUrl = 'traumjob.jpg';
+        resultText = "WOW, vielleicht solltest du dich als Trainer bewerben!";
         buttonText = 'Preis abholen';
         buttonOnClick = () => {
             window.parent.postMessage('prizeCollected', '*');
         };
+    } else if (correctAnswers >= 7) {
+        imageUrl = 'traumjob.jpg';
+        resultText = "Du scheinst dein Zeug zu können, wie wäre es mit einer Stelle bei uns?";
+        buttonText = 'Preis abholen';
+        buttonOnClick = () => {
+            window.parent.postMessage('prizeCollected', '*');
+        };
+    } else if (correctAnswers >= 4) {
+        imageUrl = 'traumjob.jpg';
+        resultText = "Schon nicht schlecht, wie wärs mit einer Auffrischung deines Wissens?";
+        buttonText = 'Zurück zum Start';
+        buttonOnClick = () => {
+            window.parent.postMessage('quizFailed', '*');
+        };
     } else {
-        imageUrl = 'fail.jpg';
+        imageUrl = 'traumjob.jpg';
+        resultText = "Da musst du wohl nochmal zu unseren Schulungen";
         buttonText = 'Zurück zum Start';
         buttonOnClick = () => {
             window.parent.postMessage('quizFailed', '*');
@@ -167,11 +183,14 @@ function showResults() {
     if (imageUrl) {
         const resultImage = document.createElement('img');
         resultImage.src = imageUrl;
-        resultImage.style.display = 'block';
-        resultImage.style.margin = '10px auto';
-        resultImage.style.maxWidth = '300px';
+        resultImage.id = 'result-image';
         questionContainer.appendChild(resultImage);
     }
+
+    const resultTextElement = document.createElement('div');
+    resultTextElement.id = 'result-text';
+    resultTextElement.innerText = resultText;
+    questionContainer.appendChild(resultTextElement);
 
     const resultButton = document.createElement('button');
     resultButton.innerText = buttonText;

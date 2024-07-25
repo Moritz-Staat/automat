@@ -15,11 +15,10 @@ body, html {
 
 .quiz-container {
     height: 45%;
-    width: 45%;
-    border: 5px solid #62b55a;
-    padding: 10px;
+    width: 85%;
     box-sizing: border-box;
     overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 iframe {
@@ -31,10 +30,6 @@ body {
     font-family: Arial, sans-serif;
 }
 
-.logo {
-    cursor: pointer;
-    width: 100px;
-}
 
 /* Modal Styles */
 .modal {
@@ -82,6 +77,17 @@ body {
     width: 80%;
 }
 
+
+
+
+/* Stylen unten rechts Logo */
+.logo{
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 100px;
+    height: 100px;
+}
 /* Nummern Pad Hinzufügen */
 #numpad {
     display: grid;
@@ -103,17 +109,6 @@ body {
 #numpad button:hover {
     background-color: #505050;
 }
-
-
-/* Stylen unten rechts Logo */
-.logo{
-    position: fixed;
-    bottom: 40px;
-    right: 40px;
-    width: 100px;
-    height: 100px;
-}
-
 /* Stylen Zurück zur Startseite*/
 .homesweethome {
     height:80px;

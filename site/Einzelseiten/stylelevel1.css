@@ -16,7 +16,7 @@ body, html {
 .quiz-container {
     height: 45%;
     width: 45%;
-    border: 5px solid green;
+    border: 5px solid #62b55a;
     padding: 10px;
     box-sizing: border-box;
     overflow: hidden;
@@ -103,7 +103,7 @@ body {
 .Abbrechen {
     position: fixed;
     bottom: 0;
-    left: 32px;
+    left: 53px;
 }
 #wholepage {
     background-image: url('../../Images/Wallpaper_Automat.png');

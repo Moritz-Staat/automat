@@ -68,7 +68,7 @@ const questions = [
             { text: "Kangchenjunga", correct: false },
             { text: "Lhotse", correct: false }
         ],
-        image: "images/everest.jpg"
+        image: "everest.jpg"
     }
 ];
 
@@ -128,13 +128,59 @@ function handleNextButton() {
         showQuestion(shuffledQuestions[currentQuestionIndex]);
         document.getElementById('next-button').style.display = 'none';
     } else {
-        if (correctAnswers / shuffledQuestions.length >= 0.8) {
-            doPost('1', 'http://192.168.0.120/Register');
-            alert('Glückwunsch! Sie haben das Quiz bestanden und das Relais wurde ausgelöst.');
-        } else {
-            alert('Quiz beendet. Leider haben Sie nicht genug richtige Antworten gegeben.');
-        }
+        showResults();
     }
+}
+
+function showResults() {
+    const questionContainer = document.getElementById('question-container');
+    const answerButtonsElement = document.getElementById('answer-buttons');
+    const questionImage = document.getElementById('question-image');
+    const nextButton = document.getElementById('next-button');
+    const questionText = document.getElementById('question-text');
+
+    questionContainer.innerHTML = '';
+    answerButtonsElement.innerHTML = '';
+    nextButton.style.display = 'none';
+
+    const score = (correctAnswers / shuffledQuestions.length) * 100;
+    questionText.innerText = `Dein Ergebnis: ${correctAnswers} von ${shuffledQuestions.length} (${score}%)`;
+
+    let imageUrl, buttonText, buttonOnClick;
+
+    if (score >= 80) {
+        imageUrl = 'pass.jpg';
+        buttonText = 'Preis abholen';
+        buttonOnClick = () => {
+            doPost('1', 'http://192.168.0.120/Register');
+            setTimeout(() => {
+                window.location.href = '../../automat.html';
+            }, 3000);
+        };
+    } else {
+        imageUrl = 'fail.jpg';
+        buttonText = 'Zurück zum Start';
+        buttonOnClick = () => {
+            window.location.href = '../../automat.html';
+        };
+    }
+
+    if (imageUrl) {
+        const resultImage = document.createElement('img');
+        resultImage.src = imageUrl;
+        resultImage.style.display = 'block';
+        resultImage.style.margin = '10px auto';
+        resultImage.style.maxWidth = '300px';
+        questionContainer.appendChild(resultImage);
+    }
+
+    const resultButton = document.createElement('button');
+    resultButton.innerText = buttonText;
+    resultButton.classList.add('btn');
+    resultButton.addEventListener('click', buttonOnClick);
+    questionContainer.appendChild(resultButton);
+
+    alert(`Dein Ergebnis: ${correctAnswers} von ${shuffledQuestions.length} (${score}%)`);
 }
 
 function doPost(param, url) {

@@ -16,7 +16,6 @@ window.onclick = function(event) {
 document.getElementById('submitPin').onclick = function() {
     const pinInput = document.getElementById('pinInput');
     if (pinInput.value === '151107') {
-        alert('PIN korrekt! Relais wird ausgelöst.');
         doPost('1', 'http://192.168.0.120/Register');
         closeModal();
     } else {

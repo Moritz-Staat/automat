@@ -451,6 +451,7 @@ const questions = [
     }
 ];
 
+/* Ende der Fragen*/
 
 let shuffledQuestions, currentQuestionIndex, correctAnswers;
 

@@ -277,7 +277,7 @@ const questions = [
             { text: "25 °C ± 3 °C", correct: false },
             { text: "30 °C ± 7 °C", correct: false }
         ],
-        image: "Storage_battery_manual,_including_principles_of_storage_battery_construction_and_design,_with_the_application_of_storage_of_batteries_to_the_naval_service_(1920)_(14770284552).jpg"
+        image: "Storage_battery_manual.jpg"
     },
     {
         question: "In welche zwei Kategorien lässt sich der unmittelbare Flankenschutz einteilen?",

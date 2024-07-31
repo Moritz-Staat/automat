@@ -40,12 +40,6 @@ document.getElementById('backspace').onclick = function() {
     pinInput.value = pinInput.value.slice(0, -1);
 };
 
-function doPost(param, url) {
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", url + "?param=" + param, true);
-    xhr.send();
-}
-
 function closeModal() {
     document.getElementById('pinInput').value = '';
     document.getElementById('pinModal').style.display = 'none';

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Originally edited with Inkscape, optimised by hand -->
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="64" height="124" version="1.1">
+ <defs>
+  <radialGradient id="GradientOrange" cx=".5" cy=".5" r=".45">
+   <stop stop-color="#ffc955" offset=".05"/>
+   <stop stop-color="#fc8e00" offset=".9"/>
+  </radialGradient>
+  <radialGradient id="GradientBlanc" cx=".5" cy=".5" r=".3">
+   <stop stop-color="#fffaef" offset=".2"/>
+   <stop stop-color="#ebe6d8" offset="1"/>
+  </radialGradient>
+  <circle id="Blanc" r="3.5"
+          style="fill:url(#GradientBlanc);stroke:#d8d4b6;stroke-width:1.7;stroke-opacity:0.8"/>
+  <circle id="GrandGris" r="7.5"
+          style="fill:none;stroke:#3d3d3d;stroke-width:0.6;stroke-opacity:0.75"/>
+  <circle id="PetitGris" r="3.5"
+          style="fill:none;stroke:#3d3d3d;stroke-width:0.6;stroke-opacity:0.75"/>
+ </defs>
+ <path d="M 2,2 l 4,-2 l 52,0 l 4,2 l 0,120 l -4,2 l -52,0 l -4,-2 z"
+       style="fill:#3c3c3c;stroke:none"/>
+ <rect width="64" height="120" x="0" y="2"
+       style="fill:#000;stroke:none"/>
+ <use id="Rouge" x="32" y="32" xlink:href="#GrandGris"/>
+ <use id="Vert" x="16.5" y="57.3" xlink:href="#GrandGris"/>
+ <circle id="Orange" cx="47.5" cy="57.3" r="7.5"
+         style="fill:url(#GradientOrange);stroke:#f08700;stroke-width:2;stroke-opacity:.85"/>
+ <use id="Zs1" x="32" y="81" xlink:href="#PetitGris"/>
+ <use id="ZusatzlichtUnter" x="11.5" y="98.7" xlink:href="#PetitGris"/>
+ <use id="ZusatzlichtOben" x="16.5" y="14.5" xlink:href="#Blanc"/>
+ <g id="Zs7">
+  <use id="Jaune" x="21.5" y="81" xlink:href="#PetitGris"/>
+  <use x="10.5" y="17.7" xlink:href="#Jaune"/>
+  <use x="21" y="0" xlink:href="#Jaune"/>
+ </g>
+</svg>

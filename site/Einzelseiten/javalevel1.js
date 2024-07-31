@@ -53,7 +53,7 @@ function closeModal() {
 }
 
 
-/* Nach Beenden des Quizzes Zurück Verlinken zur Startseite*/
+/* Nach Beenden des Quizzes Zurück Verlinken zur Startseite und Preis ausspucken*/
 window.addEventListener('message', (event) => {
     if (event.data === 'prizeCollected') {
         doPost('1', 'http://192.168.0.120/Register');

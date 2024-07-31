@@ -752,9 +752,9 @@ function showResults() {
     } else if (correctAnswers >= 7) {
         imageUrl = 'traumjob.jpg';
         resultText = "Du scheinst dein Zeug zu können, wie wäre es mit einer Stelle bei uns?";
-        buttonText = 'Preis abholen';
+        buttonText = 'Zurück zum Start';
         buttonOnClick = () => {
-            window.parent.postMessage('prizeCollected', '*');
+            window.parent.postMessage('quizFailed', '*');
         };
     } else if (correctAnswers >= 4) {
         imageUrl = 'traumjob.jpg';

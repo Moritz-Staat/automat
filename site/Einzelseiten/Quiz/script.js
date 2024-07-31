@@ -802,3 +802,17 @@ function doPost(param, url) {
     xhr.open("POST", url + "?param=" + param, true);
     xhr.send();
 }
+/* Java H1 testen */
+// script.js
+document.addEventListener('DOMContentLoaded', function() {
+    const headline = document.querySelector('#JAVATESTEN h1');
+
+    // Einfacher Bounce-Effekt bei Seitenladung
+    headline.style.opacity = 0;
+    headline.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+        headline.style.transition = 'transform 0.6s ease, opacity 0.6s ease';
+        headline.style.opacity = 1;
+        headline.style.transform = 'translateY(0)';
+    }, 100);
+});

@@ -188,12 +188,6 @@ svg {
 .blurred {
     filter: blur(0.3125rem);
 }
-
-#überschrift {
-    margin-top: -30rem;
-}
-
-.Leveltext {
-    font-family: "Rajdhani SemiBold";
-    font-size: 4rem;
-}
+.levelschrift {
+    font-size: 2rem;
+    font-family:"Rajdhani SemiBold";

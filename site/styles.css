@@ -222,3 +222,7 @@ svg {
 .blurred {
     filter: blur(0.3125rem);
 }
+.levelschrift {
+    font-size: 2rem;
+    font-family:"Rajdhani SemiBold";
+}

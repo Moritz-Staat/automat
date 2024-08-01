@@ -442,7 +442,6 @@ function startGame() {
     shuffledQuestions = questions.sort(() => Math.random() - 0.5).slice(0, 10);
     currentQuestionIndex = 0;
     correctAnswers = 0;
-    document.getElementById('next-button').style.display = 'none';
     showQuestion(shuffledQuestions[currentQuestionIndex]);
 }
 
@@ -479,32 +478,38 @@ function selectAnswer(button, correct) {
         btn.disabled = true;
         if (btn.innerText === button.innerText) {
             btn.style.backgroundColor = correct ? 'green' : 'red';
+        } else if (btn.innerText === getCorrectAnswerText()) {
+            btn.style.backgroundColor = 'lightgreen';
         }
     });
+
     if (correct) correctAnswers++;
-    document.getElementById('next-button').style.display = 'block';
+
+    // Nach 1,5 Sekunden zur nächsten Frage wechseln
+    setTimeout(() => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < shuffledQuestions.length) {
+            showQuestion(shuffledQuestions[currentQuestionIndex]);
+        } else {
+            showResults();
+        }
+    }, 1500); // 1,5 Sekunden
 }
 
-function handleNextButton() {
-    currentQuestionIndex++;
-    if (currentQuestionIndex < shuffledQuestions.length) {
-        showQuestion(shuffledQuestions[currentQuestionIndex]);
-        document.getElementById('next-button').style.display = 'none';
-    } else {
-        showResults();
-    }
+function getCorrectAnswerText() {
+    const currentQuestion = shuffledQuestions[currentQuestionIndex];
+    const correctAnswer = currentQuestion.answers.find(answer => answer.correct);
+    return correctAnswer ? correctAnswer.text : '';
 }
 
 function showResults() {
     const questionContainer = document.getElementById('question-container');
     const answerButtonsElement = document.getElementById('answer-buttons');
     const questionImage = document.getElementById('question-image');
-    const nextButton = document.getElementById('next-button');
     const questionText = document.getElementById('question-text');
 
     questionContainer.innerHTML = '';
     answerButtonsElement.innerHTML = '';
-    nextButton.style.display = 'none';
 
     const score = (correctAnswers / shuffledQuestions.length) * 100;
     questionText.innerText = `Dein Ergebnis: ${correctAnswers} von ${shuffledQuestions.length} (${score}%)`;
@@ -564,10 +569,4 @@ function updateProgressBar() {
     const progressBar = document.getElementById('progress-bar');
     const progressPercentage = ((currentQuestionIndex + 1) / shuffledQuestions.length) * 100;
     progressBar.style.width = `${progressPercentage}%`;
-}
-
-function doPost(param, url) {
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", url + "?param=" + param, true);
-    xhr.send();
 }

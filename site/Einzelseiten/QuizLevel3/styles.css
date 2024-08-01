@@ -42,7 +42,10 @@ body {
 #question-container {
     margin-bottom: 1.25rem;
 }
-
+#question-text {
+    font-size: 1.3rem;
+    font-family: "Rajdhani SemiBold";
+}
 #question-image {
     width: 100%;
     max-width: 18.75rem;

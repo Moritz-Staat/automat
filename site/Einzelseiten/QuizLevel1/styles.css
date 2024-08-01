@@ -38,7 +38,10 @@ body {
     border-radius: 0.3125rem;
     transition: width 0.3s;
 }
-
+#question-text {
+    font-size: 1.3rem;
+    font-family: "Rajdhani SemiBold";
+}
 #question-container {
     margin-bottom: 1.25rem;
 }

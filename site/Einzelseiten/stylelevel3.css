@@ -6,16 +6,16 @@ body, html {
 .container {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Ändert die vertikale Ausrichtung */
-    height: 100rem; /* Höhe des Viewports */
-    width: 80rem; /* Breite des Viewports */
+    align-items: center;
+    height: 200rem;
+    width: 180rem;
     box-sizing: border-box;
-    margin-top: 0rem; /* Beispielwert, kann angepasst werden */
+    margin-top: 0rem;
 }
 
 .quiz-container {
-    height: 80rem;
-    width: 60rem;
+    height: 200rem;
+    width: 180rem;
     box-sizing: border-box;
     overflow: hidden;
     box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.5);
@@ -110,8 +110,8 @@ body {
 
 /* Stylen Zurück zur Startseite */
 .homesweethome {
-    height: 5rem;
-    width: 5rem;
+    height: 10rem;
+    width: 10rem;
     bottom: 2.5rem;
     left: 2.5rem;
     position: fixed;
@@ -129,7 +129,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -54,7 +54,10 @@ window.addEventListener('message', (event) => {
             window.location.href = '../Automat.html';
         }, 3000);
     } else if (event.data === 'quizFailed') {
-        window.location.href = '../Automat.html';
+        doPost('1', 'http://192.168.0.120/Expert');
+        setTimeout(() => {
+            window.location.href = '../Automat.html';
+        }, 3000);
     }
 });
 

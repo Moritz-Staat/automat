@@ -6,19 +6,20 @@ body, html {
 .container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100vw;
+    align-items: flex-start; /* Ändert die vertikale Ausrichtung */
+    height: 100rem; /* Höhe des Viewports */
+    width: 80rem; /* Breite des Viewports */
     box-sizing: border-box;
-
+    margin-top: 0rem; /* Beispielwert, kann angepasst werden */
+}
 
 .quiz-container {
-    height: 45%;
-    width: 45%;
-    border: 5px solid green;
-    padding: 10px;
+    height: 80rem;
+    width: 60rem;
     box-sizing: border-box;
     overflow: hidden;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.5);
+    border-radius: 0.5rem;
 }
 
 iframe {
@@ -26,69 +27,120 @@ iframe {
     height: 100%;
     border: none;
 }
-    /* Stylen unten rechts Logo */
-    .logo{
-        width:50px;
-        height:50px;
-        position: fixed;
-        bottom: 0;
-        right: 0;
-        width: 100px;
-        height: 100px;
-    }
 
-    /* Stylen Zurück zur Startseite*/
-    .homesweethome {
-        height:80px;
-        width: 80px;
-        bottom: 40px;
-        left: 40px;
-        position: fixed;
-    }
-    .Abbrechen {
-        position: fixed;
-        bottom: 0;
-        left: 53px;
-    }
+body {
+    font-family: Arial, sans-serif;
+}
 
-    #wholepage {
-        background-image: url('../../Images/Wallpaper_Automat.png');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    /* Stil für die rote Umrandung bei falschem PIN */
-    .error-border {
-        border: 2px solid red;
-    }
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 3.75rem;
+}
 
-    /* Blurr-Effekt erzeugen*/
-    #wholepage.blurred {
-        filter: blur(5px);
-    }
-    /* Nummern Pad Hinzufügen */
-    #numpad {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-        margin-top: 10px;
-    }
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 1.25rem;
+    border: 0.0625rem solid #888;
+    width: 80%;
+    max-width: 18.75rem;
+    text-align: center;
+}
 
-    #numpad button {
-        padding: 20px;
-        font-size: 18px;
-        background-color: #646363;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 1.75rem;
+    font-weight: bold;
+}
 
-    #numpad button:hover {
-        background-color: #505050;
-    }
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#pinInput {
+    padding: 0.625rem;
+    font-size: 1rem;
+    margin: 0.625rem 0;
+    width: 80%;
+}
+
+/* Stylen unten rechts Logo */
+.logo {
+    position: fixed;
+    bottom: 2.5rem;
+    right: 2.5rem;
+    width: 6.25rem;
+    height: 6.25rem;
+}
+
+/* Nummern Pad Hinzufügen */
+#numpad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.625rem;
+    margin-top: 0.625rem;
+}
+
+#numpad button {
+    padding: 1.25rem;
+    font-size: 1.125rem;
+    background-color: #646363;
+    color: white;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+#numpad button:hover {
+    background-color: #505050;
+}
+
+/* Stylen Zurück zur Startseite */
+.homesweethome {
+    height: 5rem;
+    width: 5rem;
+    bottom: 2.5rem;
+    left: 2.5rem;
+    position: fixed;
+}
+
+.Abbrechen {
+    position: fixed;
+    bottom: 0;
+    left: 3.3125rem;
+}
+
+#wholepage {
+    background-image: url('../../Images/Wallpaper_Automat.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Stil für die rote Umrandung bei falschem PIN */
+.error-border {
+    border: 0.125rem solid red;
+}
+
+/* Blurr-Effekt erzeugen */
+#wholepage.blurred {
+    filter: blur(0.3125rem);
+}

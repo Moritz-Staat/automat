@@ -31,7 +31,7 @@ html {
 }
 
 body {
-    background: linear-gradient(to bottom right, #62b55a, #303030);
+    background: linear-gradient(to bottom, #62b55a, #2e9633, #054824);
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -196,5 +196,5 @@ svg {
 }
 
 #überschrift {
-    margin-top: -50rem;
+    margin-top: -70rem;
 }

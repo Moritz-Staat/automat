@@ -1,21 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Rajdhani:wght@600&display=swap');
 
-/* Schriftarten einbinden */
-@font-face {
-    font-family: 'Roboto';
-    src: local('Roboto'), url('Roboto-Regular-webfont.woff') format('woff');
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Roboto';
-    src: local('Roboto'), url('Roboto-Italic-webfont.woff') format('woff');
-    font-weight: 400;
-    font-style: italic;
-}
-
-body, .container, .quiz-options, .quiz-link, .quiz3container, .quiz2container, .quiz1container, .h1 {
+.container, .quiz-options, .quiz-link, .quiz3container, .quiz2container, .quiz1container {
     text-align: center;
 }
 
@@ -34,14 +19,15 @@ body {
 
 /* Container für Quiz */
 .container {
-    width: 62.5rem;
+    width: 100rem;
 }
 
 /* Body und HTML */
-body, html {
+html {
     margin: 0;
     padding: 0;
     height: 100%;
+    text-align: center;
 }
 
 body {
@@ -50,7 +36,6 @@ body {
     padding: 0;
     height: 100vh;
     background-size: cover;
-    font-family: 'Roboto', sans-serif;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -59,8 +44,8 @@ body {
 
 svg {
     font-weight: bold;
-    max-width: 56.25rem;
-    height: 100%;
+    max-width: 70rem;
+    height: 15rem;
 }
 
 #screensaver {
@@ -86,7 +71,7 @@ svg {
 }
 
 .schriftunten {
-    font-size: 3.75rem;
+    font-size: 6rem;
     color: white;
     margin-top: 12.5rem;
     font-family: "Rajdhani", sans-serif;
@@ -97,7 +82,7 @@ svg {
 .quiz-options {
     display: flex;
     justify-content: space-around;
-    margin-top: 1.25rem;
+    margin-top: 1rem;
 }
 
 .quiz-link {
@@ -106,34 +91,15 @@ svg {
 
 .level3, .level2, .level1 {
     position: relative;
-    width: 18.75rem;
-    height: 50rem;
-    border: 0.1875rem solid #62b55a;
-    border-radius: 1.125rem;
+    width: 30rem;
+    height: 65rem;
+    border: 0.2rem solid #62b55a;
+    border-radius: 1.1rem;
     transition: border-color 0.3s ease;
     background-color: white;
     margin-top: 6.25rem;
 }
 
-.button1, .button2, .button3 {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 9.375rem;
-    height: 5rem;
-    background-color: #1dc51d;
-    color: gray;
-    border: 0.1875rem solid darkgreen;
-    border-radius: 0.625rem;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 2.5rem;
-}
 
 /* Modal Styles */
 .modal {
@@ -225,4 +191,3 @@ svg {
 .levelschrift {
     font-size: 2rem;
     font-family:"Rajdhani SemiBold";
-}

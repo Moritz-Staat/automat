@@ -11,55 +11,57 @@ body {
 
 #quiz-container {
     background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 800px;
+    max-width: 55rem;
     text-align: center;
     position: relative;
+    margin-top: -20rem; /* Negative Marge verschiebt das Element nach oben */
 }
-/* Fortschrittsbalken stylen*/
+
+/* Fortschrittsbalken stylen */
 #progress-container {
     background: #e0e0e0;
-    border-radius: 5px;
-    height: 10px;
-    margin-top: 20px;
+    border-radius: 0.3125rem;
+    height: 0.625rem;
+    margin-top: 1.25rem;
     width: 100%;
-    max-width: 800px;
+    max-width: 50rem;
 }
 
 #progress-bar {
     background: #62b55a;
     height: 100%;
     width: 0%;
-    border-radius: 5px;
+    border-radius: 0.3125rem;
     transition: width 0.3s;
 }
 
 #question-container {
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
 }
 
 #question-image {
     width: 100%;
-    max-width: 300px;
-    margin: 10px auto;
+    max-width: 18.75rem;
+    margin: 0.625rem auto;
     display: block;
 }
 
 .btn-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 0.625rem;
 }
 
 .btn {
-    padding: 10px;
+    padding: 0.625rem;
     background-color: #62b55a;
     color: #ffffff;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.3125rem;
     cursor: pointer;
     transition: background-color 0.3s;
 }
@@ -75,11 +77,11 @@ body {
 
 #result-image {
     display: block;
-    margin: 10px auto;
-    max-width: 300px;
+    margin: 0.625rem auto;
+    max-width: 18.75rem;
 }
 
 #result-text {
     font-size: 1.2em;
-    margin: 10px 0;
+    margin: 0.625rem 0;
 }

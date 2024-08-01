@@ -1,3 +1,6 @@
+/* Schriftarten einbinden */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Rajdhani:wght@600&display=swap');
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
@@ -42,10 +45,6 @@ body {
 #question-container {
     margin-bottom: 1.25rem;
 }
-#question-text {
-    font-size: 1.3rem;
-    font-family: "Rajdhani SemiBold";
-}
 #question-image {
     width: 100%;
     max-width: 18.75rem;
@@ -67,6 +66,7 @@ body {
     border-radius: 0.3125rem;
     cursor: pointer;
     transition: background-color 0.3s;
+    font-family: 'Rajdhani SemiBold', sans-serif;
 }
 
 .btn:hover {
@@ -87,4 +87,9 @@ body {
 #result-text {
     font-size: 1.2em;
     margin: 0.625rem 0;
+}
+
+#question-text {
+    font-size: 1.3rem;
+    font-family: 'Rajdhani', sans-serif;
 }

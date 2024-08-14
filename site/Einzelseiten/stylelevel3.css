@@ -78,15 +78,6 @@ body {
     width: 80%;
 }
 
-/* Stylen unten rechts Logo */
-.logo {
-    position: fixed;
-    bottom: 2.5rem;
-    right: 2.5rem;
-    width: 6.25rem;
-    height: 6.25rem;
-}
-
 /* Nummern Pad Hinzufügen */
 #numpad {
     display: grid;
@@ -111,17 +102,26 @@ body {
 
 /* Stylen Zurück zur Startseite */
 .homesweethome {
-    height: 10rem;
-    width: 10rem;
+    height: 9rem;
+    width: 9rem;
     bottom: 2.5rem;
     left: 2.5rem;
     position: fixed;
 }
 
 .Abbrechen {
+    font-size: 2rem;
     position: fixed;
-    bottom: 0;
-    left: 3.3125rem;
+    bottom: -1.2rem;
+    left: 4.3rem;
+}
+/* Stylen unten rechts Logo */
+.logo {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    width: 9rem;
+    height: 9rem;
 }
 
 #wholepage {

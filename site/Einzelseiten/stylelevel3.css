@@ -6,16 +6,17 @@ body, html {
 .container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 200rem;
-    width: 180rem;
+    align-items: flex-start; /* Ändert die vertikale Ausrichtung */
+    height: 120rem; /* Höhe des Viewports */
+    width: 100rem; /* Breite des Viewports */
     box-sizing: border-box;
-    margin-top: 0rem;
+    margin-top: 0rem; /* Beispielwert, kann angepasst werden */
 }
 
 .quiz-container {
-    height: 200rem;
-    width: 180rem;
+    margin-top: -40rem;
+    height: 160rem;
+    width: 100rem;
     box-sizing: border-box;
     overflow: hidden;
     box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.5);

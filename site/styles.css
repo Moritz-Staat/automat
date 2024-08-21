@@ -101,6 +101,11 @@ svg {
     background-color: white;
     margin-top: 6.25rem;
 }
+a.level1link, a.level2link, a.level3link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
 
 
 /* Modal Styles */

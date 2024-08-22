@@ -183,13 +183,11 @@ a.level1link, a.level2link, a.level3link {
 
 /* Stylen unten rechts Logo */
 .logo {
-    width: 3.125rem;
-    height: 3.125rem;
     position: fixed;
     bottom: 0;
     right: 0;
-    width: 6.25rem;
-    height: 6.25rem;
+    width: 10rem;
+    height: 10rem;
 }
 
 .blurred {

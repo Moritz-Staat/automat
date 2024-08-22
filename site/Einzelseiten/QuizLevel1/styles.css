@@ -50,6 +50,7 @@ body {
 #question-image {
     width: 100%;
     max-width: 90rem;
+    max-height: 100rem;
     margin: 0.625rem auto;
     display: block;
 }

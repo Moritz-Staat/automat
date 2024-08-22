@@ -6,11 +6,11 @@ body, html {
 .container {
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Ändert die vertikale Ausrichtung */
-    height: 120rem; /* Höhe des Viewports */
-    width: 100rem; /* Breite des Viewports */
+    align-items: flex-start;
+    height: 120rem;
+    width: 100rem;
     box-sizing: border-box;
-    margin-top: 0rem; /* Beispielwert, kann angepasst werden */
+    margin-top: 0rem;
 }
 
 .quiz-container {

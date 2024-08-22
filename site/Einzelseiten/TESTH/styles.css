@@ -8,82 +8,6 @@ body {
     margin: 0;
     flex-direction: column;
 }
-
-#quiz-container {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 800px;
-    text-align: center;
-    position: relative;
-}
-/* Fortschrittsbalken stylen*/
-#progress-container {
-    background: #e0e0e0;
-    border-radius: 5px;
-    height: 10px; 
-    margin-top: 20px;
-    width: 100%;
-    max-width: 800px;
-}
-
-#progress-bar {
-    background: #62b55a;
-    height: 100%;
-    width: 0%;
-    border-radius: 5px;
-    transition: width 0.3s;
-}
-
-#question-container {
-    margin-bottom: 20px;
-}
-
-#question-image {
-    width: 100%;
-    max-width: 300px;
-    margin: 10px auto;
-    display: block;
-}
-
-.btn-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.btn {
-    padding: 10px;
-    background-color: #62b55a;
-    color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.btn:hover {
-    background-color: #505050;
-}
-
-.btn:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-}
-
-#result-image {
-    display: block;
-    margin: 10px auto;
-    max-width: 300px;
-}
-
-#result-text {
-    font-size: 1.2em;
-    margin: 10px 0;
-}
-
 /* Neue Überschrift testen */
 /* styles.css */
 #JAVATESTEN h1 {
@@ -161,3 +85,41 @@ body {
         color: #333;
     }
 }
+
+
+#Pixelparty {
+    display: none;
+}
+#grüneanimation {
+    height: 60rem;
+    width: 40rem;
+}
+canvas {
+    width: 100vw;
+    height: 100vh;
+    background-color: transparent; /* Hintergrund entfernen */
+}
+
+.wrapper {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    max-width: 75%;
+    font-size: 100px;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+    color: #540032;
+}
+
+.title {
+    background-image: url(https://diamondpainting.de/cdn/shop/products/e8d50591490923124fea8b6f4e9691ea.jpg?v=1698660253);
+    background-attachment: fixed;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+
+

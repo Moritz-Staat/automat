@@ -199,5 +199,10 @@ a.level1link, a.level2link, a.level3link {
 }
 
 #überschrift {
-    margin-top: -70rem;
+    margin-top: -40rem;
+}
+
+#grünebirne{
+    height: 20rem;
+    width: 20rem;
 }

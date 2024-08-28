@@ -48,8 +48,10 @@ body {
     margin-bottom: 1.25rem;
 }
 #question-image {
-    width: 100%;
-    max-width: 90rem;
+    width: 70rem;
+    height: 100rem;
+    object-fit: contain;
+    max-width: 70rem;
     max-height: 100rem;
     margin: 0.625rem auto;
     display: block;
@@ -97,4 +99,5 @@ body {
 #question-text {
     font-size: 3rem;
     font-family: 'Rajdhani', sans-serif;
+    margin-bottom: 3rem;
 }

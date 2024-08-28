@@ -3,19 +3,9 @@ body, html {
     height: 100%;
 }
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Ändert die vertikale Ausrichtung */
-    height: 120rem; /* Höhe des Viewports */
-    width: 100rem; /* Breite des Viewports */
-    box-sizing: border-box;
-    margin-top: 0rem; /* Beispielwert, kann angepasst werden */
-}
-
 .quiz-container {
-    margin-top: -40rem;
-    height: 160rem;
+    margin-top: -20rem;
+    height: 180rem;
     width: 100rem;
     box-sizing: border-box;
     overflow: hidden;

@@ -44,20 +44,29 @@ window.onclick = function (event) {
 
 document.getElementById('submitPin').onclick = function () {
     const pinInput = document.getElementById('pinInput');
+
     if (pinInput.value === '151107') {
-        alert('PIN korrekt! Relais wird ausgelöst.');
+        let kontakt = localStorage.getItem('kontaktdaten');
+        if (kontakt == null) {
+            kontakt = 1;
+        } else {
+            kontakt = parseInt(kontakt);
+            kontakt += 1;
+        }
+        localStorage.setItem('kontaktdaten', kontakt);
         doPost('1', 'http://192.168.0.120/Register');
         closeModal();
     } else if (pinInput.value === '1111') {
-        localStorage.clear()
+        localStorage.clear();
     } else if (pinInput.value === '258') {
         const data = {
-            level1: getFromLocalStorage('level1win'), /*Andere Level darunter*/
+            level1: getFromLocalStorage('level1win'),
             level2: getFromLocalStorage('level2win'),
             level3: getFromLocalStorage('level3win'),
             loses: getFromLocalStorage('loses'),
-        }
-        alert('Level1Stand:' + data.level1 + '\nLevel2Stand:' + data.level2 + '\nLevel3Stand:' + data.level3 + '\nTrostpreise:' + data.loses);
+            kontakt: getFromLocalStorage('kontaktdaten')
+        };
+        alert('Level1Stand:' + data.level1 + '\nLevel2Stand:' + data.level2 + '\nLevel3Stand:' + data.level3 + '\nTrostpreise:' + data.loses + '\nkontaktpreise: ' + data.kontakt);
     } else {
         pinInput.classList.add('error-border');
         setTimeout(() => {
@@ -66,6 +75,7 @@ document.getElementById('submitPin').onclick = function () {
         }, 2000);
     }
 };
+
 
 function getFromLocalStorage(key) {
     let value = localStorage.getItem(key);
@@ -105,10 +115,11 @@ function birnenwechsler() {
         level2: getFromLocalStorage('level2win'),
         level3: getFromLocalStorage('level3win'),
         loses: getFromLocalStorage('loses'),
+        kontakt: getFromLocalStorage('kontaktdaten')
     }
-    if (data.level1 > 39 || data.level2 > 39 || data.level3 > 39 || data.loses > 39) {
+    if (data.level1 > 3 || data.level2 > 3 || data.level3 > 3 || data.loses > 3) {
         document.getElementById('zählstand').src = "../images/orangebirne.svg"
-    } else if (data.level1 > 39 || data.level2 > 49 || data.level3 > 49 || data.loses > 49) {
+    } else if (data.level1 > 5 || data.level2 > 5 || data.level3 > 5 || data.loses > 5) {
         document.getElementById('zählstand').src = "../images/rotebirne.svg"
     } else {
         document.getElementById('zählstand').src = "../images/grünebirne.svg"

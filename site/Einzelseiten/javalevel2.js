@@ -15,16 +15,18 @@ window.onclick = function (event) {
 
 document.getElementById('submitPin').onclick = function () {
     const pinInput = document.getElementById('pinInput');
+
     if (pinInput.value === '151107') {
-        /*alert('PIN korrekt! Relais wird ausgelöst.');*/
+        let kontakt = localStorage.getItem('kontaktdaten');
+        if (kontakt == null) {
+            kontakt = 1;
+        } else {
+            kontakt = parseInt(kontakt);
+            kontakt += 1;
+        }
+        localStorage.setItem('kontaktdaten', kontakt);
         doPost('1', 'http://192.168.0.120/Register');
         closeModal();
-    } else {
-        pinInput.classList.add('error-border');
-        setTimeout(() => {
-            pinInput.classList.remove('error-border');
-            closeModal();
-        }, 2000);
     }
 };
 

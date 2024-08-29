@@ -1,125 +1,54 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    flex-direction: column;
-}
-/* Neue Überschrift testen */
-/* styles.css */
-#JAVATESTEN h1 {
-    font-size: 3rem;
-    font-weight: bold;
-    color: #333;
-    position: relative;
-    display: inline-block;
-    transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
-    margin: 0;
-    animation: bounce 2s infinite, colorChange 4s infinite;
+/* Styling für den Button */
+#popupButton {
+    background-color: lightgreen;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
 }
 
-#JAVATESTEN h1::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 5px;
-    background-color: #3498db;
-    transform: scaleX(0);
-    transform-origin: bottom right;
-    transition: transform 0.3s ease;
-}
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-30px);
-    }
-    60% {
-        transform: translateY(-15px);
-    }
-}
-
-@keyframes colorChange {
-    0% {
-        color: #333;
-    }
-    50% {
-        color: #3498db;
-    }
-    100% {
-        color: #333;
-    }
-}
-
-
-/* styles.css */
-#JAVATESTEN h1 {
-    font-size: 3rem;
-    font-weight: bold;
-    color: #333;
-    position: relative;
-    display: inline-block;
-    transition: color 0.3s ease;
-    margin: 0;
-    animation: zoomEffect 3s infinite;
-}
-
-@keyframes zoomEffect {
-    0% {
-        transform: scale(1);
-        color: #333;
-    }
-    50% {
-        transform: scale(1.5);
-        color: #3498db;
-    }
-    100% {
-        transform: scale(1);
-        color: #333;
-    }
-}
-
-
-#Pixelparty {
+/* Styling für das Popup */
+#popup {
     display: none;
-}
-#grüneanimation {
-    height: 60rem;
-    width: 40rem;
-}
-canvas {
-    width: 100vw;
-    height: 100vh;
-    background-color: transparent; /* Hintergrund entfernen */
-}
-
-.wrapper {
-    display: flex;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-}
-
-h1 {
-    max-width: 75%;
-    font-size: 100px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
     text-align: center;
-    font-family: "Montserrat", sans-serif;
-    color: #540032;
+    z-index: 10;
 }
 
-.title {
-    background-image: url(https://diamondpainting.de/cdn/shop/products/e8d50591490923124fea8b6f4e9691ea.jpg?v=1698660253);
-    background-attachment: fixed;
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
+#popup img {
+    width: 100px;
+    height: auto;
 }
 
+/* Popup Button Styles */
+.popupButton {
+    font-family: "Roboto";
+    margin: 10px;
+    width: 300px;
+    padding: 10px 20px;
+    background-color: #93fa69;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
 
+p {
+    font-family: "Rajdhani SemiBold";
+    font-size: 1.4rem;
+}
+
+/* Blur-Effekt für den Hintergrund */
+.blurred {
+    filter: blur(5px);
+}

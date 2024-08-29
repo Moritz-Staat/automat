@@ -3,25 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz</title>
+    <title>Popup Beispiel</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div id="Pixelparty">
-    <ul data-time="3000">
-        <li data-hue="120">Q</li> <!-- Grünton -->
-        <li data-hue="130">U</li> <!-- Grünton -->
-        <li data-hue="140">I</li> <!-- Grünton -->
-        <li data-hue="110">Z</li> <!-- Grünton -->
-    </ul>
+
+<!-- Alles außer dem Popup wird in einen Container gesetzt -->
+<div id="mainContent">
+    <!-- Der hellgrüne Button -->
+    <button id="popupButton">Premium Preis</button>
 </div>
-<canvas id="grüneanimation"></canvas>
-<div class="wrapper">
-    <h1 class="title">Das QUIZ<h1>
+
+<!-- Popup-Container -->
+<div id="popup">
+    <p id="popupText">Wir tauschen deine Kontaktdaten gegen einen Premium Preis!</p>
+    <img id="popupGif" src="../../../images/geschenk.gif" alt="Lustiges Gif">
+    <div id="popupButtons">
+        <button class="popupButton" id="premiumButton">Premium Preis abholen</button>
+        <button class="popupButton" id="normalButton">Bei normalen Preis bleiben</button>
+    </div>
 </div>
-<div id="JAVATESTEN">
-<h1> Das Quiz</h1>
-</div>
+
 <script src="script.js"></script>
 </body>
 </html>

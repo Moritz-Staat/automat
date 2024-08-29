@@ -52,9 +52,9 @@ document.getElementById('submitPin').onclick = function () {
         localStorage.clear()
     } else if (pinInput.value === '258') {
         const data = {
-            level1: getFromLocalStorage('level1wins'), /*Andere Level darunter*/
-            level2: getFromLocalStorage('level2wins'),
-            level3: getFromLocalStorage('level3wins'),
+            level1: getFromLocalStorage('level1win'), /*Andere Level darunter*/
+            level2: getFromLocalStorage('level2win'),
+            level3: getFromLocalStorage('level3win'),
             loses: getFromLocalStorage('loses'),
         }
         alert('Level1Stand:' + data.level1 + '\nLevel2Stand:' + data.level2 + '\nLevel3Stand:' + data.level3 + '\nTrostpreise:' + data.loses);
@@ -101,9 +101,9 @@ function closeModal() {
 
 function birnenwechsler() {
     const data = {
-        level1: getFromLocalStorage('level1wins'), /*Andere Level darunter*/
-        level2: getFromLocalStorage('level2wins'),
-        level3: getFromLocalStorage('level3wins'),
+        level1: getFromLocalStorage('level1win'), /*Andere Level darunter*/
+        level2: getFromLocalStorage('level2win'),
+        level3: getFromLocalStorage('level3win'),
         loses: getFromLocalStorage('loses'),
     }
     if (data.level1 > 39 || data.level2 > 39 || data.level3 > 39 || data.loses > 39) {

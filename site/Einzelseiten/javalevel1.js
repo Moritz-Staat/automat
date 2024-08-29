@@ -47,7 +47,7 @@ function closeModal() {
 }
 
 let timeout = undefined
-/* Nach Beenden des Quizzes Zurück Verlinken zur Startseite und Preis ausspucken*/
+/* Nach Beenden des Quizzes Zählen, Verlinken zur Startseite und Preis ausspucken*/
 window.addEventListener('message', (event) => {
     if (timeout != undefined) {
         return

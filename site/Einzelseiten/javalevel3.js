@@ -46,21 +46,42 @@ function closeModal() {
 }
 
 
+let timeout = undefined
 /* Nach Beenden des Quizzes Zurück Verlinken zur Startseite*/
 window.addEventListener('message', (event) => {
+    if (timeout != undefined) {
+        return
+    }
     if (event.data === 'prizeCollected') {
+        let level3wins = localStorage.getItem('level3win')
+        if (level3wins == null) {
+            level3wins = 1
+        } else {
+            level3wins = parseInt(level3wins)
+            level3wins += 1;
+        }
+        localStorage.setItem('level3win', level3wins.toString())
         doPost('1', 'http://192.168.0.120/Hyper');
-        setTimeout(() => {
+        timeout = setTimeout(() => {
+            timeout = undefined
             window.location.href = '../Automat.html';
         }, 3000);
     } else if (event.data === 'quizFailed') {
-        doPost('1', 'http://192.168.0.120/Expert');
-        setTimeout(() => {
+        let loses = localStorage.getItem('loses')
+        if (loses == null) {
+            loses = 1
+        } else {
+            loses = parseInt(loses)
+            loses += 1;
+        }
+        localStorage.setItem('loses', loses.toString())
+        doPost('1', 'http://192.168.0.120/Trostpreis');
+        timeout = setTimeout(() => {
+            timeout = undefined
             window.location.href = '../Automat.html';
         }, 3000);
     }
 });
-
 function doPost(param, url) {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", url + "?param=" + param, true);

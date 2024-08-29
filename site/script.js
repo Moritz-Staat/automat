@@ -117,9 +117,9 @@ function birnenwechsler() {
         loses: getFromLocalStorage('loses'),
         kontakt: getFromLocalStorage('kontaktdaten')
     }
-    if (data.level1 > 3 || data.level2 > 3 || data.level3 > 3 || data.loses > 3) {
+    if (data.level1 > 3 || data.level2 > 3 || data.level3 > 3 || data.loses > 3 || data.kontakt > 3) {
         document.getElementById('zählstand').src = "../images/orangebirne.svg"
-    } else if (data.level1 > 5 || data.level2 > 5 || data.level3 > 5 || data.loses > 5) {
+    } else if (data.level1 > 5 || data.level2 > 5 || data.level3 > 5 || data.loses > 5 || data.kontakt > 5) {
         document.getElementById('zählstand').src = "../images/rotebirne.svg"
     } else {
         document.getElementById('zählstand').src = "../images/grünebirne.svg"

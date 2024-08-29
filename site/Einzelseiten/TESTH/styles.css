@@ -52,3 +52,59 @@ p {
 .blurred {
     filter: blur(5px);
 }
+
+/* Testen Social Media Icons*/
+
+/* Social Icons (Positionierung und Größe) */
+#social-icons {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 10;
+}
+
+.social-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.social-btn img {
+    width: 2rem;
+    height: 2rem;
+}
+
+/* Social Popup (versteckt) */
+#socialpopup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Halbtransparenter Hintergrund */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+}
+
+#socialpopup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+}
+
+#socialpopup img {
+    width: 150px;
+    height: 150px;
+}
+
+.hidden {
+    display: none;
+}

@@ -27,3 +27,45 @@ normalButton.addEventListener('click', () => {
     popup.style.display = 'none';
     mainContent.classList.remove('blurred');
 });
+
+
+
+//SOcial Media Icons
+// Elemente abrufen
+const socialPopup = document.getElementById('socialpopup');
+const socialPopupContent = document.getElementById('socialpopup-content');
+const socialPopupQr = document.getElementById('socialpopup-qr');
+const socialIcons = document.getElementById('social-icons');
+
+// QR-Codes für die jeweiligen Social Media Plattformen
+const qrCodes = {
+    whatsapp: '../../../images/websiteqr.svg', // Pfad zum WhatsApp-QR-Code
+    instagram: '../../../images/instagramqr.svg', // Pfad zum Instagram-QR-Code
+    facebook: '../../../images/facebookqr.svg', // Pfad zum Facebook-QR-Code
+    linkedin: '../../../images/linkedinqr.svg' // Pfad zum LinkedIn-QR-Code
+};
+
+// Funktion zum Öffnen des Popups
+function openPopup(socialMedia) {
+    socialPopupQr.src = qrCodes[socialMedia]; // Ändert den QR-Code
+    socialPopup.style.display = 'flex'; // Zeigt das Popup
+}
+
+// Funktion zum Schließen des Popups
+function closePopup() {
+    socialPopup.style.display = 'none'; // Versteckt das Popup
+}
+
+// Klick-Event-Listener für die Social-Buttons
+document.getElementById('whatsapp').addEventListener('click', () => openPopup('whatsapp'));
+document.getElementById('instagram').addEventListener('click', () => openPopup('instagram'));
+document.getElementById('facebook').addEventListener('click', () => openPopup('facebook'));
+document.getElementById('linkedin').addEventListener('click', () => openPopup('linkedin'));
+
+// Klick außerhalb des Popups schließt das Popup
+socialPopup.addEventListener('click', (event) => {
+    if (event.target === socialPopup) {
+        closePopup();
+    }
+});
+

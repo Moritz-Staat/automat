@@ -51,6 +51,7 @@ function closeModal() {
 let timeout = undefined
 /* Nach Beenden des Quizzes Zurück Verlinken zur Startseite*/
 window.addEventListener('message', (event) => {
+    /*
     if (timeout != undefined) {
         return
     }
@@ -82,7 +83,8 @@ window.addEventListener('message', (event) => {
             timeout = undefined
             window.location.href = '../Automat.html';
         }, 3000);
-    }
+    } */
+    show(event.data)
 });
 
 function doPost(param, url) {
@@ -90,3 +92,57 @@ function doPost(param, url) {
     xhr.open("POST", url + "?param=" + param, true);
     xhr.send();
 }
+let _data;
+function show(data) {
+    document.getElementById('Preisauswahl').classList.remove('preise');
+    _data=data;
+    document.getElementById('Preisauswahl').classList.add('preiseshown');
+}
+
+premiumButton.addEventListener('click', () => {
+    // Ändere den Popup-Inhalt für das Premium-Angebot
+    popupText.textContent = "Melde dich bei unserem Stand und wir geben dir dein Premium Geschenk";
+    popupGif.style.display = 'none';
+    popupButtons.style.display = 'none';
+    timeout = setTimeout(() => {
+        timeout = undefined
+        window.location.href = '../Automat.html';
+    }, 3000);
+});
+
+normalButton.addEventListener('click', () => {
+    if (timeout != undefined) {
+        return
+    }
+    if (_data === 'prizeCollected') {
+        let level2wins = localStorage.getItem('level2win')
+        if (level2wins == null) {
+            level2wins = 1
+        } else {
+            level2wins = parseInt(level2wins)
+            level2wins += 1;
+        }
+        localStorage.setItem('level2win', level2wins.toString())
+        doPost('1', 'http://192.168.0.120/Beginner');
+        timeout = setTimeout(() => {
+            timeout = undefined
+            window.location.href = '../Automat.html';
+        }, 3000);
+    } else if (_data === 'quizFailed') {
+        let loses = localStorage.getItem('loses')
+        if (loses == null) {
+            loses = 1
+        } else {
+            loses = parseInt(loses)
+            loses += 1;
+        }
+        localStorage.setItem('loses', loses.toString())
+        doPost('1', 'http://192.168.0.120/Trostpreis');
+        timeout = setTimeout(() => {
+            timeout = undefined
+            window.location.href = '../Automat.html';
+        }, 300);
+    }
+    popup.style.display = 'none';
+    mainContent.classList.remove('blurred');
+});

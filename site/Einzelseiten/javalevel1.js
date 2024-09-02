@@ -141,7 +141,7 @@ normalButton.addEventListener('click', () => {
         timeout = setTimeout(() => {
             timeout = undefined
             window.location.href = '../Automat.html';
-        }, 3000);
+        }, 300);
     }
     popup.style.display = 'none';
     mainContent.classList.remove('blurred');

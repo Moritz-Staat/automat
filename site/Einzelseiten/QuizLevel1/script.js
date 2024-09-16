@@ -292,7 +292,7 @@ const questions = [
         {
             question: "Welche Spannung hat die Oberleitung bei der Bahn?",
             answers: [
-                { text: "10 kV", correct: false },
+                { text: "12 kV", correct: false },
                 { text: "220 kV", correct: false },
                 { text: "15.000 V", correct: true },
                 { text: "10 kV", correct: false }

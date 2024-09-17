@@ -18,13 +18,23 @@ function hideScreensaver() {
 function resetTimer() {
     hideScreensaver();
     clearTimeout(timeout);
-    timeout = setTimeout(showScreensaver, 20000000); // 10 Sekunden
+    timeout = setTimeout(showScreensaver, 5000); // 10 Sekunden
 }
 
+// Änderungen: Click-Event und Touch-Event hinzugefügt
 document.addEventListener('mousemove', resetTimer);
 document.addEventListener('keydown', resetTimer);
+document.addEventListener('click', function(event) {
+    event.preventDefault();
+    resetTimer();
+});
+document.addEventListener('touchstart', function(event) { // Änderung
+    event.preventDefault(); // Änderung
+    resetTimer();
+});
 
 resetTimer();
+
 
 
 document.getElementById('logo').onclick = function () {

@@ -639,28 +639,28 @@ function showResults() {
 
     if (correctAnswers >= 9) {
         imageUrl = 'traumjob.jpg';
-        resultText = "WOW, vielleicht solltest du dich als Trainer bewerben!";
+        resultText = "Weichen perfekt eingestellt! Du beherrschst das Bahnwissen wie ein Profi!";
         buttonText = 'Preis abholen';
         buttonOnClick = () => {
             window.parent.postMessage('prizeCollected', '*');
         };
     } else if (correctAnswers >= 7) {
         imageUrl = 'traumjob.jpg';
-        resultText = "Du scheinst dein Zeug zu können, wie wäre es mit einer Stelle bei uns?";
+        resultText = "Du bist auf dem Überholgleis, das war richtig gut!";
         buttonText = 'Zurück zum Start';
         buttonOnClick = () => {
             window.parent.postMessage('quizFailed', '*');
         };
     } else if (correctAnswers >= 4) {
         imageUrl = 'traumjob.jpg';
-        resultText = "Schon nicht schlecht, wie wärs mit einer Auffrischung deines Wissens?";
+        resultText = "Die Ampel steht auf gelb - du hast einen soliden Start hingelegt, aber da ist noch Platz nach oben!";
         buttonText = 'Zurück zum Start';
         buttonOnClick = () => {
             window.parent.postMessage('quizFailed', '*');
         };
     } else {
         imageUrl = 'traumjob.jpg';
-        resultText = "Da musst du wohl nochmal zu unseren Schulungen";
+        resultText = "Rote Ampel! Ab zu unseren Schulungen ;)";
         buttonText = 'Zurück zum Start';
         buttonOnClick = () => {
             window.parent.postMessage('quizFailed', '*');

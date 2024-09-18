@@ -198,7 +198,6 @@ a.level1link, a.level2link, a.level3link {
 
 #überschrift {
     margin-top: -20rem;
-    margin-left:23rem;
 }
 
 #zählstand{
@@ -209,23 +208,10 @@ a.level1link, a.level2link, a.level3link {
 
 /* Überschrift stylen*/
 h1 {
-    font-size: 12rem;
+    font-size: 7rem;
     color: white;
-    transition: all 0.5s ease-in-out;
     display: inline-block;
     transform-origin: center;
-}
-
-@keyframes growAndRotate {
-    0% {
-        transform: scale(1) rotate(0deg);
-    }
-    50% {
-        transform: scale(1.5) rotate(180deg);
-    }
-    100% {
-        transform: scale(1) rotate(360deg);
-    }
 }
 
 h2{

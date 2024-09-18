@@ -71,6 +71,7 @@ document.getElementById('submitPin').onclick = function () {
         closeModal();
     } else if (pinInput.value === '1111') {
         localStorage.clear();
+        doPost('1', 'http://192.168.0.120/Start')
     } else if (pinInput.value === '258') {
         const data = {
             level1: getFromLocalStorage('level1win'),

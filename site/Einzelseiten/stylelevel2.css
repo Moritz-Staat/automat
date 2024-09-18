@@ -150,7 +150,7 @@ body {
 }
 #popup {
     position: fixed;
-    width: 90%;
+    width: 100%;
     height: 100%;
     padding: 20px;
     background-color: white;
@@ -168,18 +168,20 @@ body {
 /* Popup Button Styles */
 .popupButton {
     margin: 10px;
-    width: 100%;
+    width: 80%;
     height: 8rem;
     padding: 10px 20px;
-    background-color: #93fa69;
+    background-color: #62b55a;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     font-size: 6rem;
     font-family: "Rajdhani SemiBold";
+    color: white;
 }
 #popupText{
     font-family: "Rajdhani SemiBold";
     font-size: 8rem;
     margin-top: 80rem;
+    color: black;
 }

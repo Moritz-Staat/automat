@@ -517,28 +517,28 @@ function showResults() {
     let imageUrl, buttonText, buttonOnClick, resultText;
 
     if (correctAnswers >= 9) {
-        imageUrl = 'traumjob.jpg';
+        imageUrl = 'LOGO.svg';
         resultText = "Wow! Lokführer des Wissens, du hast die Strecke sehr gut gemeistert!";
         buttonText = 'Preis abholen';
         buttonOnClick = () => {
             window.parent.postMessage('prizeCollected', '*');
         };
     } else if (correctAnswers >= 7) {
-        imageUrl = 'traumjob.jpg';
+        imageUrl = 'LOGO.svg';
         resultText = "Dein Wissen nimmt Fahrt auf! Du kommst schon ziemlich gut in die richtige Spur";
         buttonText = 'Zurück zum Start';
         buttonOnClick = () => {
             window.parent.postMessage('quizFailed', '*');
         };
     } else if (correctAnswers >= 4) {
-        imageUrl = 'traumjob.jpg';
+        imageUrl = 'LOGO.svg';
         resultText = "Schon nicht schlecht, wie wärs mit einer Auffrischung deines Wissens?";
         buttonText = 'Zurück zum Start';
         buttonOnClick = () => {
             window.parent.postMessage('quizFailed', '*');
         };
     } else {
-        imageUrl = 'traumjob.jpg';
+        imageUrl = 'LOGO.svg';
         resultText = "Da musst du wohl nochmal zu unseren Schulungen!";
         buttonText = 'Zurück zum Start';
         buttonOnClick = () => {

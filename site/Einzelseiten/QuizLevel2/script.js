@@ -638,28 +638,28 @@ function showResults() {
     let imageUrl, buttonText, buttonOnClick, resultText;
 
     if (correctAnswers >= 9) {
-        imageUrl = 'traumjob.jpg';
+        imageUrl = 'LOGO.svg';
         resultText = "Weichen perfekt eingestellt! Du beherrschst das Bahnwissen wie ein Profi!";
         buttonText = 'Preis abholen';
         buttonOnClick = () => {
             window.parent.postMessage('prizeCollected', '*');
         };
     } else if (correctAnswers >= 7) {
-        imageUrl = 'traumjob.jpg';
+        imageUrl = 'LOGO.svg';
         resultText = "Du bist auf dem Überholgleis, das war richtig gut!";
         buttonText = 'Zurück zum Start';
         buttonOnClick = () => {
             window.parent.postMessage('quizFailed', '*');
         };
     } else if (correctAnswers >= 4) {
-        imageUrl = 'traumjob.jpg';
+        imageUrl = 'LOGO.svg';
         resultText = "Die Ampel steht auf gelb - du hast einen soliden Start hingelegt, aber da ist noch Platz nach oben!";
         buttonText = 'Zurück zum Start';
         buttonOnClick = () => {
             window.parent.postMessage('quizFailed', '*');
         };
     } else {
-        imageUrl = 'traumjob.jpg';
+        imageUrl = 'LOGO.svg';
         resultText = "Rote Ampel! Ab zu unseren Schulungen ;)";
         buttonText = 'Zurück zum Start';
         buttonOnClick = () => {

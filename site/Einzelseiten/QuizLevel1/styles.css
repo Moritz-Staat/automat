@@ -43,6 +43,7 @@ body {
     height: 100%;
     width: 100%;
     margin-bottom: 1.25rem;
+    align-items: center;
 }
 #question-image {
     width: 70rem;
@@ -84,13 +85,17 @@ body {
 
 #result-image {
     display: block;
-    margin: 0.625rem auto;
-    max-width: 18.75rem;
+    max-width: 30rem;
+    margin-left: 28rem;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
 }
 
 #result-text {
     font-size: 4rem;
-    margin: 0.625rem 0;
+    font-family: "Rajdhani SemiBold";
+    color:black;
+    margin-bottom: 3rem;
 }
 
 #question-text {

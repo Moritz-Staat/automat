@@ -536,28 +536,28 @@ function showResults() {
     let imageUrl, buttonText, buttonOnClick, resultText;
 
     if (correctAnswers >= 9) {
-        imageUrl = 'traumjob.jpg';
+        imageUrl = 'LOGO.svg';
         resultText = "Wow,das war spitze! Vielleicht solltest du dich als Trainer bei uns bewerben!";
         buttonText = 'Preis abholen';
         buttonOnClick = () => {
             window.parent.postMessage('prizeCollected', '*');
         };
     } else if (correctAnswers >= 7) {
-        imageUrl = 'traumjob.jpg';
+        imageUrl = 'LOGO.svg';
         resultText = "Du scheinst dein Zeug zu können! Ein letztes Signal und du wirst zum Profi!";
         buttonText = 'Zurück zum Start';
         buttonOnClick = () => {
             window.parent.postMessage('quizFailed', '*');
         };
     } else if (correctAnswers >= 4) {
-        imageUrl = 'traumjob.jpg';
+        imageUrl = 'LOGO.svg';
         resultText = "Ein paar Weichen musst du wohl noch richtig stellen!";
         buttonText = 'Zurück zum Start';
         buttonOnClick = () => {
             window.parent.postMessage('quizFailed', '*');
         };
     } else {
-        imageUrl = 'traumjob.jpg';
+        imageUrl = 'LOGO.svg';
         resultText = "Das war wohl etwas schwer, better luck next time!";
         buttonText = 'Zurück zum Start';
         buttonOnClick = () => {

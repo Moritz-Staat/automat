@@ -197,7 +197,8 @@ a.level1link, a.level2link, a.level3link {
 }
 
 #überschrift {
-    margin-top: -41rem;
+    margin-top: -20rem;
+    margin-left:23rem;
 }
 
 #zählstand{
@@ -225,10 +226,6 @@ h1 {
     100% {
         transform: scale(1) rotate(360deg);
     }
-}
-
-h1.animate {
-    animation: growAndRotate 2s ease-in-out forwards;
 }
 
 h2{

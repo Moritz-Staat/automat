@@ -18,22 +18,25 @@ function hideScreensaver() {
 function resetTimer() {
     hideScreensaver();
     clearTimeout(timeout);
-    timeout = setTimeout(showScreensaver, 5000); // 10 Sekunden
+    timeout = setTimeout(showScreensaver, 5000); // 5 Sekunden
 }
 
-// Änderungen: Click-Event und Touch-Event hinzugefügt
-document.addEventListener('mousemove', resetTimer);
-document.addEventListener('keydown', resetTimer);
-document.addEventListener('click', function(event) {
-    event.preventDefault();
-    resetTimer();
-});
-document.addEventListener('touchstart', function(event) { // Änderung
-    event.preventDefault(); // Änderung
-    resetTimer();
+// Event-Listener nur für den Screensaver hinzufügen
+const screensaver = document.getElementById('screensaver');
+
+screensaver.addEventListener('click', function(event) {
+    // Screensaver verstecken, wenn darauf geklickt wird
+    hideScreensaver();
+    event.preventDefault(); // Verhindert Standardaktion auf Screensaver-Klick
 });
 
+// Standard-Interaktionen auf der Seite
+document.addEventListener('mousemove', resetTimer);
+document.addEventListener('keydown', resetTimer);
+document.addEventListener('touchstart', resetTimer);
+
 resetTimer();
+
 
 
 

@@ -25,7 +25,7 @@ body {
 #progress-container {
     background: #e0e0e0;
     border-radius: 0.3125rem;
-    height: 1.5rem;
+    height: 2rem;
     margin-top: 1.25rem;
     width: 100%;
     max-width: 90rem;
@@ -71,6 +71,7 @@ body {
     transition: background-color 0.3s;
     font-family: 'Rajdhani SemiBold', sans-serif;
     font-size: 2rem;
+    border-radius: 4rem;
 }
 
 .btn:hover {
@@ -100,5 +101,6 @@ body {
 #question-text {
     font-size: 3rem;
     font-family: 'Rajdhani', sans-serif;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
+    font-weight: 600;
 }

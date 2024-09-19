@@ -178,6 +178,7 @@ body {
     font-size: 6rem;
     font-family: "Rajdhani SemiBold";
     color: white;
+    border-radius: 4rem;
 }
 #popupText{
     font-family: "Rajdhani SemiBold";

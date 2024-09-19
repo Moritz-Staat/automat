@@ -6,16 +6,9 @@ function showScreensaver() {
     const video = document.getElementById('screensaverVideo');
 
     const videos = [
-        '../Images/RZ_ChrisOmat_Bildschirmschonervideo_Einzeln_v1.mp4',
-        '../Images/RZ_ChrisOmat_Bildschirmschonervideo_Einzeln_v2.mp4',
-        '../Images/RZ_ChrisOmat_Bildschirmschonervideo_Einzeln_v3.mp4',
-        '../Images/RZ_ChrisOmat_Bildschirmschonervideo_Einzeln_v4.mp4',
-        '../Images/RZ_ChrisOmat_Bildschirmschonervideo_Einzeln_v5.mp4',
-        '../Images/RZ_ChrisOmat_Bildschirmschonervideo_Einzeln_v6.mp4',
-        '../Images/RZ_ChrisOmat_Bildschirmschonervideo_Einzeln_v7.mp4',
-        '../Images/RZ_ChrisOmat_Bildschirmschonervideo_Einzeln_v8.mp4',
-        '../Images/RZ_ChrisOmat_Bildschirmschonervideo_Einzeln_v9.mp4',
-        '../Images/RZ_ChrisOmat_Bildschirmschonervideo_Einzeln_v10.mp4'
+        '../Images/RZ_ChrisOmat_Bildschirmschonervideo_3er_v1.mp4',
+        '../Images/RZ_ChrisOmat_Bildschirmschonervideo_3er_v2.mp4',
+        '../Images/RZ_ChrisOmat_Bildschirmschonervideo_3er_v3.mp4',
     ];
 
     const randomVideo = videos[Math.floor(Math.random() * videos.length)];
@@ -34,7 +27,7 @@ function onVideoEnded() {
     playCount++;
     const video = document.getElementById('screensaverVideo');
 
-    if (playCount < 3) {
+    if (playCount < 2) {
         video.play();
     } else {
         hideScreensaver();
@@ -57,7 +50,7 @@ function hideScreensaver() {
 function resetTimer() {
     hideScreensaver();
     clearTimeout(timeout);
-    timeout = setTimeout(showScreensaver, 5000);
+    timeout = setTimeout(showScreensaver, 20000);
 }
 
 document.addEventListener('mousemove', resetTimer);

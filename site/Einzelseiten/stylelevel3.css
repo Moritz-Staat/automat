@@ -162,24 +162,40 @@ iframe {
     height: auto;
 }
 
-/* Popup Button Styles */
-.popupButton {
+#popupText{
+    font-family: "Rajdhani SemiBold";
+    font-size: 6rem;
+    margin-top: 40rem;
+    color: black;
+    padding: 15rem;
+}
+#normalButton {
     margin: 10px;
-    width: 80%;
-    height: 8rem;
-    padding: 10px 20px;
+    width: 30%;
+    height: 6rem;
+    background-color: #646363;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 4rem;
+    font-family: "Rajdhani SemiBold";
+    color: white;
+    border-radius: 4rem;
+    margin-top: 30rem;
+}
+
+#premiumButton {
+    margin: 10px;
+    width: 30%;
+    height: 6rem;
     background-color: #62b55a;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 6rem;
+    font-size: 4rem;
     font-family: "Rajdhani SemiBold";
     color: white;
     border-radius: 4rem;
-}
-#popupText{
-    font-family: "Rajdhani SemiBold";
-    font-size: 8rem;
-    margin-top: 80rem;
-    color: black;
+    margin-left: 20rem;
+    margin-top: 30rem;
 }

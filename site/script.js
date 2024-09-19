@@ -54,7 +54,7 @@ function resetTimer() {
 }
 
 document.addEventListener('mousemove', resetTimer);
-document.addEventListener('keydown', resetTimer);
+document.addEventListener('click', resetTimer);
 document.addEventListener('touchstart', resetTimer);
 
 resetTimer();

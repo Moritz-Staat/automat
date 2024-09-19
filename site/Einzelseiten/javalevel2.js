@@ -101,7 +101,7 @@ function show(data) {
 
 premiumButton.addEventListener('click', () => {
     // Ändere den Popup-Inhalt für das Premium-Angebot
-    popupText.textContent = "Melde dich bei unserem Stand und wir geben dir dein Premium Geschenk";
+    popupText.textContent = "Melde dich bei unserem Stand für dein Premium Geschenk!";
     popupGif.style.display = 'none';
     popupButtons.style.display = 'none';
     timeout = setTimeout(() => {

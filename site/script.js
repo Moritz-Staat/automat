@@ -7,6 +7,23 @@ function showScreensaver() {
     video.play();
 }
 
+function showScreensaver() {
+    const screensaver = document.getElementById('screensaver');
+    const video = document.getElementById('screensaverVideo');
+
+    // Liste der Videos
+    const videos = ['../Images/RZ_ChrisOmat_Bildschirmschonervideo_Einzeln_v1.mp4', '../Images/RZ_ChrisOmat_Bildschirmschonervideo_Einzeln_v2.mp4', '../Images/RZ_ChrisOmat_Bildschirmschonervideo_Einzeln_v3.mp4', '../Images/RZ_ChrisOmat_Bildschirmschonervideo_Einzeln_v4.mp4', '../Images/RZ_ChrisOmat_Bildschirmschonervideo_Einzeln_v5.mp4', '../Images/RZ_ChrisOmat_Bildschirmschonervideo_Einzeln_v6.mp4', '../Images/RZ_ChrisOmat_Bildschirmschonervideo_Einzeln_v7.mp4', '../Images/RZ_ChrisOmat_Bildschirmschonervideo_Einzeln_v8.mp4', '../Images/RZ_ChrisOmat_Bildschirmschonervideo_Einzeln_v9.mp4', '../Images/RZ_ChrisOmat_Bildschirmschonervideo_Einzeln_v10.mp4'];
+
+    // Zufällig eines der Videos auswählen
+    const randomVideo = videos[Math.floor(Math.random() * videos.length)];
+
+    // Das ausgewählte Video in den Video-Element setzen
+    video.src = randomVideo;
+
+    screensaver.classList.remove('hidden');
+    video.play();
+}
+
 function hideScreensaver() {
     const screensaver = document.getElementById('screensaver');
     const video = document.getElementById('screensaverVideo');
@@ -18,13 +35,13 @@ function hideScreensaver() {
 function resetTimer() {
     hideScreensaver();
     clearTimeout(timeout);
-    timeout = setTimeout(showScreensaver, 5000); // 5 Sekunden
+    timeout = setTimeout(showScreensaver, 50000); // 5 Sekunden
 }
 
 // Event-Listener nur für den Screensaver hinzufügen
 const screensaver = document.getElementById('screensaver');
 
-screensaver.addEventListener('click', function(event) {
+screensaver.addEventListener('click', function (event) {
     // Screensaver verstecken, wenn darauf geklickt wird
     hideScreensaver();
     event.preventDefault(); // Verhindert Standardaktion auf Screensaver-Klick
@@ -36,8 +53,6 @@ document.addEventListener('keydown', resetTimer);
 document.addEventListener('touchstart', resetTimer);
 
 resetTimer();
-
-
 
 
 document.getElementById('logo').onclick = function () {
@@ -71,7 +86,7 @@ document.getElementById('submitPin').onclick = function () {
         closeModal();
     } else if (pinInput.value === '1111') {
         localStorage.clear();
-        doPost('1', 'http://192.168.0.120/Start')
+        doPost('1', 'http://192.168.0.120/Start');
     } else if (pinInput.value === '258') {
         const data = {
             level1: getFromLocalStorage('level1win'),
@@ -139,6 +154,7 @@ function birnenwechsler() {
         document.getElementById('zählstand').src = "../images/grünebirne.svg"
     }
 }
+
 birnenwechsler()
 
 // Überschrift Animation

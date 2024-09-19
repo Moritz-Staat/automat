@@ -67,7 +67,7 @@ document.getElementById('submitPin').onclick = function () {
             kontakt += 1;
         }
         localStorage.setItem('kontaktdaten', kontakt);
-        doPost('1', 'http://192.168.0.120/Register');
+        doPost('1', 'http://192.168.0.120/Expert');
         closeModal();
     } else if (pinInput.value === '1111') {
         localStorage.clear();

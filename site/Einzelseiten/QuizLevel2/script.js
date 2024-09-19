@@ -637,14 +637,14 @@ function showResults() {
 
     let imageUrl, buttonText, buttonOnClick, resultText;
 
-    if (correctAnswers >= 9) {
+    if (correctAnswers >= 8) {
         imageUrl = 'LOGO.svg';
         resultText = "Weichen perfekt eingestellt! Du beherrschst das Bahnwissen wie ein Profi!";
         buttonText = 'Preis abholen';
         buttonOnClick = () => {
             window.parent.postMessage('prizeCollected', '*');
         };
-    } else if (correctAnswers >= 7) {
+    } else if (correctAnswers >= 6) {
         imageUrl = 'LOGO.svg';
         resultText = "Du bist auf dem Überholgleis, das war richtig gut!";
         buttonText = 'Zurück zum Start';

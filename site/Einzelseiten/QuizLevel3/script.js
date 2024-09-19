@@ -549,7 +549,7 @@ function showResults() {
         buttonOnClick = () => {
             window.parent.postMessage('quizFailed', '*');
         };
-    } else if (correctAnswers >= 4) {
+    } else if (correctAnswers >= 3) {
         imageUrl = 'LOGO.svg';
         resultText = "Ein paar Weichen musst du wohl noch richtig stellen!";
         buttonText = 'Zurück zum Start';

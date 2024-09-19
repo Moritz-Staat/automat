@@ -107,7 +107,7 @@ premiumButton.addEventListener('click', () => {
     timeout = setTimeout(() => {
         timeout = undefined
         window.location.href = '../Automat.html';
-    }, 3000);
+    }, 10000);
 });
 
 normalButton.addEventListener('click', () => {

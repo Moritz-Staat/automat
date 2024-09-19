@@ -554,9 +554,12 @@ const questions = [
 
 
 let shuffledQuestions, currentQuestionIndex, correctAnswers;
-
+let inactivityTimeout, blurTimeout; // Hinzufügen der Variablen für das Blur
+let isBlurred = false; // Variable, um den Blur-Status zu tracken
 document.addEventListener('DOMContentLoaded', () => {
     startGame();
+    resetInactivityTimer(); // Timer bei Spielstart initialisieren
+    setupInactivityListeners(); // Setze die Event-Listener für Inaktivität
 });
 
 function startGame() {
@@ -585,7 +588,10 @@ function showQuestion(question) {
         const button = document.createElement('button');
         button.innerText = answer.text;
         button.classList.add('btn');
-        button.addEventListener('click', () => selectAnswer(button, answer.correct));
+        button.addEventListener('click', () => {
+            selectAnswer(button, answer.correct);
+            resetInactivityTimer(); // Timer nach Benutzerinteraktion zurücksetzen
+        });
         answerButtonsElement.appendChild(button);
     });
 
@@ -614,7 +620,7 @@ function selectAnswer(button, correct) {
         } else {
             showResults();
         }
-    }, 1500); // 1,5 Sekunden
+    }, 1500);
 }
 
 function getCorrectAnswerText() {
@@ -698,4 +704,36 @@ function updateProgressBar() {
 
     // Aktualisiere den Fortschrittstext (z.B. "1/10", "2/10")
     progressText.innerText = `${currentQuestionNumber}/${totalQuestions}`;
+}
+
+// Funktion zum Blurren der Seite
+function blurPage() {
+    document.body.classList.add('blur');
+    document.getElementById('blur-overlay').style.display = 'flex'; // Overlay sichtbar machen
+    isBlurred = true;
+}
+
+// Funktion zum Zurücksetzen des Inaktivitäts-Timers
+function resetInactivityTimer() {
+    clearTimeout(inactivityTimeout); // Vorherigen Timeout löschen
+    clearTimeout(blurTimeout); // Blur Timeout ebenfalls löschen
+
+    if (isBlurred) {
+        document.body.classList.remove('blur'); // Entferne den Blur-Effekt
+        document.getElementById('blur-overlay').style.display = 'none'; // Overlay verstecken
+        isBlurred = false;
+    }
+
+    // Blurre die Seite nach 20 Sekunden Inaktivität
+    blurTimeout = setTimeout(blurPage, 20000);
+
+    // Leitet nach 30 Sekunden im Hauptfenster auf Automat.html weiter
+    inactivityTimeout = setTimeout(() => {
+        window.top.location.href = '../../Automat.html';
+    }, 30000);
+}
+
+// Setzt Event-Listener für **Mausklick-Aktivität**
+function setupInactivityListeners() {
+    document.addEventListener('click', resetInactivityTimer); // Nur Maus-Klicks
 }

@@ -19,9 +19,6 @@ iframe {
     border: none;
 }
 
-body {
-    font-family: Arial, sans-serif;
-}
 
 /* Modal Styles */
 .modal {
@@ -154,6 +151,8 @@ body {
     height: 100%;
     padding: 20px;
     background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
     text-align: center;
     z-index: 10;
 }

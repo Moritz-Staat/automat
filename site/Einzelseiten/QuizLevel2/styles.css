@@ -1,6 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,7 +12,7 @@ body {
     background: white;
     padding: 1.25rem;
     border-radius: 0.5rem;
-    box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
+    /*box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);*/
     width: 100%;
     max-width: 80rem;
     text-align: center;
@@ -61,10 +60,10 @@ body {
     margin-bottom: 1.25rem;
 }
 #question-image {
-    width: 70rem;
+    width: 80rem;
     height: 100rem;
     object-fit: contain;
-    max-width: 70rem;
+    max-width: 80rem;
     max-height: 100rem;
     margin: 0.625rem auto;
     display: block;
@@ -82,7 +81,6 @@ body {
     background-color: #62b55a;
     color: #ffffff;
     border: none;
-    border-radius: 0.3125rem;
     cursor: pointer;
     transition: background-color 0.3s;
     font-family: 'Rajdhani SemiBold', sans-serif;

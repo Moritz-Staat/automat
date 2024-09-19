@@ -567,6 +567,14 @@ function showResults() {
 
 function updateProgressBar() {
     const progressBar = document.getElementById('progress-bar');
-    const progressPercentage = ((currentQuestionIndex + 1) / shuffledQuestions.length) * 100;
+    const progressText = document.getElementById('progress-text');
+    const currentQuestionNumber = currentQuestionIndex + 1;
+    const totalQuestions = shuffledQuestions.length;
+    const progressPercentage = (currentQuestionNumber / totalQuestions) * 100;
+
+    // Aktualisiere die Breite der Progress Bar
     progressBar.style.width = `${progressPercentage}%`;
+
+    // Aktualisiere den Fortschrittstext (z.B. "1/10", "2/10")
+    progressText.innerText = `${currentQuestionNumber}/${totalQuestions}`;
 }

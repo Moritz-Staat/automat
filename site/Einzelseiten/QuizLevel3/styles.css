@@ -7,7 +7,12 @@ body {
     margin: 0;
     flex-direction: column;
 }
-
+@font-face {
+    font-family: 'Rajdhani-SemiBold';
+    src: url('../../../fonts/Rajdhani-Semibold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 #quiz-container {
     background: white;
     padding: 1.25rem;
@@ -44,7 +49,7 @@ body {
     position: absolute;
     width: 100%;
     text-align: center;
-    font-family: 'Rajdhani', sans-serif;
+    font-family: 'Rajdhani-SemiBold', sans-serif;
     font-weight: 600;
     font-size: 1.5rem;
     color: white;
@@ -83,7 +88,7 @@ body {
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
-    font-family: 'Rajdhani SemiBold', sans-serif;
+    font-family: 'Rajdhani-SemiBold', sans-serif;
     font-size: 2rem;
     border-radius: 4rem;
 }
@@ -107,14 +112,14 @@ body {
 
 #result-text {
     font-size: 4rem;
-    font-family: "Rajdhani SemiBold";
+    font-family: "Rajdhani-SemiBold";
     color:black;
     margin-bottom: 3rem;
 }
 
 #question-text {
     font-size: 3rem;
-    font-family: 'Rajdhani', sans-serif;
+    font-family: 'Rajdhani-SemiBold', sans-serif;
     margin-bottom: 4rem;
     font-weight: 600;
 }

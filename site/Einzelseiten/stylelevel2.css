@@ -2,7 +2,12 @@ body, html {
     margin: 0;
     height: 100%;
 }
-
+@font-face {
+    font-family: 'Rajdhani-SemiBold';
+    src: url('../../fonts/Rajdhani-Semibold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 .quiz-container {
     margin-top: -20rem;
     height: 180rem;
@@ -163,7 +168,7 @@ iframe {
 }
 
 #popupText{
-    font-family: "Rajdhani SemiBold";
+    font-family: "Rajdhani-SemiBold";
     font-size: 6rem;
     margin-top: 40rem;
     color: black;
@@ -178,7 +183,7 @@ iframe {
     border-radius: 10px;
     cursor: pointer;
     font-size: 4rem;
-    font-family: "Rajdhani SemiBold";
+    font-family: "Rajdhani-SemiBold";
     color: white;
     border-radius: 4rem;
     margin-top: 30rem;
@@ -193,7 +198,7 @@ iframe {
     border-radius: 10px;
     cursor: pointer;
     font-size: 4rem;
-    font-family: "Rajdhani SemiBold";
+    font-family: "Rajdhani-SemiBold";
     color: white;
     border-radius: 4rem;
     margin-left: 20rem;

@@ -1,10 +1,21 @@
 @font-face {
-    font-family: 'Rajdhani-SemiBold';
-    src: url('../fonts/Rajdhani-Semibold.ttf') format('truetype');
+    font-family: 'Rajdhani-Bold';
+    src: url('../fonts/Rajdhani-Bold.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
-
+@font-face {
+    font-family: 'Rajdhani-SemiBold';
+    src: url('../fonts/Rajdhani-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Roboto-Bold';
+    src: url('../fonts/Roboto-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 .container, .quiz-options, .quiz-link, .quiz3container, .quiz2container, .quiz1container {
     text-align: center;
 }
@@ -13,18 +24,9 @@
     margin-top: 1.25rem;
 }
 
-.quiz-link {
+.quiz-link {F
     display: block;
     margin: 6.25rem auto;
-}
-
-body {
-    font-family: "Rajdhani-Semibold", sans-serif;
-}
-
-/* Container für TESTH */
-.container {
-    width: 130rem;
 }
 
 /* Body und HTML */
@@ -47,13 +49,6 @@ body {
     align-items: center;
 }
 
-svg {
-    font-weight: bold;
-    max-width: 50rem;
-    height: 120rem;
-    max-width: 120rem;
-    height: 100%;
-}
 
 #screensaver {
     position: fixed;
@@ -78,10 +73,10 @@ svg {
 }
 
 .schriftunten {
-    font-size: 8rem;
+    font-size: 5rem;
     color: white;
     margin-top: 12.5rem;
-    font-family: "Rajdhani-SemiBold", sans-serif;
+    font-family: 'Roboto-Bold';
     text-align: center;
 }
 
@@ -200,11 +195,7 @@ a.level1link, a.level2link, a.level3link {
 }
 .levelschriften {
     font-size: 5rem;
-    font-family: 'Rajdhani-SemiBold', sans-serif;
-}
-
-#überschrift {
-    margin-top: -20rem;
+    font-family: 'Rajdhani-SemiBold';
 }
 
 #zählstand{
@@ -215,14 +206,22 @@ a.level1link, a.level2link, a.level3link {
 
 /* Überschrift stylen*/
 h1 {
-    font-size: 7rem;
+font-size: 20rem;
+    color:white;
+    transform-origin: center;
+    display: inline-block;
+    font-family: 'Rajdhani-Bold';
+}
+
+h2 {
+    font-size: 5rem;
     color: white;
     display: inline-block;
     transform-origin: center;
-    padding: 10rem;
+    margin-top: -15rem;
+    font-family: 'Roboto-Bold';
 }
-
-h2{
+h3{
     color:black;
-    font-family: 'Rajdhani-SemiBold', sans-serif;
+    font-family: 'Rajdhani-SemiBold';
 }

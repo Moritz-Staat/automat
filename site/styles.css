@@ -199,8 +199,9 @@ a.level1link, a.level2link, a.level3link {
 }
 
 #zählstand{
-    height: 20rem;
-    width: 20rem;
+    height: 25rem;
+    width: 25rem;
+    margin-top: 10rem;
 }
 
 
@@ -214,14 +215,21 @@ font-size: 20rem;
 }
 
 h2 {
-    font-size: 5rem;
+    font-size: 6rem;
     color: white;
     display: inline-block;
     transform-origin: center;
-    margin-top: -15rem;
-    font-family: 'Roboto-Bold';
+    font-family: 'Radjhani-Bold';
+    margin-left: 10rem;
+    margin-right: 10rem;
 }
 h3{
     color:black;
     font-family: 'Rajdhani-SemiBold';
+}
+
+#CHRISOMAT {
+    margin-top: -10rem;
+    width: auto;
+    height: 50rem;
 }

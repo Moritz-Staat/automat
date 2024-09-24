@@ -1,3 +1,21 @@
+@font-face {
+    font-family: 'Rajdhani-Bold';
+    src: url('../fonts/Rajdhani-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Rajdhani-SemiBold';
+    src: url('../fonts/Rajdhani-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Roboto-Bold';
+    src: url('../fonts/Roboto-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 .container, .quiz-options, .quiz-link, .quiz3container, .quiz2container, .quiz1container {
     text-align: center;
 }
@@ -6,18 +24,9 @@
     margin-top: 1.25rem;
 }
 
-.quiz-link {
+.quiz-link {F
     display: block;
     margin: 6.25rem auto;
-}
-
-body {
-    font-family: "Rajdhani", sans-serif;
-}
-
-/* Container für TESTH */
-.container {
-    width: 130rem;
 }
 
 /* Body und HTML */
@@ -40,13 +49,6 @@ body {
     align-items: center;
 }
 
-svg {
-    font-weight: bold;
-    max-width: 50rem;
-    height: 120rem;
-    max-width: 120rem;
-    height: 100%;
-}
 
 #screensaver {
     position: fixed;
@@ -71,10 +73,10 @@ svg {
 }
 
 .schriftunten {
-    font-size: 8rem;
+    font-size: 5rem;
     color: white;
     margin-top: 12.5rem;
-    font-family: "Rajdhani", sans-serif;
+    font-family: 'Roboto-Bold';
     text-align: center;
 }
 
@@ -193,28 +195,41 @@ a.level1link, a.level2link, a.level3link {
 }
 .levelschriften {
     font-size: 5rem;
-    font-family: 'Rajdhani', sans-serif;
-}
-
-#überschrift {
-    margin-top: -20rem;
+    font-family: 'Rajdhani-SemiBold';
 }
 
 #zählstand{
-    height: 20rem;
-    width: 20rem;
+    height: 25rem;
+    width: 25rem;
+    margin-top: 10rem;
 }
 
 
 /* Überschrift stylen*/
 h1 {
-    font-size: 7rem;
+font-size: 20rem;
+    color:white;
+    transform-origin: center;
+    display: inline-block;
+    font-family: 'Rajdhani-Bold';
+}
+
+h2 {
+    font-size: 6rem;
     color: white;
     display: inline-block;
     transform-origin: center;
+    font-family: 'Radjhani-Bold';
+    margin-left: 10rem;
+    margin-right: 10rem;
+}
+h3{
+    color:black;
+    font-family: 'Rajdhani-SemiBold';
 }
 
-h2{
-    color:black;
-    font-family: 'Rajdhani', sans-serif;
+#CHRISOMAT {
+    margin-top: -10rem;
+    width: auto;
+    height: 50rem;
 }

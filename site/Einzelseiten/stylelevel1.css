@@ -87,7 +87,12 @@ iframe {
 #numpad button:hover {
     background-color: #505050;
 }
-
+@font-face {
+    font-family: 'Rajdhani-SemiBold';
+    src: url('../../fonts/Rajdhani-Semibold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 /* Stylen Zurück zur Startseite */
 .homesweethome {
     height: 9rem;
@@ -163,7 +168,7 @@ iframe {
 }
 
 #popupText{
-    font-family: "Rajdhani SemiBold";
+    font-family: "Rajdhani-SemiBold";
     font-size: 6rem;
     margin-top: 40rem;
     color: black;
@@ -172,13 +177,13 @@ iframe {
 #normalButton {
     margin: 10px;
     width: 30%;
-    height: 6rem;
+    height: 7rem;
     background-color: #646363;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     font-size: 4rem;
-    font-family: "Rajdhani SemiBold";
+    font-family: "Rajdhani-SemiBold";
     color: white;
     border-radius: 4rem;
     margin-top: 30rem;
@@ -193,7 +198,7 @@ iframe {
     border-radius: 10px;
     cursor: pointer;
     font-size: 4rem;
-    font-family: "Rajdhani SemiBold";
+    font-family: "Rajdhani-SemiBold";
     color: white;
     border-radius: 4rem;
     margin-left: 20rem;

@@ -27,7 +27,7 @@ function onVideoEnded() {
     playCount++;
     const video = document.getElementById('screensaverVideo');
 
-    if (playCount < 2) {
+    if (playCount < 1) {
         video.play();
     } else {
         hideScreensaver();

@@ -1,5 +1,6 @@
 let timeout;
 let playCount = 0;
+let screensaverActive = false; // Variable, um zu überprüfen, ob der Screensaver aktiv ist
 
 function showScreensaver() {
     const screensaver = document.getElementById('screensaver');
@@ -18,6 +19,7 @@ function showScreensaver() {
     video.play();
 
     playCount = 0;
+    screensaverActive = true; // Screensaver ist jetzt aktiv
 
     video.removeEventListener('ended', onVideoEnded);
     video.addEventListener('ended', onVideoEnded);
@@ -31,7 +33,6 @@ function onVideoEnded() {
         video.play();
     } else {
         hideScreensaver();
-        // Startet den Timer, um den Screensaver nach 5 Sekunden erneut anzuzeigen
         resetTimer();
     }
 }
@@ -45,6 +46,8 @@ function hideScreensaver() {
     screensaver.classList.add('hidden');
     video.pause();
     video.currentTime = 0;
+
+    screensaverActive = false; // Screensaver ist jetzt inaktiv
 }
 
 function resetTimer() {
@@ -53,11 +56,23 @@ function resetTimer() {
     timeout = setTimeout(showScreensaver, 20000);
 }
 
+// Event-Listener für Touchscreens
+document.addEventListener('touchstart', function(event) {
+    if (screensaverActive) {
+        event.preventDefault(); // Verhindert Klicks auf darunterliegende Links beim ersten Touch
+        hideScreensaver(); // Blendet den Screensaver aus
+        resetTimer(); // Setzt den Timer zurück
+    } else {
+        resetTimer();
+    }
+});
+
+// Event-Listener für Mausbewegung und Klicks (für den PC)
 document.addEventListener('mousemove', resetTimer);
 document.addEventListener('click', resetTimer);
-document.addEventListener('touchstart', resetTimer);
 
 resetTimer();
+
 
 
 document.getElementById('logo').onclick = function () {

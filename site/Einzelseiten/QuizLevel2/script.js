@@ -632,7 +632,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function startGame() {
-    shuffledQuestions = questions.sort(() => Math.random() - 0.5).slice(0, 10);
+    shuffledQuestions = questions.sort(() => Math.random() - 0.5).slice(0, 5);
     currentQuestionIndex = 0;
     correctAnswers = 0;
     showQuestion(shuffledQuestions[currentQuestionIndex]);
@@ -712,30 +712,16 @@ function showResults() {
 
     let imageUrl, buttonText, buttonOnClick, resultText;
 
-    if (correctAnswers >= 8) {
+    if (correctAnswers = 5) {
         imageUrl = 'LOGO.svg';
-        resultText = "Weichen perfekt eingestellt! Du beherrschst das Bahnwissen wie ein Profi!";
+        resultText = "Alles richtig, viel Spaß mit deinem Preis!";
         buttonText = 'Preis abholen';
         buttonOnClick = () => {
             window.parent.postMessage('prizeCollected', '*');
         };
-    } else if (correctAnswers >= 6) {
+    } else if (correctAnswers < 5) {
         imageUrl = 'LOGO.svg';
-        resultText = "Du bist auf dem Überholgleis, das war richtig gut!";
-        buttonText = 'Zurück zum Start';
-        buttonOnClick = () => {
-            window.parent.postMessage('quizFailed', '*');
-        };
-    } else if (correctAnswers >= 4) {
-        imageUrl = 'LOGO.svg';
-        resultText = "Die Ampel steht auf gelb - du hast einen soliden Start hingelegt, aber da ist noch Platz nach oben!";
-        buttonText = 'Zurück zum Start';
-        buttonOnClick = () => {
-            window.parent.postMessage('quizFailed', '*');
-        };
-    } else {
-        imageUrl = 'LOGO.svg';
-        resultText = "Rote Ampel! Ab zu unseren Schulungen ;)";
+        resultText = "Da musst du wohl nochmal üben, versuchs nochmal!";
         buttonText = 'Zurück zum Start';
         buttonOnClick = () => {
             window.parent.postMessage('quizFailed', '*');

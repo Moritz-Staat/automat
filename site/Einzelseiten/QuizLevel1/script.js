@@ -501,7 +501,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function startGame() {
-    shuffledQuestions = questions.sort(() => Math.random() - 0.5).slice(0, 10);
+    shuffledQuestions = questions.sort(() => Math.random() - 0.5).slice(0, 5);
     currentQuestionIndex = 0;
     correctAnswers = 0;
     showQuestion(shuffledQuestions[currentQuestionIndex]);
@@ -579,30 +579,16 @@ function showResults() {
 
     let imageUrl, buttonText, buttonOnClick, resultText;
 
-    if (correctAnswers >= 7) {
+    if (correctAnswers = 5) {
         imageUrl = 'LOGO.svg';
-        resultText = "Wow! Lokführer des Wissens, du hast die Strecke sehr gut gemeistert!";
+        resultText = "Alles richtig, viel Spaß mit deinem Preis!";
         buttonText = 'Preis abholen';
         buttonOnClick = () => {
             window.parent.postMessage('prizeCollected', '*');
         };
-    } else if (correctAnswers >= 5) {
+    } else if (correctAnswers < 5) {
         imageUrl = 'LOGO.svg';
-        resultText = "Dein Wissen nimmt Fahrt auf! Du kommst schon ziemlich gut in die richtige Spur";
-        buttonText = 'Zurück zum Start';
-        buttonOnClick = () => {
-            window.parent.postMessage('quizFailed', '*');
-        };
-    } else if (correctAnswers >= 3) {
-        imageUrl = 'LOGO.svg';
-        resultText = "Schon nicht schlecht, wie wärs mit einer Auffrischung deines Wissens?";
-        buttonText = 'Zurück zum Start';
-        buttonOnClick = () => {
-            window.parent.postMessage('quizFailed', '*');
-        };
-    } else {
-        imageUrl = 'LOGO.svg';
-        resultText = "Da musst du wohl nochmal zu unseren Schulungen!";
+        resultText = "Da musst du wohl nochmal üben, versuchs nochmal!";
         buttonText = 'Zurück zum Start';
         buttonOnClick = () => {
             window.parent.postMessage('quizFailed', '*');

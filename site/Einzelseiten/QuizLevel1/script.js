@@ -1,12 +1,12 @@
 let shuffledQuestions = [];
 let currentQuestionIndex, correctAnswers;
-let inactivityTimeout, blurTimeout; // Hinzufügen der Variablen für das Blur
+let inactivityTimeout, blurTimeout; // Variablen für das Blur
 let isBlurred = false; // Variable, um den Blur-Status zu tracken
 
 document.addEventListener('DOMContentLoaded', () => {
     startGame();
     resetInactivityTimer(); // Timer bei Spielstart initialisieren
-    setupInactivityListeners(); // Setze die Event-Listener für Inaktivität
+    setupInactivityListeners(); // Event-Listener für Inaktivität setzen
 });
 
 async function startGame() {
@@ -20,17 +20,21 @@ async function startGame() {
 async function fetchQuestions() {
     const response = await fetch('http://127.0.0.1:8090/api/collections/automat/records');
     const data = await response.json();
-    return data.items.map(item => ({
-        question: item.frage,
-        image: item.bildId ? `http://127.0.0.1:8090/api/files/bilder/${item.bildId}` : null, // Bild-URL generieren
-        answers: [
-            { text: item.antwort1, correct: true },
-            { text: item.antwort2, correct: false },
-            { text: item.antwort3, correct: false },
-            { text: item.antwort4, correct: false }
-        ]
-    }));
+    return data.items.map(item => {
+        const imageUrl = item.bildid ? `http://127.0.0.1:8090/api/collections/bilder/${item.bildid}` : null;
+        return {
+            question: item.frage,
+            image: imageUrl, // Bild-URL zuweisen
+            answers: [
+                { text: item.antwort1, correct: true },
+                { text: item.antwort2, correct: false },
+                { text: item.antwort3, correct: false },
+                { text: item.antwort4, correct: false }
+            ]
+        };
+    });
 }
+
 
 function showQuestion(question) {
     const questionText = document.getElementById('question-text');

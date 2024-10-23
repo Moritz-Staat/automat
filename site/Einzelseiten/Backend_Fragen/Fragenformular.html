@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fragen hinzufügen</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h1>Neue Frage hinzufügen</h1>
+<form id="questionForm">
+    <label for="question">Frage:</label>
+    <input type="text" id="question" required><br>
+
+    <label for="image">Bild-URL:</label>
+    <input type="text" id="image" required><br>
+
+    <label for="option1">Antwortmöglichkeit 1:</label>
+    <input type="text" id="option1" required><br>
+
+    <label for="option2">Antwortmöglichkeit 2:</label>
+    <input type="text" id="option2" required><br>
+
+    <label for="option3">Antwortmöglichkeit 3:</label>
+    <input type="text" id="option3" required><br>
+
+    <label for="option4">Antwortmöglichkeit 4:</label>
+    <input type="text" id="option4" required><br>
+
+    <label for="correctAnswer">Richtige Antwort:</label>
+    <select id="correctAnswer" required>
+        <option value="1">Antwort 1</option>
+        <option value="2">Antwort 2</option>
+        <option value="3">Antwort 3</option>
+        <option value="4">Antwort 4</option>
+    </select><br>
+
+    <button type="submit">Frage hinzufügen</button>
+</form>
+
+<script src="script.js"></script>
+</body>
+</html>

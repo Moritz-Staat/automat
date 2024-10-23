@@ -18,13 +18,30 @@ async function startGame() {
 }
 
 async function fetchQuestions() {
+    // Holen der Fragen und Bilder
     const response = await fetch('http://127.0.0.1:8090/api/collections/automat/records');
     const data = await response.json();
-    return data.items.map(item => {
-        const imageUrl = item.bildid ? `http://127.0.0.1:8090/api/collections/bilder/${item.bildid}` : null;
+
+    // Mapping der Fragen und Bilder
+    return await Promise.all(data.items.map(async item => {
+        let imageUrl = null;
+
+        // Prüfen, ob es eine bildid gibt
+        if (item.bildid) {
+            // API-Aufruf, um die Bilddaten aus der "bilder"-Collection zu holen
+            const imageResponse = await fetch(`http://127.0.0.1:8090/api/collections/bilder/records/${item.bildid}`);
+            const imageData = await imageResponse.json();
+
+            // Bild-URL zusammenbauen, wenn das Bild vorhanden ist
+            imageUrl = imageData.fragenbild
+                ? `http://127.0.0.1:8090/api/files/bilder/${item.bildid}/${imageData.fragenbild}`
+                : null;
+        }
+
+        // Rückgabe des Frage-Objekts mit Bild und Antworten
         return {
             question: item.frage,
-            image: imageUrl, // Bild-URL zuweisen
+            image: imageUrl,
             answers: [
                 { text: item.antwort1, correct: true },
                 { text: item.antwort2, correct: false },
@@ -32,7 +49,7 @@ async function fetchQuestions() {
                 { text: item.antwort4, correct: false }
             ]
         };
-    });
+    }));
 }
 
 

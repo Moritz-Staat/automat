@@ -8,6 +8,9 @@ document.getElementById('questionForm').addEventListener('submit', async functio
     const antwort4 = document.getElementById('option4').value;
     const imageFile = document.getElementById('image').files[0];
 
+    // Schwierigkeit ermitteln
+    const schwierigkeit = document.querySelector('input[name="schwierigkeit"]:checked').value;
+
     // Funktion zum Hochladen des Bildes
     async function uploadImage(file) {
         const formData = new FormData();
@@ -35,6 +38,7 @@ document.getElementById('questionForm').addEventListener('submit', async functio
             antwort2,
             antwort3,
             antwort4,
+            schwierigkeit: schwierigkeit, // Schwierigkeitsgrad zur Frage hinzufügen
             bildid: imageId // Bild-ID zur Frage hinzufügen
         };
 

@@ -13,7 +13,7 @@ document.getElementById('questionForm').addEventListener('submit', async functio
         const formData = new FormData();
         formData.append('fragenbild', file); // Das Feld für das Bild
 
-        const response = await fetch('http://127.0.0.1:8090/api/collections/bilder/records', {
+        const response = await fetch('http://127.0.0.1:8090/api/collections/automat/records', {
             method: 'POST',
             body: formData,
         });

@@ -18,27 +18,20 @@ async function startGame() {
 }
 
 async function fetchQuestions() {
-    // Holen der Fragen und Bilder
-    const response = await fetch('http://127.0.0.1:8090/api/collections/automat/records');
+    const response = await fetch('http://127.0.0.1:8090/api/collections/automat/records?filter=schwierigkeit="leicht"');
     const data = await response.json();
 
-    // Mapping der Fragen und Bilder
     return await Promise.all(data.items.map(async item => {
         let imageUrl = null;
-
-        // Prüfen, ob es eine bildid gibt
         if (item.bildid) {
-            // API-Aufruf, um die Bilddaten aus der "bilder"-Collection zu holen
             const imageResponse = await fetch(`http://127.0.0.1:8090/api/collections/bilder/records/${item.bildid}`);
             const imageData = await imageResponse.json();
 
-            // Bild-URL zusammenbauen, wenn das Bild vorhanden ist
             imageUrl = imageData.fragenbild
                 ? `http://127.0.0.1:8090/api/files/bilder/${item.bildid}/${imageData.fragenbild}`
                 : null;
         }
 
-        // Rückgabe des Frage-Objekts mit Bild und Antworten
         return {
             question: item.frage,
             image: imageUrl,
@@ -51,6 +44,7 @@ async function fetchQuestions() {
         };
     }));
 }
+
 
 
 function showQuestion(question) {

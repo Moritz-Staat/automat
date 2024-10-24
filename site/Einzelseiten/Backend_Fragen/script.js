@@ -1,5 +1,54 @@
+// Variable, um das Token nach dem Login zu speichern
+let userToken = null;
+
+// Elemente holen
+const loginFormContainer = document.getElementById('loginFormContainer');
+const questionFormContainer = document.getElementById('questionFormContainer');
+
+// Login-Formular-Event-Listener
+document.getElementById('loginForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    try {
+        const response = await fetch('http://127.0.0.1:8090/api/collections/users/auth-with-password', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                identity: email,
+                password: password
+            }),
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            userToken = data.token;  // Token speichern
+
+            // Erfolgsmeldung und Formular wechseln
+            alert('Erfolgreich eingeloggt!');
+            loginFormContainer.style.display = 'none';  // Login-Formular ausblenden
+            questionFormContainer.style.display = 'block';  // Fragenformular einblenden
+        } else {
+            const errorText = await response.text();
+            alert('Login fehlgeschlagen: ' + errorText);
+        }
+    } catch (error) {
+        alert('Ein Fehler ist aufgetreten: ' + error.message);
+    }
+});
+
+// Frageformular-Event-Listener
 document.getElementById('questionForm').addEventListener('submit', async function(event) {
     event.preventDefault();
+
+    if (!userToken) {
+        alert('Bitte logge dich ein, um eine Frage hinzuzufügen.');
+        return;
+    }
 
     const frage = document.getElementById('question').value;
     const antwort1 = document.getElementById('option1').value;
@@ -8,13 +57,11 @@ document.getElementById('questionForm').addEventListener('submit', async functio
     const antwort4 = document.getElementById('option4').value;
     const imageFile = document.getElementById('image').files[0];
 
-    // Schwierigkeit ermitteln
     const schwierigkeit = document.querySelector('input[name="schwierigkeit"]:checked').value;
 
-    // Funktion zum Hochladen des Bildes
     async function uploadImage(file) {
         const formData = new FormData();
-        formData.append('fragenbild', file); // Das Feld für das Bild
+        formData.append('fragenbild', file);
 
         const response = await fetch('http://127.0.0.1:8090/api/collections/bilder/records', {
             method: 'POST',
@@ -23,14 +70,14 @@ document.getElementById('questionForm').addEventListener('submit', async functio
 
         if (response.ok) {
             const imageData = await response.json();
-            return imageData.id; // Bild-ID zurückgeben
+            return imageData.id;
         } else {
             throw new Error('Fehler beim Hochladen des Bildes');
         }
     }
 
     try {
-        const imageId = await uploadImage(imageFile); // Bild hochladen und ID erhalten
+        const imageId = await uploadImage(imageFile);
 
         const data = {
             frage,
@@ -38,14 +85,15 @@ document.getElementById('questionForm').addEventListener('submit', async functio
             antwort2,
             antwort3,
             antwort4,
-            schwierigkeit: schwierigkeit, // Schwierigkeitsgrad zur Frage hinzufügen
-            bildid: imageId // Bild-ID zur Frage hinzufügen
+            schwierigkeit: schwierigkeit,
+            bildid: imageId
         };
 
         const response = await fetch('http://127.0.0.1:8090/api/collections/automat/records', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${userToken}`  // Token anhängen
             },
             body: JSON.stringify(data),
         });

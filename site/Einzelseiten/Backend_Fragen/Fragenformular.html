@@ -7,41 +7,51 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<h1>Neue Frage hinzufügen</h1>
-<form id="questionForm">
-    <label for="question">Frage:</label>
-    <input type="text" id="question" required>
 
-    <label for="option1">richtige Antwort:</label>
-    <input type="text" id="option1" required>
+<div id="loginFormContainer">
+    <h2>Login</h2>
+    <form id="loginForm">
+        <label for="email">E-Mail:</label>
+        <input type="email" id="email" required>
+        <label for="password">Passwort:</label>
+        <input type="password" id="password" required>
+        <button type="submit">Einloggen</button>
+    </form>
+</div>
 
-    <label for="option2">falsche Antwort 1:</label>
-    <input type="text" id="option2" required>
 
-    <label for="option3">falsche Antwort 2:</label>
-    <input type="text" id="option3" required>
+<div id="questionFormContainer" style="display:none;">
+    <h1>Neue Frage hinzufügen</h1>
+    <form id="questionForm">
+        <label for="question">Frage:</label>
+        <input type="text" id="question" required>
+        <label for="option1">richtige Antwort:</label>
+        <input type="text" id="option1" required>
+        <label for="option2">falsche Antwort 1:</label>
+        <input type="text" id="option2" required>
+        <label for="option3">falsche Antwort 2:</label>
+        <input type="text" id="option3" required>
+        <label for="option4">falsche Antwort 3:</label>
+        <input type="text" id="option4" required>
+        <label for="image">Bild hochladen:</label>
+        <input type="file" id="image" accept="image/*" required>
 
-    <label for="option4">falsche Antwort 3:</label>
-    <input type="text" id="option4" required>
+        <fieldset>
+            <legend>Schwierigkeit:</legend>
+            <label>
+                <input type="radio" name="schwierigkeit" value="leicht" required> Leicht
+            </label>
+            <label>
+                <input type="radio" name="schwierigkeit" value="mittel"> Mittel
+            </label>
+            <label>
+                <input type="radio" name="schwierigkeit" value="schwer"> Schwer
+            </label>
+        </fieldset>
 
-    <label for="image">Bild hochladen:</label>
-    <input type="file" id="image" accept="image/*" required>
-
-    <fieldset>
-        <legend>Schwierigkeit:</legend>
-        <label>
-            <input type="radio" name="schwierigkeit" value="leicht" required> Leicht
-        </label>
-        <label>
-            <input type="radio" name="schwierigkeit" value="mittel"> Mittel
-        </label>
-        <label>
-            <input type="radio" name="schwierigkeit" value="schwer"> Schwer
-        </label>
-    </fieldset>
-
-    <button type="submit">Frage hinzufügen</button>
-</form>
+        <button type="submit">Frage hinzufügen</button>
+    </form>
+</div>
 
 <script src="script.js"></script>
 </body>

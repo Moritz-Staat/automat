@@ -124,14 +124,16 @@ function showResults() {
         resultText = "Alles richtig, viel Spaß mit deinem Preis!";
         buttonText = 'Preis abholen';
         buttonOnClick = () => {
-            window.parent.postMessage('prizeCollected', '*');
+            window.parent.postMessage('prizeCollected', '*')
+            window.parent.location.href = '../../Automat.html';
         };
     } else {
         imageUrl = 'LOGO.svg';
         resultText = "Da musst du wohl nochmal üben, versuchs nochmal!";
         buttonText = 'Zurück zum Start';
         buttonOnClick = () => {
-            window.parent.postMessage('quizFailed', '*');
+            window.parent.postMessage('quizFailed', '*')
+            window.parent.location.href = '../../Automat.html';
         };
     }
 

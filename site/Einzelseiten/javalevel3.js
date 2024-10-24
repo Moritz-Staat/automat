@@ -52,7 +52,6 @@ function closeModal() {
 let timeout = undefined
 /* Nach Beenden des Quizzes Zurück Verlinken zur Startseite*/
 window.addEventListener('message', (event) => {
-    /*
     if (timeout != undefined) {
         return
     }
@@ -69,7 +68,7 @@ window.addEventListener('message', (event) => {
         timeout = setTimeout(() => {
             timeout = undefined
             window.location.href = '../Automat.html';
-        }, 3000);
+        }, 0);
     } else if (event.data === 'quizFailed') {
         let loses = localStorage.getItem('loses')
         if (loses == null) {
@@ -84,7 +83,7 @@ window.addEventListener('message', (event) => {
             timeout = undefined
             window.location.href = '../Automat.html';
         }, 3000);
-    }*/
+    }
     show(event.data)
 });
 function doPost(param, url) {
@@ -92,6 +91,7 @@ function doPost(param, url) {
     xhr.open("POST", url + "?param=" + param, true);
     xhr.send();
 }
+/*
 let _data;
 function show(data) {
     document.getElementById('Preisauswahl').classList.remove('preise');
@@ -146,3 +146,4 @@ normalButton.addEventListener('click', () => {
     popup.style.display = 'none';
     mainContent.classList.remove('blurred');
 });
+ */

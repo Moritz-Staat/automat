@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Rajdhani-SemiBold';
-    src: url('../../../fonts/Rajdhani-Semibold.ttf') format('truetype');
+    src: url('../../fonts/Rajdhani-Semibold.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }

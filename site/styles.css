@@ -1,18 +1,18 @@
 @font-face {
     font-family: 'Rajdhani-Bold';
-    src: url('../fonts/Rajdhani-Bold.ttf') format('truetype');
+    src: url('fonts/Rajdhani-Bold.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'Rajdhani-SemiBold';
-    src: url('../fonts/Rajdhani-Bold.ttf') format('truetype');
+    src: url('fonts/Rajdhani-Bold.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'Roboto-Bold';
-    src: url('../fonts/Roboto-Bold.ttf') format('truetype');
+    src: url('fonts/Roboto-Bold.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }

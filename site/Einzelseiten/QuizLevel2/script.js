@@ -32,27 +32,27 @@ async function fetchQuestions() {
                 : null;
         }
 
+        // Antworten in einem Array speichern und nach dem Erstellen mischen
+        const answers = [
+            { text: item.antwort1, correct: true },
+            { text: item.antwort2, correct: false },
+            { text: item.antwort3, correct: false },
+            { text: item.antwort4, correct: false }
+        ].sort(() => Math.random() - 0.5); // Antworten mischen
+
         return {
             question: item.frage,
             image: imageUrl,
-            answers: [
-                { text: item.antwort1, correct: true },
-                { text: item.antwort2, correct: false },
-                { text: item.antwort3, correct: false },
-                { text: item.antwort4, correct: false }
-            ]
+            answers: answers // gemischte Antworten
         };
     }));
 }
-
-
 
 function showQuestion(question) {
     const questionText = document.getElementById('question-text');
     const answerButtonsElement = document.getElementById('answer-buttons');
     const questionImage = document.getElementById('question-image');
 
-    questionText.innerText = question.question;
     questionText.innerText = question.question;
     answerButtonsElement.innerHTML = '';
 
@@ -69,7 +69,7 @@ function showQuestion(question) {
         button.classList.add('btn');
         button.addEventListener('click', () => {
             selectAnswer(button, answer.correct);
-            resetInactivityTimer(); // Timer nach Benutzerinteraktion zurücksetzen
+            resetInactivityTimer();
         });
         answerButtonsElement.appendChild(button);
     });

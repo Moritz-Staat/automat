@@ -1,0 +1,12 @@
+@echo off
+REM Start Apache Server (XAMPP)
+start "" "C:\xampp\apache_start.bat"
+
+REM Start PocketBase Server
+start "" "C:\pocketbase\pocketbase.exe" serve --http="0.0.0.0:8100"
+
+REM Warte 5 Sekunden, um sicherzustellen, dass die Server gestartet sind
+timeout /t 5 /nobreak >nul
+
+REM Öffne die Quiz-Seite im Vollbildmodus (mit Chrome als Beispiel)
+start "" "msedge.exe" --kiosk http://10.1.10.147:8090 --edge-kiosk-type=fullscreen

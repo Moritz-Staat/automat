@@ -1,0 +1,69 @@
+import requests
+import json
+
+# PocketBase Server-URL und API-Token (falls Authentifizierung erforderlich ist)
+BASE_URL = "http://10.1.10.147:8080"
+AUTOMAT_COLLECTION = "automat"
+BILDER_COLLECTION = "Bilder"
+# API-Token kann über ein Login generiert werden, falls erforderlich
+API_TOKEN = "your_api_token_here"
+
+headers = {
+    "Authorization": f"Bearer {API_TOKEN}"
+}
+
+# Funktion zum Einlesen und Parsen der Quizdaten
+def parse_quiz_file(file_path):
+    with open(file_path, 'r', encoding='utf-8') as file:
+        data = file.read()
+    # Annahme: Die Daten sind im JSON-ähnlichen Format von JS-Objekten geschrieben
+    questions = json.loads(data)
+    return questions
+
+# Funktion zur Überprüfung und Hochladen von Bildern
+def upload_image(image_name):
+    # Überprüfen, ob das Bild bereits in der Sammlung existiert
+    response = requests.get(f"{BASE_URL}/api/collections/{BILDER_COLLECTION}/records", headers=headers)
+    images = response.json().get("items", [])
+
+    # Prüfen, ob das Bild bereits existiert
+    for img in images:
+        if img["name"] == image_name:
+            return img["id"]  # Bild existiert, ID zurückgeben
+
+    # Wenn das Bild nicht existiert, hochladen
+    with open(f"./images/{image_name}", "rb") as img_file:
+        files = {"file": img_file}
+        response = requests.post(f"{BASE_URL}/api/collections/{BILDER_COLLECTION}/records", files=files, headers=headers)
+        if response.status_code == 201:
+            print(f"Bild {image_name} erfolgreich hochgeladen.")
+            return response.json()["id"]
+        else:
+            print(f"Fehler beim Hochladen von {image_name}: {response.text}")
+            return None
+
+# Funktion zum Hochladen der Fragen in die PocketBase
+def upload_questions(questions):
+    for question in questions:
+        # Bild-Upload
+        image_id = upload_image(question["image"]) if question.get("image") else None
+
+        # Frage und Antworten formatieren
+        data = {
+            "question": question["question"],
+            "answers": question["answers"],
+            "image": image_id
+        }
+
+        # POST-Anfrage zum Erstellen eines neuen Eintrags in der Automat-Sammlung
+        response = requests.post(f"{BASE_URL}/api/collections/{AUTOMAT_COLLECTION}/records", json=data, headers=headers)
+        if response.status_code == 201:
+            print(f"Frage '{question['question']}' erfolgreich hochgeladen.")
+        else:
+            print(f"Fehler beim Hochladen der Frage '{question['question']}': {response.text}")
+
+# Dateien einlesen und Fragen hochladen
+file_paths = ["leicht.txt", "mittel.txt", "schwer.txt"]
+for file_path in file_paths:
+    questions = parse_quiz_file(file_path)
+    upload_questions(questions)

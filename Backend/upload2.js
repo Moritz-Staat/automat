@@ -1,79 +1,65 @@
 import PocketBase from 'pocketbase';
 import fs from 'fs';
+import csv from 'csv-parser';
 
 const pb = new PocketBase('http://10.1.10.147:8100');
 
-// Beispiel-Daten für die Bilder (mit lokalen Pfaden)
-const bilder = [
-    { bildname: "Bild 1", bildpath: "C:/Users/MoritzStaat/WebstormProjects/automat/Backend/Fragenbilder/1.jpg" },
-    { bildname: "Bild 2", bildpath: "C:/Users/MoritzStaat/WebstormProjects/automat/Backend/Fragenbilder/2.jpg" },
-];
-
-async function uploadBilder() {
-    const bildIdMap = {};
-    try {
-        for (const bild of bilder) {
-            const bildBuffer = fs.readFileSync(bild.bildpath);
-
-            const bildFile = new File([bildBuffer], bild.bildname, { type: 'image/jpeg' });
-
-            const bildRecord = await pb.collection('bilder').create({
-                fragenbild: bildFile,
-            });
-
-            console.log('Bild erfolgreich hochgeladen:', bildRecord);
-            bildIdMap[bild.bildname] = bildRecord.id;
-        }
-    } catch (error) {
-        console.error('Fehler beim Hochladen der Bilder:', error);
-    }
-    return bildIdMap;
+// Lese die CSV-Datei und extrahiere die Fragen
+function leseFragenAusCSV(dateipfad) {
+    return new Promise((resolve, reject) => {
+        const fragen = [];
+        fs.createReadStream(dateipfad)
+            .pipe(csv())
+            .on('data', (row) => {
+                console.log('CSV-Daten Zeile:', row);  // Protokolliere jede Zeile
+                fragen.push(row);
+            })
+            .on('end', () => resolve(fragen))
+            .on('error', reject);
+    });
 }
 
-const fragenMitAntwortenUndBilder = [
-    {
-        frage: "Was ist die Hauptstadt von Frankreich?",
-        antwort1: "Paris",
-        antwort2: "London",
-        antwort3: "Berlin",
-        antwort4: "Madrid",
-        bildname: "Bild 1",
-        bildid: null,
-        schwierigkeit: "mittel"
-    },
-    {
-        frage: "Was ist die Hauptstadt von Deutschland?",
-        antwort1: "Berlin",
-        antwort2: "Hamburg",
-        antwort3: "München",
-        antwort4: "Frankfurt",
-        bildname: "Bild 2",
-        bildid: null,
-        schwierigkeit: "leicht"
-    },
-    {
-        frage: "Was ist die Hauptstadt von Italien?",
-        antwort1: "Rom",
-        antwort2: "Mailand",
-        antwort3: "Venedig",
-        antwort4: "Florenz",
-        bildname: "Bild 2",
-        bildid: null,
-        schwierigkeit: "leicht"
-    },
-
-];
-
 async function uploadFragenMitBilder() {
-    const bildIdMap = await uploadBilder();
+    const fragenMitAntwortenUndBilder = await leseFragenAusCSV('fragen2.csv');
 
     try {
         for (const frage of fragenMitAntwortenUndBilder) {
-            if (frage.bildname && bildIdMap[frage.bildname]) {
-                frage.bildid = bildIdMap[frage.bildname];
+            console.log('Frage-Daten vor dem Hochladen:', frage);  // Protokolliere die Frage-Daten
+
+            let bildid = null;
+
+            // Wenn ein Bildpfad vorhanden ist, lade das Bild hoch
+            if (frage.bildpath) {
+                try {
+                    const bildBuffer = fs.readFileSync(frage.bildpath);
+                    const bildFile = new File([bildBuffer], frage.bildpath.split('/').pop(), { type: 'image/jpeg' });
+
+                    const bildRecord = await pb.collection('bilder').create({
+                        fragenbild: bildFile,
+                    });
+
+                    console.log('Bild erfolgreich hochgeladen:', bildRecord);
+                    bildid = bildRecord.id;
+                } catch (error) {
+                    console.error(`Fehler beim Hochladen des Bildes für Frage "${frage.frage}":`, error);
+                }
             }
 
-            const frageRecord = await pb.collection('automat').create(frage);
+            // Protokolliere die gesendeten Daten
+            const frageData = {
+                frage: frage.frage,
+                antwort1: frage.antwort1,
+                antwort2: frage.antwort2,
+                antwort3: frage.antwort3,
+                antwort4: frage.antwort4,
+                bildid: bildid, // Bild-ID wird gesetzt
+                schwierigkeit: frage.schwierigkeit,
+            };
+
+            console.log('Frage-Daten, die hochgeladen werden:', frageData);
+
+            // Frage in der Datenbank erstellen, mit oder ohne Bild-ID
+            const frageRecord = await pb.collection('automat').create(frageData);
             console.log('Frage erfolgreich erstellt:', frageRecord);
         }
     } catch (error) {

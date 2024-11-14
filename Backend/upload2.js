@@ -5,8 +5,8 @@ const pb = new PocketBase('http://10.1.10.147:8100');
 
 // Beispiel-Daten für die Bilder (mit lokalen Pfaden)
 const bilder = [
-    { bildname: "Bild 1", bildpath: "C:/Users/MoritzStaat/1.jpg" },
-    { bildname: "Bild 2", bildpath: "C:/Users/MoritzStaat/2.jpg" },
+    { bildname: "Bild 1", bildpath: "C:/Users/MoritzStaat/WebstormProjects/automat/Backend/Fragenbilder/1.jpg" },
+    { bildname: "Bild 2", bildpath: "C:/Users/MoritzStaat/WebstormProjects/automat/Backend/Fragenbilder/2.jpg" },
     // Weitere Bilder hier
 ];
 

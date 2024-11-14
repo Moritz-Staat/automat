@@ -198,3 +198,37 @@ window.addEventListener('load', () => {
     // Wiederhole die Animation alle 10 Sekunden
     setInterval(animateHeading, 10000); // 10.000 Millisekunden = 10 Sekunden
 });
+
+
+
+//Weihnachten Start
+// Schnee animieren
+// Maximalanzahl der Schneeflocken auf dem Bildschirm
+const maxSnowflakes = 50;
+const snowContainer = document.getElementById('snow-container');
+
+// Funktion zum Erzeugen einer Schneeflocke
+function createSnowflake() {
+    // Nur dann eine Schneeflocke erstellen, wenn die maximale Anzahl noch nicht erreicht ist
+    if (snowContainer.childElementCount < maxSnowflakes) {
+        const snowflake = document.createElement('div');
+        snowflake.classList.add('snowflake');
+        snowflake.innerHTML = '❄️';
+
+        // Zufällige Startposition und -größen festlegen
+        snowflake.style.left = `${Math.random() * 100}vw`;
+        snowflake.style.fontSize = `${Math.random() * 15 + 80}px`;
+        snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`;
+        snowflake.style.animationDelay = `${Math.random() * 5}s`;
+
+        snowContainer.appendChild(snowflake);
+
+        // Schneeflocke nach Animation entfernen, um den Speicherverbrauch gering zu halten
+        snowflake.addEventListener('animationend', () => {
+            snowflake.remove();
+        });
+    }
+}
+
+// Schneeflocken in regelmäßigen Abständen erzeugen
+setInterval(createSnowflake, 200);

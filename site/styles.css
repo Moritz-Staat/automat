@@ -38,7 +38,7 @@ html {
 }
 
 body {
-    background: linear-gradient(to bottom, #62b55a, #2e9633, #054824);
+    background: linear-gradient(to bottom, #054824, #165019, #054824);
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -74,7 +74,7 @@ body {
 
 .schriftunten {
     font-size: 5rem;
-    color: white;
+    color: #0c3408;
     margin-top: 12.5rem;
     font-family: 'Roboto-Bold';
     text-align: center;
@@ -95,10 +95,10 @@ body {
     position: relative;
     width: 35rem;
     height: 75rem;
-    border: 0.1875rem solid #62b55a;
+    border: 0.1875rem solid #0c3408;
     border-radius: 5rem;
     transition: border-color 0.3s ease;
-    background-color: white;
+    background-color: #0c3408;
     margin-top: 6.25rem;
 }
 a.level1link, a.level2link, a.level3link {
@@ -207,7 +207,7 @@ a.level1link, a.level2link, a.level3link {
 /* Überschrift stylen*/
 h1 {
 font-size: 20rem;
-    color:white;
+    color: #0c3408;
     transform-origin: center;
     display: inline-block;
     font-family: 'Rajdhani-Bold';
@@ -215,13 +215,91 @@ font-size: 20rem;
 
 h2 {
     font-size: 5rem;
-    color: white;
+    color: #0c3408;
     display: inline-block;
     transform-origin: center;
     margin-top: -15rem;
     font-family: 'Roboto-Bold';
 }
 h3{
-    color:black;
+    color: #054824;
     font-family: 'Rajdhani-SemiBold';
+}
+
+#snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 9999;
+}
+
+.snowflake {
+    position: absolute;
+    top: -10px;
+    color: #fff;
+    font-size: 1em;
+    opacity: 0.8;
+    user-select: none;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0.2;
+    }
+}
+ /* Lichterkette*/
+.lights-container {
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 10px 0;
+    background-color: transparent;
+    z-index: 1000;
+}
+
+.light {
+    width: 30px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 0 5px;
+    animation: glow 1s ease-in-out infinite alternate;
+}
+
+.light.red { background-color: red; }
+.light.green { background-color: green; }
+.light.blue { background-color: blue; }
+.light.yellow { background-color: yellow; }
+
+@keyframes glow {
+    from { opacity: 0.6; }
+    to { opacity: 1; }
+}
+
+/*Weihnachtsmann*/
+.santa-icon {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 400px;
+    animation: wiggle 1s ease-in-out infinite;
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
 }

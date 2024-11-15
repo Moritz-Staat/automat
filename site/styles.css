@@ -284,6 +284,7 @@ h3{
 .light.green { background-color: green; }
 .light.blue { background-color: blue; }
 .light.yellow { background-color: yellow; }
+.light.gray { background-color: #b208a8; }
 
 @keyframes glow {
     from { opacity: 0.6; }

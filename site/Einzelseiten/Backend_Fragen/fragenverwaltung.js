@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
     const token = localStorage.getItem('userToken');
     if (!token) {
-        alert('Bitte logge dich ein!');
+        showCustomAlert('Bitte logge dich ein!');
         window.location.href = 'Fragenformular.html';
         return;
     }
@@ -18,6 +18,22 @@ document.addEventListener('DOMContentLoaded', async () => {
         editModal.style.display = 'none';
     });
 
+    function showCustomAlert(message) {
+        const alertBox = document.createElement('div');
+        alertBox.classList.add('custom-alert');
+        alertBox.innerHTML = `
+            <div class="custom-alert-content">
+                <p>${message}</p>
+                <button id="closeAlert">OK</button>
+            </div>
+        `;
+        document.body.appendChild(alertBox);
+
+        document.getElementById('closeAlert').addEventListener('click', () => {
+            document.body.removeChild(alertBox);
+        });
+    }
+
     async function fetchQuestions(category) {
         try {
             const response = await fetch('http://192.168.178.95:8100/api/collections/automat/records', {
@@ -28,10 +44,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const data = await response.json();
                 populateQuestions(data.items, category);
             } else {
-                alert('Fehler beim Abrufen der Fragen.');
+                showCustomAlert('Fehler beim Abrufen der Fragen.');
             }
         } catch (error) {
-            alert('Ein Fehler ist aufgetreten.');
+            showCustomAlert('Ein Fehler ist aufgetreten.');
         }
     }
 
@@ -49,8 +65,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <td>${question.antwort3}</td>
                 <td>${question.antwort4}</td>
                 <td>
-                    <button class="edit-btn" data-id="${question.id}">Bearbeiten</button>
-                    <button class="delete-btn" data-id="${question.id}">Löschen</button>
+                    <button class="edit-btn" data-id="${question.id}">
+                        <img src="editieren.svg" alt="Bearbeiten">
+                    </button>
+                    <button class="delete-btn" data-id="${question.id}">
+                        <img src="löschen.svg" alt="Löschen">
+                    </button>
                 </td>
             `;
             questionsRows.appendChild(row);
@@ -69,8 +89,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.addEventListener('click', async (event) => {
         const target = event.target;
 
-        if (target.classList.contains('edit-btn')) {
-            currentQuestionId = target.dataset.id;
+        if (target.closest('.edit-btn')) {
+            currentQuestionId = target.closest('.edit-btn').dataset.id;
 
             try {
                 const response = await fetch(`http://192.168.178.95:8100/api/collections/automat/records/${currentQuestionId}`, {
@@ -89,15 +109,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                     editModal.style.display = 'block';
                 } else {
-                    alert('Fehler beim Abrufen der Frage.');
+                    showCustomAlert('Fehler beim Abrufen der Frage.');
                 }
             } catch (error) {
-                alert('Ein Fehler ist aufgetreten.');
+                showCustomAlert('Ein Fehler ist aufgetreten.');
             }
         }
 
-        if (target.classList.contains('delete-btn')) {
-            const id = target.dataset.id;
+        if (target.closest('.delete-btn')) {
+            const id = target.closest('.delete-btn').dataset.id;
             if (confirm('Möchtest du diese Frage wirklich löschen?')) {
                 try {
                     const response = await fetch(`http://192.168.178.95:8100/api/collections/automat/records/${id}`, {
@@ -106,14 +126,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                     });
 
                     if (response.ok) {
-                        alert('Frage gelöscht!');
+                        showCustomAlert('Frage gelöscht!');
                         const activeCategory = document.querySelector('.category.active').dataset.category;
                         fetchQuestions(activeCategory);
                     } else {
-                        alert('Fehler beim Löschen.');
+                        showCustomAlert('Fehler beim Löschen.');
                     }
                 } catch (error) {
-                    alert('Ein Fehler ist aufgetreten.');
+                    showCustomAlert('Ein Fehler ist aufgetreten.');
                 }
             }
         }
@@ -142,15 +162,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             });
 
             if (response.ok) {
-                alert('Frage erfolgreich aktualisiert!');
+                showCustomAlert('Frage erfolgreich aktualisiert!');
                 editModal.style.display = 'none';
                 const activeCategory = document.querySelector('.category.active').dataset.category;
                 fetchQuestions(activeCategory);
             } else {
-                alert('Fehler beim Aktualisieren der Frage.');
+                showCustomAlert('Fehler beim Aktualisieren der Frage.');
             }
         } catch (error) {
-            alert('Ein Fehler ist aufgetreten.');
+            showCustomAlert('Ein Fehler ist aufgetreten.');
         }
     });
 

@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
+    const categoryElements = document.querySelectorAll('.category');
+    const categoryTitle = document.getElementById('category-title');
+    const questionsRows = document.getElementById('questions-rows');
     const editModal = document.getElementById('editModal');
     const closeModal = document.getElementById('closeModal');
     const editForm = document.getElementById('editForm');
@@ -15,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         editModal.style.display = 'none';
     });
 
-    async function fetchQuestions() {
+    async function fetchQuestions(category) {
         try {
             const response = await fetch('http://192.168.178.95:8100/api/collections/automat/records', {
                 headers: { 'Authorization': `Bearer ${token}` },
@@ -23,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             if (response.ok) {
                 const data = await response.json();
-                populateTables(data.items);
+                populateQuestions(data.items, category);
             } else {
                 alert('Fehler beim Abrufen der Fragen.');
             }
@@ -32,29 +35,36 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    function populateTables(questions) {
-        ['leicht', 'mittel', 'schwer'].forEach(level => {
-            const tbody = document.getElementById(`${level}-rows`);
-            tbody.innerHTML = '';
-            questions
-                .filter(q => q.schwierigkeit === level)
-                .forEach(question => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>${question.frage}</td>
-                        <td>${question.antwort1}</td>
-                        <td>${question.antwort2}</td>
-                        <td>${question.antwort3}</td>
-                        <td>${question.antwort4}</td>
-                        <td>
-                            <button class="edit-btn" data-id="${question.id}">Bearbeiten</button>
-                            <button class="delete-btn" data-id="${question.id}">Löschen</button>
-                        </td>
-                    `;
-                    tbody.appendChild(row);
-                });
+    function populateQuestions(questions, category) {
+        questionsRows.innerHTML = '';
+        categoryTitle.textContent = `Fragen (${category.charAt(0).toUpperCase() + category.slice(1)})`;
+        const filteredQuestions = questions.filter(q => q.schwierigkeit === category);
+
+        filteredQuestions.forEach(question => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${question.frage}</td>
+                <td>${question.antwort1}</td>
+                <td>${question.antwort2}</td>
+                <td>${question.antwort3}</td>
+                <td>${question.antwort4}</td>
+                <td>
+                    <button class="edit-btn" data-id="${question.id}">Bearbeiten</button>
+                    <button class="delete-btn" data-id="${question.id}">Löschen</button>
+                </td>
+            `;
+            questionsRows.appendChild(row);
         });
     }
+
+    categoryElements.forEach(category => {
+        category.addEventListener('click', () => {
+            const selectedCategory = category.dataset.category;
+            categoryElements.forEach(cat => cat.classList.remove('active'));
+            category.classList.add('active');
+            fetchQuestions(selectedCategory);
+        });
+    });
 
     document.addEventListener('click', async (event) => {
         const target = event.target;
@@ -97,7 +107,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                     if (response.ok) {
                         alert('Frage gelöscht!');
-                        fetchQuestions();
+                        const activeCategory = document.querySelector('.category.active').dataset.category;
+                        fetchQuestions(activeCategory);
                     } else {
                         alert('Fehler beim Löschen.');
                     }
@@ -133,7 +144,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (response.ok) {
                 alert('Frage erfolgreich aktualisiert!');
                 editModal.style.display = 'none';
-                fetchQuestions();
+                const activeCategory = document.querySelector('.category.active').dataset.category;
+                fetchQuestions(activeCategory);
             } else {
                 alert('Fehler beim Aktualisieren der Frage.');
             }
@@ -142,5 +154,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    fetchQuestions();
+    // Initiale Kategorie laden
+    fetchQuestions('leicht');
+    document.querySelector('[data-category="leicht"]').classList.add('active');
 });

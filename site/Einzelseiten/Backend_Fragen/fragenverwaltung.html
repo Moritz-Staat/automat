@@ -7,10 +7,17 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div id="questionsContainer">
-  <h1>Fragen verwalten</h1>
-  <div class="difficulty-section" id="leicht">
-    <h2>Leichte Fragen</h2>
+<div class="container">
+  <nav class="sidebar">
+    <h2>Kategorien</h2>
+    <ul>
+      <li class="category" data-category="leicht">Leicht</li>
+      <li class="category" data-category="mittel">Mittel</li>
+      <li class="category" data-category="schwer">Schwer</li>
+    </ul>
+  </nav>
+  <main class="content">
+    <h1 id="category-title">Fragen</h1>
     <table class="question-table">
       <thead>
       <tr>
@@ -22,47 +29,11 @@
         <th>Aktionen</th>
       </tr>
       </thead>
-      <tbody id="leicht-rows">
+      <tbody id="questions-rows">
       <!-- Dynamische Inhalte -->
       </tbody>
     </table>
-  </div>
-  <div class="difficulty-section" id="mittel">
-    <h2>Mittelschwere Fragen</h2>
-    <table class="question-table">
-      <thead>
-      <tr>
-        <th>Frage</th>
-        <th>Antwort 1</th>
-        <th>Antwort 2</th>
-        <th>Antwort 3</th>
-        <th>Antwort 4</th>
-        <th>Aktionen</th>
-      </tr>
-      </thead>
-      <tbody id="mittel-rows">
-      <!-- Dynamische Inhalte -->
-      </tbody>
-    </table>
-  </div>
-  <div class="difficulty-section" id="schwer">
-    <h2>Schwere Fragen</h2>
-    <table class="question-table">
-      <thead>
-      <tr>
-        <th>Frage</th>
-        <th>Antwort 1</th>
-        <th>Antwort 2</th>
-        <th>Antwort 3</th>
-        <th>Antwort 4</th>
-        <th>Aktionen</th>
-      </tr>
-      </thead>
-      <tbody id="schwer-rows">
-      <!-- Dynamische Inhalte -->
-      </tbody>
-    </table>
-  </div>
+  </main>
 </div>
 
 <div id="editModal" class="modal">

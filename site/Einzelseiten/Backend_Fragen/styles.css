@@ -1,46 +1,64 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
-    padding: 20px;
-    background-color: #3f3f3f;
-    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f6f4;
+    color: #333;
 }
 
-h1, h2 {
-    color: #ffffff;
+.container {
+    display: flex;
+    height: 100vh;
 }
 
-form, .difficulty-section {
-    background: #444444;
+.sidebar {
+    width: 250px;
+    background-color: #e9f7ed;
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-right: 2px solid #62b55a;
+    overflow-y: auto;
+}
+
+.sidebar h2 {
+    color: #62b55a;
     margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px;
+    margin: 5px 0;
+    cursor: pointer;
+    background-color: #d6f0dd;
+    border-radius: 4px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar ul li:hover, .sidebar ul li.active {
+    background-color: #62b55a;
+    color: #fff;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
 }
 
 .question-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
 }
 
 .question-table th, .question-table td {
+    padding: 10px;
     border: 1px solid #ccc;
-    padding: 10px;
     text-align: left;
-}
-
-button {
-    background-color: #62b55a;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #4caf50;
 }
 
 .modal {

@@ -64,6 +64,39 @@
     </table>
   </div>
 </div>
+
+<div id="editModal" class="modal">
+  <div class="modal-content">
+    <span id="closeModal" class="close">&times;</span>
+    <h2>Frage bearbeiten</h2>
+    <form id="editForm">
+      <label for="editQuestion">Frage:</label>
+      <input type="text" id="editQuestion" required>
+      <label for="editOption1">richtige Antwort:</label>
+      <input type="text" id="editOption1" required>
+      <label for="editOption2">falsche Antwort 1:</label>
+      <input type="text" id="editOption2" required>
+      <label for="editOption3">falsche Antwort 2:</label>
+      <input type="text" id="editOption3" required>
+      <label for="editOption4">falsche Antwort 3:</label>
+      <input type="text" id="editOption4" required>
+      <fieldset>
+        <legend>Schwierigkeit:</legend>
+        <label>
+          <input type="radio" name="editSchwierigkeit" value="leicht" required> Leicht
+        </label>
+        <label>
+          <input type="radio" name="editSchwierigkeit" value="mittel"> Mittel
+        </label>
+        <label>
+          <input type="radio" name="editSchwierigkeit" value="schwer"> Schwer
+        </label>
+      </fieldset>
+      <button type="submit">Änderungen speichern</button>
+    </form>
+  </div>
+</div>
+
 <script src="fragenverwaltung.js"></script>
 </body>
 </html>

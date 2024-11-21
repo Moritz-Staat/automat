@@ -1,11 +1,14 @@
-// Variable, um das Token nach dem Login zu speichern
 let userToken = null;
 
-// Elemente holen
-const loginFormContainer = document.getElementById('loginFormContainer');
-const questionFormContainer = document.getElementById('questionFormContainer');
+document.addEventListener('DOMContentLoaded', () => {
+    const savedToken = localStorage.getItem('userToken');
+    if (savedToken) {
+        userToken = savedToken;  // Token aus localStorage laden
+        document.getElementById('loginFormContainer').style.display = 'none';
+        document.getElementById('questionFormContainer').style.display = 'block';
+    }
+});
 
-// Login-Formular-Event-Listener
 document.getElementById('loginForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
@@ -15,37 +18,31 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     try {
         const response = await fetch('http://192.168.178.95:8100/api/collections/users/auth-with-password', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                identity: email,
-                password: password
-            }),
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ identity: email, password: password }),
         });
 
         if (response.ok) {
             const data = await response.json();
-            userToken = data.token;  // Token speichern
+            userToken = data.token;
+            localStorage.setItem('userToken', userToken);  // Token speichern
 
-            // Erfolgsmeldung und Formular wechseln
             alert('Erfolgreich eingeloggt!');
-            loginFormContainer.style.display = 'none';  // Login-Formular ausblenden
-            questionFormContainer.style.display = 'block';  // Fragenformular einblenden
+            document.getElementById('loginFormContainer').style.display = 'none';
+            document.getElementById('questionFormContainer').style.display = 'block';
         } else {
-            const errorText = await response.text();
-            alert('Login fehlgeschlagen: ' + errorText);
+            alert('Login fehlgeschlagen.');
         }
     } catch (error) {
         alert('Ein Fehler ist aufgetreten: ' + error.message);
     }
 });
 
-// Frageformular-Event-Listener
 document.getElementById('questionForm').addEventListener('submit', async function(event) {
     event.preventDefault();
 
-    if (!userToken) {
+    const token = localStorage.getItem('userToken');
+    if (!token) {
         alert('Bitte logge dich ein, um eine Frage hinzuzufügen.');
         return;
     }
@@ -56,7 +53,6 @@ document.getElementById('questionForm').addEventListener('submit', async functio
     const antwort3 = document.getElementById('option3').value;
     const antwort4 = document.getElementById('option4').value;
     const imageFile = document.getElementById('image').files[0];
-
     const schwierigkeit = document.querySelector('input[name="schwierigkeit"]:checked').value;
 
     async function uploadImage(file) {
@@ -86,14 +82,14 @@ document.getElementById('questionForm').addEventListener('submit', async functio
             antwort3,
             antwort4,
             schwierigkeit: schwierigkeit,
-            bildid: imageId
+            bildid: imageId,
         };
 
         const response = await fetch('http://192.168.178.95:8100/api/collections/automat/records', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${userToken}`  // Token anhängen
+                'Authorization': `Bearer ${token}`,
             },
             body: JSON.stringify(data),
         });
@@ -101,6 +97,10 @@ document.getElementById('questionForm').addEventListener('submit', async functio
         if (response.ok) {
             alert('Frage erfolgreich hinzugefügt!');
             document.getElementById('questionForm').reset();
+        } else if (response.status === 401) {
+            alert('Deine Sitzung ist abgelaufen. Bitte logge dich erneut ein.');
+            localStorage.removeItem('userToken');
+            location.reload();
         } else {
             const errorText = await response.text();
             alert('Fehler beim Hinzufügen der Frage: ' + errorText);
@@ -109,10 +109,9 @@ document.getElementById('questionForm').addEventListener('submit', async functio
         alert('Ein Fehler ist aufgetreten: ' + error.message);
     }
 });
-alert('Erfolgreich eingeloggt!');
-const choice = confirm('Möchtest du Fragen hinzufügen? Klicke auf OK. Möchtest du Fragen verwalten? Klicke auf Abbrechen.');
-if (choice) {
-    questionFormContainer.style.display = 'block';
-} else {
-    window.location.href = 'fragenverwaltung.html';
-}
+
+document.getElementById('logoutButton').addEventListener('click', () => {
+    localStorage.removeItem('userToken');
+    alert('Erfolgreich abgemeldet!');
+    location.reload();
+});

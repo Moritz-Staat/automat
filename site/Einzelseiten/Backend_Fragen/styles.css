@@ -46,3 +46,22 @@ button {
 button:hover {
     background-color: #4caf50;
 }
+.question-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.question-table th, .question-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.difficulty-section h2 {
+    background-color: #62b55a;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}

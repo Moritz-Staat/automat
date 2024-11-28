@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="b" data-name="Ebene 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 444.62 512.1">
+  <defs>
+    <linearGradient id="d" data-name="Unbenannter Verlauf 37" x1="31.33" y1="416.26" x2="413.3" y2="95.74" gradientUnits="userSpaceOnUse">
+      <stop offset=".03" stop-color="#f7af6d"/>
+      <stop offset=".07" stop-color="#f3aa69"/>
+      <stop offset=".12" stop-color="#e99c5d"/>
+      <stop offset=".17" stop-color="#d9854b"/>
+      <stop offset=".22" stop-color="#c36531"/>
+      <stop offset=".26" stop-color="#ac4517"/>
+      <stop offset=".35" stop-color="#c15b14"/>
+      <stop offset=".4" stop-color="#d06b13"/>
+      <stop offset=".41" stop-color="#d16e17"/>
+      <stop offset=".43" stop-color="#dd8231"/>
+      <stop offset=".45" stop-color="#e79347"/>
+      <stop offset=".48" stop-color="#eea058"/>
+      <stop offset=".51" stop-color="#f4a964"/>
+      <stop offset=".56" stop-color="#f7ae6b"/>
+      <stop offset=".69" stop-color="#f8b06d"/>
+      <stop offset=".75" stop-color="#f6ad6b"/>
+      <stop offset=".77" stop-color="#f1a666"/>
+      <stop offset=".79" stop-color="#e7995d"/>
+      <stop offset=".81" stop-color="#da8750"/>
+      <stop offset=".82" stop-color="#c9703f"/>
+      <stop offset=".83" stop-color="#b4532b"/>
+      <stop offset=".84" stop-color="#9e3516"/>
+      <stop offset=".86" stop-color="#b8562a"/>
+      <stop offset=".88" stop-color="#ce723a"/>
+      <stop offset=".91" stop-color="#e08747"/>
+      <stop offset=".93" stop-color="#ec9750"/>
+      <stop offset=".96" stop-color="#f3a056"/>
+      <stop offset="1" stop-color="#f6a358"/>
+    </linearGradient>
+  </defs>
+  <g id="c" data-name="Gestaltungsebene">
+    <path d="M222.31,0c13.3,0,24,10.7,24,24v46.1l23-23c9.4-9.4,24.6-9.4,33.9,0s9.4,24.6,0,33.9l-57,57v76.5l66.2-38.2,20.9-77.8c3.4-12.8,16.6-20.4,29.4-17s20.4,16.6,17,29.4l-8.4,31.3,37.1-21.4c11.5-6.6,26.2-2.7,32.8,8.8,6.6,11.5,2.7,26.2-8.8,32.8l-37.1,21.4,31.5,8.4c12.8,3.4,20.4,16.6,17,29.4s-16.6,20.4-29.4,17l-77.8-20.9-66.3,38.3,66.2,38.2,77.8-20.9c12.8-3.4,26,4.2,29.4,17s-4.2,26-17,29.4l-31.4,8.5,37.1,21.4c11.5,6.6,15.4,21.3,8.8,32.8s-21.3,15.4-32.8,8.8l-37.1-21.4,8.4,31.5c3.4,12.8-4.2,26-17,29.4s-26-4.2-29.4-17l-20.9-77.8-66.1-38.3v76.5l57,57c9.4,9.4,9.4,24.6,0,33.9s-24.6,9.4-33.9,0l-23-23v46.1c0,13.3-10.7,24-24,24s-24-10.7-24-24v-46.1l-23,23c-9.4,9.4-24.6,9.4-33.9,0s-9.4-24.6,0-33.9l57-57v-76.5l-66.2,38.2-20.9,77.8c-3.4,12.8-16.6,20.4-29.4,17s-20.4-16.6-17-29.4l8.3-31.4-37.1,21.4c-11.5,6.6-26.2,2.7-32.8-8.8s-2.7-26.2,8.8-32.8l37.1-21.4-31.5-8.4c-12.8-3.4-20.4-16.6-17-29.4s16.6-20.4,29.4-17l77.8,20.9,66.3-38.3-66.2-38.2-77.9,20.8c-12.8,3.4-26-4.2-29.4-17s4.2-26,17-29.4l31.5-8.4-37.1-21.4c-11.5-6.6-15.4-21.3-8.8-32.8s21.3-15.4,32.8-8.8l37.1,21.4-8.4-31.5c-3.4-12.8,4.2-26,17-29.4s26,4.2,29.4,17l20.9,77.8,66.1,38.3v-76.5l-57-56.9c-9.4-9.4-9.4-24.6,0-33.9s24.6-9.4,33.9,0l23,23,.1-46.1c0-13.3,10.7-24,24-24Z" fill="url(#d)"/>
+  </g>
+</svg>

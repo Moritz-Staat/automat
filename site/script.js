@@ -167,11 +167,11 @@ function birnenwechsler() {
         kontakt: getFromLocalStorage('kontaktdaten')
     }
     if (data.level1 > 15 || data.level2 > 25 || data.level3 > 15 || data.loses > 13 || data.kontakt > 5) {
-        document.getElementById('zählstand').src = "../images/orangebirne.svg"
+        document.getElementById('zählstand').src = "../images/Snowflake_White.svg"
     } else if (data.level1 > 25 || data.level2 > 35 || data.level3 > 25 || data.loses > 18 || data.kontakt > 10) {
-        document.getElementById('zählstand').src = "../images/rotebirne.svg"
+        document.getElementById('zählstand').src = "../images/Snowflake_Copper.svg"
     } else {
-        document.getElementById('zählstand').src = "../images/grünebirne.svg"
+        document.getElementById('zählstand').src = "../images/Snowflake_bordeaux.svg"
     }
 }
 
@@ -203,27 +203,26 @@ window.addEventListener('load', () => {
 
 //Weihnachten Start
 // Schnee animieren
-// Maximalanzahl der Schneeflocken auf dem Bildschirm
 const maxSnowflakes = 50;
 const snowContainer = document.getElementById('snow-container');
 
 // Funktion zum Erzeugen einer Schneeflocke
 function createSnowflake() {
-    // Nur dann eine Schneeflocke erstellen, wenn die maximale Anzahl noch nicht erreicht ist
     if (snowContainer.childElementCount < maxSnowflakes) {
         const snowflake = document.createElement('div');
         snowflake.classList.add('snowflake');
-        snowflake.innerHTML = '❄️';
+        snowflake.innerHTML = '&#10052;'; // Unicode-Schneeflocke
 
         // Zufällige Startposition und -größen festlegen
         snowflake.style.left = `${Math.random() * 100}vw`;
         snowflake.style.fontSize = `${Math.random() * 15 + 80}px`;
         snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`;
         snowflake.style.animationDelay = `${Math.random() * 5}s`;
+        snowflake.style.color = '#fcfcfc'; // Weiß, falls CSS überschrieben wird
 
         snowContainer.appendChild(snowflake);
 
-        // Schneeflocke nach Animation entfernen, um den Speicherverbrauch gering zu halten
+        // Schneeflocke nach Animation entfernen
         snowflake.addEventListener('animationend', () => {
             snowflake.remove();
         });

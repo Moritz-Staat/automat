@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fragen verwalten</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="container">
+  <nav class="sidebar">
+    <h2>Kategorien</h2>
+    <ul>
+      <li class="category" data-category="leicht">Leicht</li>
+      <li class="category" data-category="mittel">Mittel</li>
+      <li class="category" data-category="schwer">Schwer</li>
+    </ul>
+  </nav>
+  <main class="content">
+    <h1 id="category-title">Fragen</h1>
+    <table class="question-table">
+      <thead>
+      <tr>
+        <th>Frage</th>
+        <th>Antwort 1</th>
+        <th>Antwort 2</th>
+        <th>Antwort 3</th>
+        <th>Antwort 4</th>
+        <th>Aktionen</th>
+      </tr>
+      </thead>
+      <tbody id="questions-rows">
+      <!-- Dynamische Inhalte -->
+      </tbody>
+    </table>
+  </main>
+</div>
+
+<div id="editModal" class="modal">
+  <div class="modal-content">
+    <span id="closeModal" class="close">&times;</span>
+    <h2>Frage bearbeiten</h2>
+    <form id="editForm">
+      <label for="editQuestion">Frage:</label>
+      <input type="text" id="editQuestion" required>
+      <label for="editOption1">richtige Antwort:</label>
+      <input type="text" id="editOption1" required>
+      <label for="editOption2">falsche Antwort 1:</label>
+      <input type="text" id="editOption2" required>
+      <label for="editOption3">falsche Antwort 2:</label>
+      <input type="text" id="editOption3" required>
+      <label for="editOption4">falsche Antwort 3:</label>
+      <input type="text" id="editOption4" required>
+      <fieldset>
+        <legend>Schwierigkeit:</legend>
+        <label>
+          <input type="radio" name="editSchwierigkeit" value="leicht" required> Leicht
+        </label>
+        <label>
+          <input type="radio" name="editSchwierigkeit" value="mittel"> Mittel
+        </label>
+        <label>
+          <input type="radio" name="editSchwierigkeit" value="schwer"> Schwer
+        </label>
+      </fieldset>
+      <button type="submit">Änderungen speichern</button>
+    </form>
+  </div>
+</div>
+
+<script src="fragenverwaltung.js"></script>
+</body>
+</html>

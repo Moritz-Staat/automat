@@ -1,49 +1,50 @@
 let shuffledQuestions = [];
 let currentQuestionIndex, correctAnswers;
-let inactivityTimeout, blurTimeout; // Variablen für das Blur
-let isBlurred = false; // Variable, um den Blur-Status zu tracken
+let inactivityTimeout, blurTimeout;
+let isBlurred = false;
+let quizStartTime;
 
 document.addEventListener('DOMContentLoaded', () => {
     startGame();
-    resetInactivityTimer(); // Timer bei Spielstart initialisieren
-    setupInactivityListeners(); // Event-Listener für Inaktivität setzen
+    resetInactivityTimer();
+    setupInactivityListeners();
 });
 
 async function startGame() {
-    shuffledQuestions = await fetchQuestions(); // Fragen von der Datenbank abrufen
-    shuffledQuestions = shuffledQuestions.sort(() => Math.random() - 0.5).slice(0, 5); // Fragen mischen und auswählen
+    shuffledQuestions = await fetchQuestions();
+    shuffledQuestions = shuffledQuestions.sort(() => Math.random() - 0.5).slice(0, 5);
     currentQuestionIndex = 0;
     correctAnswers = 0;
+    quizStartTime = new Date();
     showQuestion(shuffledQuestions[currentQuestionIndex]);
 }
 
 async function fetchQuestions() {
-    const response = await fetch('http://10.1.10.147:8100/api/collections/automat/records?filter=schwierigkeit="mittel"');
+    const response = await fetch('http://192.168.178.95:8100/api/collections/automat/records?filter=schwierigkeit="mittel"');
     const data = await response.json();
 
     return await Promise.all(data.items.map(async item => {
         let imageUrl = null;
         if (item.bildid) {
-            const imageResponse = await fetch(`http://10.1.10.147:8100/api/collections/bilder/records/${item.bildid}`);
+            const imageResponse = await fetch(`http://192.168.178.95:8100/api/collections/bilder/records/${item.bildid}`);
             const imageData = await imageResponse.json();
 
             imageUrl = imageData.fragenbild
-                ? `http://10.1.10.147:8100/api/files/bilder/${item.bildid}/${imageData.fragenbild}`
+                ? `http://192.168.178.95:8100/api/files/bilder/${item.bildid}/${imageData.fragenbild}`
                 : null;
         }
 
-        // Antworten in einem Array speichern und nach dem Erstellen mischen
         const answers = [
             { text: item.antwort1, correct: true },
             { text: item.antwort2, correct: false },
             { text: item.antwort3, correct: false },
             { text: item.antwort4, correct: false }
-        ].sort(() => Math.random() - 0.5); // Antworten mischen
+        ].sort(() => Math.random() - 0.5);
 
         return {
             question: item.frage,
             image: imageUrl,
-            answers: answers // gemischte Antworten
+            answers: answers
         };
     }));
 }
@@ -67,6 +68,7 @@ function showQuestion(question) {
         const button = document.createElement('button');
         button.innerText = answer.text;
         button.classList.add('btn');
+        button.disabled = false; // Buttons aktivieren
         button.addEventListener('click', () => {
             selectAnswer(button, answer.correct);
             resetInactivityTimer();
@@ -80,7 +82,7 @@ function showQuestion(question) {
 function selectAnswer(button, correct) {
     const answerButtons = document.querySelectorAll('#answer-buttons .btn');
     answerButtons.forEach(btn => {
-        btn.disabled = true;
+        btn.disabled = true; // Alle Buttons deaktivieren, damit keine doppelte Auswahl möglich ist
         if (btn.innerText === button.innerText) {
             btn.style.backgroundColor = correct ? 'green' : 'red';
         } else if (btn.innerText === getCorrectAnswerText()) {
@@ -120,12 +122,12 @@ function showResults() {
 
     let imageUrl, buttonText, buttonOnClick, resultText;
 
-    if (correctAnswers === 5) {
+    if (correctAnswers === shuffledQuestions.length) {
         imageUrl = 'LOGO.svg';
         resultText = "Alles richtig, viel Spaß mit deinem Preis!";
         buttonText = 'Preis abholen';
         buttonOnClick = () => {
-            window.parent.postMessage('prizeCollected', '*')
+            window.parent.postMessage('prizeCollected', '*');
             window.parent.location.href = '../../Automat.html';
         };
     } else {
@@ -133,7 +135,7 @@ function showResults() {
         resultText = "Da musst du wohl nochmal üben, versuchs nochmal!";
         buttonText = 'Zurück zum Start';
         buttonOnClick = () => {
-            window.parent.postMessage('quizFailed', '*')
+            window.parent.postMessage('quizFailed', '*');
             window.parent.location.href = '../../Automat.html';
         };
     }
@@ -168,34 +170,28 @@ function updateProgressBar() {
     progressText.innerText = `${currentQuestionNumber}/${totalQuestions}`;
 }
 
-// Funktion zum Blurren der Seite
 function blurPage() {
     document.body.classList.add('blur');
-    document.getElementById('blur-overlay').style.display = 'flex'; // Overlay sichtbar machen
+    document.getElementById('blur-overlay').style.display = 'flex';
     isBlurred = true;
 }
 
-// Funktion zum Zurücksetzen des Inaktivitäts-Timers
 function resetInactivityTimer() {
-    clearTimeout(inactivityTimeout); // Vorherigen Timeout löschen
-    clearTimeout(blurTimeout); // Blur Timeout ebenfalls löschen
+    clearTimeout(inactivityTimeout);
+    clearTimeout(blurTimeout);
 
     if (isBlurred) {
-        document.body.classList.remove('blur'); // Entferne den Blur-Effekt
-        document.getElementById('blur-overlay').style.display = 'none'; // Overlay verstecken
+        document.body.classList.remove('blur');
+        document.getElementById('blur-overlay').style.display = 'none';
         isBlurred = false;
     }
 
-    // Blurre die Seite nach 20 Sekunden Inaktivität
     blurTimeout = setTimeout(blurPage, 20000);
-
-    // Leitet nach 30 Sekunden im Hauptfenster auf Automat.html weiter
     inactivityTimeout = setTimeout(() => {
         window.top.location.href = '../../Automat.html';
     }, 30000);
 }
 
-// Setzt Event-Listener für **Mausklick-Aktivität**
 function setupInactivityListeners() {
-    document.addEventListener('click', resetInactivityTimer); // Nur Maus-Klicks
+    document.addEventListener('click', resetInactivityTimer);
 }

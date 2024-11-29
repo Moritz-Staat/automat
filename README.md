@@ -4,3 +4,7 @@ Quiz Automat für Snackautomaten mit folgenden Funktionen:
 - Zählstandprüfung und Zurücksetzen über Zahleninput
 - HTP Request zum Auslösen von Relaises
 - Verschiedene Level mit mehreren Fragen
+
+
+
+main for Messe, castrop for daily use

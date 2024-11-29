@@ -20,17 +20,17 @@ async function startGame() {
 }
 
 async function fetchQuestions() {
-    const response = await fetch('http://192.168.178.95:8100/api/collections/automat/records?filter=schwierigkeit="mittel"');
+    const response = await fetch('http://10.1.10.204:8100/api/collections/automat/records?filter=schwierigkeit="mittel"');
     const data = await response.json();
 
     return await Promise.all(data.items.map(async item => {
         let imageUrl = null;
         if (item.bildid) {
-            const imageResponse = await fetch(`http://192.168.178.95:8100/api/collections/bilder/records/${item.bildid}`);
+            const imageResponse = await fetch(`http://10.1.10.204:8100/api/collections/bilder/records/${item.bildid}`);
             const imageData = await imageResponse.json();
 
             imageUrl = imageData.fragenbild
-                ? `http://192.168.178.95:8100/api/files/bilder/${item.bildid}/${imageData.fragenbild}`
+                ? `http://10.1.10.204:8100/api/files/bilder/${item.bildid}/${imageData.fragenbild}`
                 : null;
         }
 

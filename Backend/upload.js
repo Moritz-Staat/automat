@@ -1,7 +1,7 @@
 import PocketBase from 'pocketbase';
 import fs from 'fs';
 
-const pb = new PocketBase('http://10.1.10.147:8100');
+const pb = new PocketBase('http://10.1.10.204:8100');
 
 // Beispiel-Daten für die Bilder (mit lokalen Pfaden)
 const bilder = [

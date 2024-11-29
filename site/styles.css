@@ -186,7 +186,7 @@ a.level1link, a.level2link, a.level3link {
 .logo {
     position: fixed;
     bottom: 0;
-    right: 0;
+    right: 15px;
     width: 10rem;
     height: 10rem;
 }

@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Fragen verwalten</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/pocketbase/dist/pocketbase.umd.js"></script>
 </head>
 <body>
+<div id="overlay"></div> <!-- Hintergrund Overlay -->
 <div class="container">
   <nav class="sidebar">
     <h2>Kategorien</h2>
@@ -22,7 +24,7 @@
       <thead>
       <tr>
         <th>Frage</th>
-        <th>Antwort 1</th>
+        <th>richtige Antwort</th>
         <th>Antwort 2</th>
         <th>Antwort 3</th>
         <th>Antwort 4</th>
@@ -36,7 +38,7 @@
   </main>
 </div>
 
-<div id="editModal" class="modal">
+<div id="editModal">
   <div class="modal-content">
     <span id="closeModal" class="close">&times;</span>
     <h2>Frage bearbeiten</h2>

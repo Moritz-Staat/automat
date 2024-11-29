@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
+    const pb = new PocketBase('http://10.1.10.204:8100'); // Verbindung zur PocketBase-Instanz
     const token = localStorage.getItem('userToken');
     if (!token) {
         showCustomAlert('Bitte logge dich ein!');
@@ -6,17 +7,33 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
+    // Authentifizierung mit Token
+    pb.authStore.save(token, null);
+
     const categoryElements = document.querySelectorAll('.category');
     const categoryTitle = document.getElementById('category-title');
     const questionsRows = document.getElementById('questions-rows');
     const editModal = document.getElementById('editModal');
+    const overlay = document.getElementById('overlay');
     const closeModal = document.getElementById('closeModal');
     const editForm = document.getElementById('editForm');
+    const contentContainer = document.querySelector('.container');
     let currentQuestionId = null;
 
-    closeModal.addEventListener('click', () => {
+    function openEditModal() {
+        editModal.style.display = 'block';
+        overlay.style.display = 'block';
+        contentContainer.classList.add('modal-active'); // Hintergrund blurren
+    }
+
+    function closeEditModal() {
         editModal.style.display = 'none';
-    });
+        overlay.style.display = 'none';
+        contentContainer.classList.remove('modal-active'); // Blur entfernen
+    }
+
+    closeModal.addEventListener('click', closeEditModal);
+    overlay.addEventListener('click', closeEditModal);
 
     function showCustomAlert(message) {
         const alertBox = document.createElement('div');
@@ -36,25 +53,21 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     async function fetchQuestions(category) {
         try {
-            const response = await fetch('http://192.168.178.95:8100/api/collections/automat/records', {
-                headers: { 'Authorization': `Bearer ${token}` },
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                populateQuestions(data.items, category);
-            } else {
-                showCustomAlert('Fehler beim Abrufen der Fragen.');
-            }
+            const records = await pb.collection('automat').getFullList(); // Abruf aller Datensätze
+            console.log("Rückgabedaten:", records); // Debugging
+            populateQuestions(records, category);
         } catch (error) {
-            showCustomAlert('Ein Fehler ist aufgetreten.');
+            showCustomAlert('Fehler beim Abrufen der Fragen.');
         }
     }
 
     function populateQuestions(questions, category) {
+        console.log("Alle Fragen:", questions); // Debugging
+        const filteredQuestions = questions.filter(q => q.schwierigkeit.toLowerCase() === category.toLowerCase());
+        console.log("Gefilterte Fragen:", filteredQuestions); // Debugging
+
         questionsRows.innerHTML = '';
         categoryTitle.textContent = `Fragen (${category.charAt(0).toUpperCase() + category.slice(1)})`;
-        const filteredQuestions = questions.filter(q => q.schwierigkeit === category);
 
         filteredQuestions.forEach(question => {
             const row = document.createElement('tr');
@@ -93,26 +106,20 @@ document.addEventListener('DOMContentLoaded', async () => {
             currentQuestionId = target.closest('.edit-btn').dataset.id;
 
             try {
-                const response = await fetch(`http://192.168.178.95:8100/api/collections/automat/records/${currentQuestionId}`, {
-                    headers: { 'Authorization': `Bearer ${token}` },
-                });
+                const record = await pb.collection('automat').getOne(currentQuestionId);
+                console.log("Datensatz für Bearbeitung:", record);
 
-                if (response.ok) {
-                    const question = await response.json();
-                    document.getElementById('editQuestion').value = question.frage;
-                    document.getElementById('editOption1').value = question.antwort1;
-                    document.getElementById('editOption2').value = question.antwort2;
-                    document.getElementById('editOption3').value = question.antwort3;
-                    document.getElementById('editOption4').value = question.antwort4;
+                document.getElementById('editQuestion').value = record.frage;
+                document.getElementById('editOption1').value = record.antwort1;
+                document.getElementById('editOption2').value = record.antwort2;
+                document.getElementById('editOption3').value = record.antwort3;
+                document.getElementById('editOption4').value = record.antwort4;
 
-                    document.querySelector(`input[name="editSchwierigkeit"][value="${question.schwierigkeit}"]`).checked = true;
+                document.querySelector(`input[name="editSchwierigkeit"][value="${record.schwierigkeit}"]`).checked = true;
 
-                    editModal.style.display = 'block';
-                } else {
-                    showCustomAlert('Fehler beim Abrufen der Frage.');
-                }
+                openEditModal();
             } catch (error) {
-                showCustomAlert('Ein Fehler ist aufgetreten.');
+                showCustomAlert('Fehler beim Abrufen der Frage.');
             }
         }
 
@@ -120,20 +127,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             const id = target.closest('.delete-btn').dataset.id;
             if (confirm('Möchtest du diese Frage wirklich löschen?')) {
                 try {
-                    const response = await fetch(`http://192.168.178.95:8100/api/collections/automat/records/${id}`, {
-                        method: 'DELETE',
-                        headers: { 'Authorization': `Bearer ${token}` },
-                    });
-
-                    if (response.ok) {
-                        showCustomAlert('Frage gelöscht!');
-                        const activeCategory = document.querySelector('.category.active').dataset.category;
-                        fetchQuestions(activeCategory);
-                    } else {
-                        showCustomAlert('Fehler beim Löschen.');
-                    }
+                    await pb.collection('automat').delete(id);
+                    showCustomAlert('Frage gelöscht!');
+                    const activeCategory = document.querySelector('.category.active').dataset.category;
+                    fetchQuestions(activeCategory);
                 } catch (error) {
-                    showCustomAlert('Ein Fehler ist aufgetreten.');
+                    showCustomAlert('Fehler beim Löschen.');
                 }
             }
         }
@@ -151,26 +150,17 @@ document.addEventListener('DOMContentLoaded', async () => {
             schwierigkeit: document.querySelector('input[name="editSchwierigkeit"]:checked').value,
         };
 
-        try {
-            const response = await fetch(`http://192.168.178.95:8100/api/collections/automat/records/${currentQuestionId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`,
-                },
-                body: JSON.stringify(updatedData),
-            });
+        console.log("Aktualisierte Daten:", updatedData); // Debugging
 
-            if (response.ok) {
-                showCustomAlert('Frage erfolgreich aktualisiert!');
-                editModal.style.display = 'none';
-                const activeCategory = document.querySelector('.category.active').dataset.category;
-                fetchQuestions(activeCategory);
-            } else {
-                showCustomAlert('Fehler beim Aktualisieren der Frage.');
-            }
+        try {
+            await pb.collection('automat').update(currentQuestionId, updatedData);
+            showCustomAlert('Frage erfolgreich aktualisiert!');
+            closeEditModal();
+            const activeCategory = document.querySelector('.category.active').dataset.category;
+            fetchQuestions(activeCategory);
         } catch (error) {
-            showCustomAlert('Ein Fehler ist aufgetreten.');
+            console.error("Fehler beim Aktualisieren:", error); // Debugging
+            showCustomAlert('Fehler beim Aktualisieren der Frage.');
         }
     });
 

@@ -16,7 +16,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch('http://192.168.178.95:8100/api/collections/users/auth-with-password', {
+        const response = await fetch('http://10.1.10.204:8100/api/collections/users/auth-with-password', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ identity: email, password: password }),
@@ -59,7 +59,7 @@ document.getElementById('questionForm').addEventListener('submit', async functio
         const formData = new FormData();
         formData.append('fragenbild', file);
 
-        const response = await fetch('http://192.168.178.95:8100/api/collections/bilder/records', {
+        const response = await fetch('http://10.1.10.204:8100/api/collections/bilder/records', {
             method: 'POST',
             body: formData,
         });
@@ -85,7 +85,7 @@ document.getElementById('questionForm').addEventListener('submit', async functio
             bildid: imageId,
         };
 
-        const response = await fetch('http://192.168.178.95:8100/api/collections/automat/records', {
+        const response = await fetch('http://10.1.10.204:8100/api/collections/automat/records', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

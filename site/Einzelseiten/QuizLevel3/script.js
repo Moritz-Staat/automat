@@ -18,17 +18,17 @@ async function startGame() {
 }
 
 async function fetchQuestions() {
-    const response = await fetch('http://10.1.10.147:8100/api/collections/automat/records?filter=schwierigkeit="schwer"');
+    const response = await fetch('http://10.1.10.204:8100/api/collections/automat/records?filter=schwierigkeit="schwer"');
     const data = await response.json();
 
     return await Promise.all(data.items.map(async item => {
         let imageUrl = null;
         if (item.bildid) {
-            const imageResponse = await fetch(`http://10.1.10.147:8100/api/collections/bilder/records/${item.bildid}`);
+            const imageResponse = await fetch(`http://10.1.10.204:8100/api/collections/bilder/records/${item.bildid}`);
             const imageData = await imageResponse.json();
 
             imageUrl = imageData.fragenbild
-                ? `http://10.1.10.147:8100/api/files/bilder/${item.bildid}/${imageData.fragenbild}`
+                ? `http://10.1.10.204:8100/api/files/bilder/${item.bildid}/${imageData.fragenbild}`
                 : null;
         }
 
@@ -120,7 +120,7 @@ function showResults() {
 
     let imageUrl, buttonText, buttonOnClick, resultText;
 
-    if (correctAnswers === 5) {
+    if (correctAnswers === shuffledQuestions.length) {
         imageUrl = 'LOGO.svg';
         resultText = "Alles richtig, viel Spaß mit deinem Preis!";
         buttonText = 'Preis abholen';

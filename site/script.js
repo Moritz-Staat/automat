@@ -167,11 +167,11 @@ function birnenwechsler() {
         kontakt: getFromLocalStorage('kontaktdaten')
     }
     if (data.level1 > 15 || data.level2 > 25 || data.level3 > 15 || data.loses > 13 || data.kontakt > 5) {
-        document.getElementById('zählstand').src = "../images/Snowflake_White.svg"
+        document.getElementById('zählstand').src = "Images/Snowflake_White.svg"
     } else if (data.level1 > 25 || data.level2 > 35 || data.level3 > 25 || data.loses > 18 || data.kontakt > 10) {
-        document.getElementById('zählstand').src = "../images/Snowflake_Copper.svg"
+        document.getElementById('zählstand').src = "Images/Snowflake_Copper.svg"
     } else {
-        document.getElementById('zählstand').src = "../images/Snowflake_bordeaux.svg"
+        document.getElementById('zählstand').src = "Images/Snowflake_bordeaux.svg"
     }
 }
 

@@ -65,7 +65,7 @@ document.addEventListener('touchstart', function(event) {
     } else {
         resetTimer();
     }
-});
+}, { passive: false });
 
 // Event-Listener für Mausbewegung und Klicks (für den PC)
 document.addEventListener('mousemove', resetTimer);

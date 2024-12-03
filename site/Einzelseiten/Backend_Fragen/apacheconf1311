@@ -585,10 +585,10 @@ Include "conf/extra/httpd-ajp.conf"
 
 # Auf Port 8090 im Ordner "automat" die Datei Automat.html als Startseite verwenden
 <VirtualHost *:8090>
-    DocumentRoot "C:/xampp/htdocs/automat/site"
+    DocumentRoot "C:/xampp/htdocs/automat"
     ServerName localhost:8090
     DirectoryIndex Automat.html
-    <Directory "C:/xampp/htdocs/automat/site">
+    <Directory "C:/xampp/htdocs/automat">
         Options Indexes FollowSymLinks
         AllowOverride All
         Require all granted

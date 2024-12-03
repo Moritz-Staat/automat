@@ -7,9 +7,9 @@ function showScreensaver() {
     const video = document.getElementById('screensaverVideo');
 
     const videos = [
-        '../Images/RZ_ChrisOmat_Bildschirmschonervideo_3er_v1.mp4',
-        '../Images/RZ_ChrisOmat_Bildschirmschonervideo_3er_v2.mp4',
-        '../Images/RZ_ChrisOmat_Bildschirmschonervideo_3er_v3.mp4',
+        'Images/RZ_ChrisOmat_Bildschirmschonervideo_3er_v1.mp4',
+        'Images/RZ_ChrisOmat_Bildschirmschonervideo_3er_v2.mp4',
+        'Images/RZ_ChrisOmat_Bildschirmschonervideo_3er_v3.mp4',
     ];
 
     const randomVideo = videos[Math.floor(Math.random() * videos.length)];

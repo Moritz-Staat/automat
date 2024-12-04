@@ -20,19 +20,13 @@ async function startGame() {
 }
 
 async function fetchQuestions() {
-    const response = await fetch('http://10.1.10.204:8100/api/collections/automat/records?filter=schwierigkeit="mittel"');
+    const response = await fetch('http://10.1.10.204:8100/api/collections/automat/records?filter=schwierigkeit="mittel"&expand=bildid');
     const data = await response.json();
 
-    return await Promise.all(data.items.map(async item => {
-        let imageUrl = null;
-        if (item.bildid) {
-            const imageResponse = await fetch(`http://10.1.10.204:8100/api/collections/bilder/records/${item.bildid}`);
-            const imageData = await imageResponse.json();
-
-            imageUrl = imageData.fragenbild
-                ? `http://10.1.10.204:8100/api/files/bilder/${item.bildid}/${imageData.fragenbild}`
-                : null;
-        }
+    return data.items.map(item => {
+        const imageUrl = item.expand?.bildid?.fragenbild
+            ? `http://10.1.10.204:8100/api/files/bilder/${item.bildid}/${item.expand.bildid.fragenbild}`
+            : null;
 
         const answers = [
             { text: item.antwort1, correct: true },
@@ -46,8 +40,9 @@ async function fetchQuestions() {
             image: imageUrl,
             answers: answers
         };
-    }));
+    });
 }
+
 
 function showQuestion(question) {
     const questionText = document.getElementById('question-text');

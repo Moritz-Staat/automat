@@ -19,28 +19,67 @@ async function startGame() {
     showQuestion(shuffledQuestions[currentQuestionIndex]);
 }
 
+const imageCache = {};
+
+async function fetchImage(imageId) {
+    if (imageCache[imageId]) {
+        return imageCache[imageId]; // Aus Cache zurückgeben
+    }
+    try {
+        const imageResponse = await fetch(`http://10.1.10.204:8100/api/collections/bilder/records/${imageId}`);
+        if (!imageResponse.ok) {
+            throw new Error(`Image fetch failed with status ${imageResponse.status}`);
+        }
+        const imageData = await imageResponse.json();
+        imageCache[imageId] = imageData; // In den Cache speichern
+        return imageData;
+    } catch (error) {
+        console.error(`Error fetching image ${imageId}:`, error);
+        return null; // Alternative Rückgabe bei Fehler
+    }
+}
+
 async function fetchQuestions() {
-    const response = await fetch('http://10.1.10.204:8100/api/collections/automat/records?filter=schwierigkeit="mittel"&expand=bildid');
-    const data = await response.json();
+    console.time("fetchQuestions"); // Startzeit messen
+    try {
+        const response = await fetch('http://10.1.10.204:8100/api/collections/automat/records?filter=schwierigkeit="mittel"');
+        if (!response.ok) {
+            throw new Error(`Questions fetch failed with status ${response.status}`);
+        }
+        const data = await response.json();
 
-    return data.items.map(item => {
-        const imageUrl = item.expand?.bildid?.fragenbild
-            ? `http://10.1.10.204:8100/api/files/bilder/${item.bildid}/${item.expand.bildid.fragenbild}`
-            : null;
+        const questions = await Promise.all(data.items.map(async item => {
+            let imageUrl = null;
 
-        const answers = [
-            { text: item.antwort1, correct: true },
-            { text: item.antwort2, correct: false },
-            { text: item.antwort3, correct: false },
-            { text: item.antwort4, correct: false }
-        ].sort(() => Math.random() - 0.5);
+            // Bild laden mit Cache-Unterstützung
+            if (item.bildid) {
+                const imageData = await fetchImage(item.bildid);
+                imageUrl = imageData?.fragenbild
+                    ? `http://10.1.10.204:8100/api/files/bilder/${item.bildid}/${imageData.fragenbild}`
+                    : null;
+            }
 
-        return {
-            question: item.frage,
-            image: imageUrl,
-            answers: answers
-        };
-    });
+            // Antworten in einem Array speichern und nach dem Erstellen mischen
+            const answers = [
+                { text: item.antwort1, correct: true },
+                { text: item.antwort2, correct: false },
+                { text: item.antwort3, correct: false },
+                { text: item.antwort4, correct: false }
+            ].sort(() => Math.random() - 0.5); // Antworten mischen
+
+            return {
+                question: item.frage,
+                image: imageUrl,
+                answers: answers // gemischte Antworten
+            };
+        }));
+
+        console.timeEnd("fetchQuestions"); // Endzeit messen
+        return questions;
+    } catch (error) {
+        console.error("Error fetching questions:", error);
+        return []; // Alternative Rückgabe bei Fehler
+    }
 }
 
 

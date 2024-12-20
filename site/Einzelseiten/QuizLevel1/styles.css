@@ -1,59 +1,70 @@
+:root {
+    --primary-bg: #62b55a;
+    --secondary-bg: #e0e0e0;
+    --font-family: 'Rajdhani-SemiBold', sans-serif;
+    --font-weight: 600;
+    --btn-radius: 4rem;
+    --transition-fast: 0.2s;
+    --transition-slow: 0.5s;
+    --text-color-white: #ffffff;
+    --text-color-black: black;
+    --max-content-width: 80rem;
+}
+
 @font-face {
     font-family: 'Rajdhani-SemiBold';
     src: url('../../fonts/Rajdhani-Semibold.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
+
 body {
     background-color: white;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    flex-direction: column;
 }
 
 #quiz-container {
     background: white;
     padding: 1.25rem;
     border-radius: 0.5rem;
-    /*box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);*/
     width: 100%;
-    max-width: 80rem;
+    max-width: var(--max-content-width);
     text-align: center;
     position: relative;
-    margin-top: -10rem; /* Negative Marge verschiebt das Element nach oben */
+    margin-top: -10rem;
 }
 
-/* Fortschrittsbalken stylen */
 #progress-container {
-    background: #e0e0e0;
+    background: var(--secondary-bg);
     border-radius: 0.3125rem;
     height: 2rem;
     margin-top: 1.25rem;
     width: 100%;
-    max-width: 90rem;
+    max-width: calc(var(--max-content-width) + 10rem);
     position: relative;
 }
 
 #progress-bar {
-    background: #62b55a;
+    background: var(--primary-bg);
     height: 100%;
     width: 0%;
-    border-radius: 0.3125rem;
-    transition: width 0.3s;
-    position: relative;
+    border-radius: inherit;
+    transition: width var(--transition-fast);
 }
 
 #progress-text {
     position: absolute;
     width: 100%;
     text-align: center;
-    font-family: 'Rajdhani-SemiBold', sans-serif;
-    font-weight: 600;
+    font-family: var(--font-family);
+    font-weight: var(--font-weight);
     font-size: 1.5rem;
-    color: white;
+    color: var(--text-color-white);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -61,16 +72,15 @@ body {
 }
 
 #question-container {
-    height: 100%;
     width: 100%;
     margin-bottom: 1.25rem;
 }
+
 #question-image {
-    width: 80rem;
-    height: 100rem;
-    object-fit: contain;
-    max-width: 80rem;
+    width: 100%;
+    max-width: var(--max-content-width);
     max-height: 100rem;
+    object-fit: contain;
     margin: 0.625rem auto;
     display: block;
 }
@@ -84,18 +94,14 @@ body {
 .btn {
     height: 8rem;
     padding: 0.625rem;
-    background-color: #62b55a;
-    color: #ffffff;
+    background-color: var(--primary-bg);
+    color: var(--text-color-white);
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s;
-    font-family: 'Rajdhani-SemiBold', sans-serif;
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
+    font-family: var(--font-family);
     font-size: 2rem;
-    border-radius: 4rem;
-}
-
-.btn:hover {
-    background-color: #505050;
+    border-radius: var(--btn-radius);
 }
 
 .btn:disabled {
@@ -106,27 +112,26 @@ body {
 #result-image {
     display: block;
     max-width: 30rem;
-    margin-left: 28rem;
-    margin-top: 5rem;
-    margin-bottom: 5rem;
+    margin: 5rem auto;
 }
 
 #result-text {
     font-size: 4rem;
-    font-family: "Rajdhani-SemiBold";
-    color:black;
+    font-family: var(--font-family);
+    color: var(--text-color-black);
     margin-bottom: 3rem;
 }
 
 #question-text {
     font-size: 3rem;
-    font-family: 'Rajdhani-SemiBold', sans-serif;
+    font-family: var(--font-family);
     margin-bottom: 4rem;
-    font-weight: 600;
+    font-weight: var(--font-weight);
 }
+
 .blur {
     filter: blur(4px);
-    transition: filter 0.5s ease;
+    transition: filter var(--transition-slow);
 }
 
 .blur-overlay {
@@ -138,7 +143,7 @@ body {
     display: none;
     justify-content: center;
     align-items: center;
-    color: white;
-    font-size: 2em;
+    color: var(--text-color-white);
+    font-size: 2rem;
     z-index: 1000;
 }

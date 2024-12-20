@@ -24,7 +24,7 @@ async function fetchImage(imageId) {
         return imageCache[imageId]; // Aus Cache zurückgeben
     }
     try {
-        const imageResponse = await fetch(`http://10.1.10.204:8100/api/collections/bilder/records/${imageId}`);
+        const imageResponse = await fetch(`http://10.1.10.204:8100api/collections/bilder/records/${imageId}`);
         if (!imageResponse.ok) {
             throw new Error(`Image fetch failed with status ${imageResponse.status}`);
         }
@@ -40,7 +40,7 @@ async function fetchImage(imageId) {
 async function fetchQuestions() {
     console.time("fetchQuestions"); // Startzeit messen
     try {
-        const response = await fetch('http://10.1.10.204:8100/api/collections/automat/records?filter=schwierigkeit="leicht"');
+        const response = await fetch('http://10.1.10.204:8100/api/collections/automat/records?filter=schwierigkeit="schwer"');
         if (!response.ok) {
             throw new Error(`Questions fetch failed with status ${response.status}`);
         }
@@ -53,7 +53,7 @@ async function fetchQuestions() {
             if (item.bildid) {
                 const imageData = await fetchImage(item.bildid);
                 imageUrl = imageData?.fragenbild
-                    ? `http://10.1.10.204:8100/api/files/bilder/${item.bildid}/${imageData.fragenbild}`
+                    ? `http://10.1.10.204:8100api/files/bilder/${item.bildid}/${imageData.fragenbild}`
                     : null;
             }
 

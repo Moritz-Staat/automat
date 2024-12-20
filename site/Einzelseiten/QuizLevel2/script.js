@@ -1,8 +1,8 @@
 let shuffledQuestions = [];
-let currentQuestionIndex, correctAnswers;
+let currentQuestionIndex = 0;
+let correctAnswers = 0;
 let inactivityTimeout, blurTimeout;
 let isBlurred = false;
-let quizStartTime;
 
 document.addEventListener('DOMContentLoaded', () => {
     startGame();
@@ -11,124 +11,116 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function startGame() {
-    shuffledQuestions = await fetchQuestions();
-    shuffledQuestions = shuffledQuestions.sort(() => Math.random() - 0.5).slice(0, 5);
-    currentQuestionIndex = 0;
-    correctAnswers = 0;
-    quizStartTime = new Date();
-    showQuestion(shuffledQuestions[currentQuestionIndex]);
+    try {
+        const questions = await fetchQuestions();
+        shuffledQuestions = questions.sort(() => Math.random() - 0.5).slice(0, 5);
+        currentQuestionIndex = 0;
+        correctAnswers = 0;
+        showQuestion(shuffledQuestions[currentQuestionIndex]);
+    } catch (error) {
+        console.error("Error starting game:", error);
+    }
 }
 
-const imageCache = {};
+const imageCache = new Map();
 
 async function fetchImage(imageId) {
-    if (imageCache[imageId]) {
-        return imageCache[imageId]; // Aus Cache zurückgeben
+    if (imageCache.has(imageId)) {
+        return imageCache.get(imageId);
     }
     try {
-        const imageResponse = await fetch(`http://10.1.10.204:8100/api/collections/bilder/records/${imageId}`);
-        if (!imageResponse.ok) {
-            throw new Error(`Image fetch failed with status ${imageResponse.status}`);
-        }
-        const imageData = await imageResponse.json();
-        imageCache[imageId] = imageData; // In den Cache speichern
+        const response = await fetch(`http://10.1.10.204:8100/api/collections/bilder/records/${imageId}`);
+        if (!response.ok) throw new Error(`Failed to fetch image: ${response.status}`);
+        const imageData = await response.json();
+        imageCache.set(imageId, imageData);
         return imageData;
     } catch (error) {
         console.error(`Error fetching image ${imageId}:`, error);
-        return null; // Alternative Rückgabe bei Fehler
+        return null;
     }
 }
 
 async function fetchQuestions() {
-    console.time("fetchQuestions"); // Startzeit messen
+    console.time("fetchQuestions");
     try {
         const response = await fetch('http://10.1.10.204:8100/api/collections/automat/records?filter=schwierigkeit="mittel"');
-        if (!response.ok) {
-            throw new Error(`Questions fetch failed with status ${response.status}`);
-        }
-        const data = await response.json();
-
-        const questions = await Promise.all(data.items.map(async item => {
-            let imageUrl = null;
-
-            // Bild laden mit Cache-Unterstützung
-            if (item.bildid) {
-                const imageData = await fetchImage(item.bildid);
-                imageUrl = imageData?.fragenbild
-                    ? `http://10.1.10.204:8100/api/files/bilder/${item.bildid}/${imageData.fragenbild}`
-                    : null;
-            }
-
-            // Antworten in einem Array speichern und nach dem Erstellen mischen
-            const answers = [
-                { text: item.antwort1, correct: true },
-                { text: item.antwort2, correct: false },
-                { text: item.antwort3, correct: false },
-                { text: item.antwort4, correct: false }
-            ].sort(() => Math.random() - 0.5); // Antworten mischen
-
-            return {
-                question: item.frage,
-                image: imageUrl,
-                answers: answers // gemischte Antworten
-            };
-        }));
-
-        console.timeEnd("fetchQuestions"); // Endzeit messen
+        if (!response.ok) throw new Error(`Failed to fetch questions: ${response.status}`);
+        const { items } = await response.json();
+        const questions = await Promise.all(
+            items.map(async ({ frage, bildid, antwort1, antwort2, antwort3, antwort4 }) => {
+                const image = bildid ? await fetchImage(bildid) : null;
+                const answers = [
+                    { text: antwort1, correct: true },
+                    { text: antwort2, correct: false },
+                    { text: antwort3, correct: false },
+                    { text: antwort4, correct: false },
+                ].sort(() => Math.random() - 0.5);
+                return {
+                    question: frage,
+                    image: image?.fragenbild
+                        ? `http://10.1.10.204:8100/api/files/bilder/${bildid}/${image.fragenbild}`
+                        : null,
+                    answers,
+                };
+            })
+        );
+        console.timeEnd("fetchQuestions");
         return questions;
     } catch (error) {
         console.error("Error fetching questions:", error);
-        return []; // Alternative Rückgabe bei Fehler
+        console.timeEnd("fetchQuestions");
+        return [];
     }
 }
 
-
-function showQuestion(question) {
+function showQuestion({ question, answers, image }) {
     const questionText = document.getElementById('question-text');
     const answerButtonsElement = document.getElementById('answer-buttons');
     const questionImage = document.getElementById('question-image');
 
-    questionText.innerText = question.question;
-    answerButtonsElement.innerHTML = '';
+    questionText.textContent = question;
 
-    if (question.image) {
-        questionImage.src = question.image;
+    const fragment = document.createDocumentFragment();
+    answers.forEach(({ text, correct }) => {
+        const button = document.createElement('button');
+        button.textContent = text;
+        button.classList.add('btn');
+        button.onclick = () => {
+            selectAnswer(button, correct);
+            resetInactivityTimer();
+        };
+        fragment.appendChild(button);
+    });
+    answerButtonsElement.replaceChildren(fragment);
+
+    if (image) {
+        questionImage.src = image;
         questionImage.style.display = 'block';
     } else {
         questionImage.style.display = 'none';
     }
 
-    question.answers.forEach(answer => {
-        const button = document.createElement('button');
-        button.innerText = answer.text;
-        button.classList.add('btn');
-        button.disabled = false; // Buttons aktivieren
-        button.addEventListener('click', () => {
-            selectAnswer(button, answer.correct);
-            resetInactivityTimer();
-        });
-        answerButtonsElement.appendChild(button);
-    });
-
     updateProgressBar();
 }
 
-function selectAnswer(button, correct) {
-    const answerButtons = document.querySelectorAll('#answer-buttons .btn');
-    answerButtons.forEach(btn => {
-        btn.disabled = true; // Alle Buttons deaktivieren, damit keine doppelte Auswahl möglich ist
-        if (btn.innerText === button.innerText) {
-            btn.style.backgroundColor = correct ? 'green' : 'red';
-        } else if (btn.innerText === getCorrectAnswerText()) {
-            btn.style.backgroundColor = 'lightgreen';
-        }
+function selectAnswer(button, isCorrect) {
+    const buttons = document.querySelectorAll('#answer-buttons .btn');
+    buttons.forEach(btn => {
+        btn.disabled = true;
+        btn.style.backgroundColor =
+            btn === button
+                ? isCorrect
+                    ? 'green'
+                    : 'red'
+                : btn.textContent === getCorrectAnswerText()
+                    ? 'lightgreen'
+                    : '';
     });
 
-    if (correct) correctAnswers++;
+    if (isCorrect) correctAnswers++;
 
     setTimeout(() => {
-        currentQuestionIndex++;
-        if (currentQuestionIndex < shuffledQuestions.length) {
+        if (++currentQuestionIndex < shuffledQuestions.length) {
             showQuestion(shuffledQuestions[currentQuestionIndex]);
         } else {
             showResults();
@@ -137,71 +129,36 @@ function selectAnswer(button, correct) {
 }
 
 function getCorrectAnswerText() {
-    const currentQuestion = shuffledQuestions[currentQuestionIndex];
-    const correctAnswer = currentQuestion.answers.find(answer => answer.correct);
-    return correctAnswer ? correctAnswer.text : '';
+    return shuffledQuestions[currentQuestionIndex]?.answers.find(a => a.correct)?.text || '';
 }
 
 function showResults() {
-    const questionContainer = document.getElementById('question-container');
-    const answerButtonsElement = document.getElementById('answer-buttons');
-    const questionImage = document.getElementById('question-image');
-    const questionText = document.getElementById('question-text');
+    const container = document.getElementById('question-container');
+    const score = ((correctAnswers / shuffledQuestions.length) * 100).toFixed(2);
 
-    questionContainer.innerHTML = '';
-    answerButtonsElement.innerHTML = '';
+    container.innerHTML = `
+        <img id="result-image" src="LOGO.svg" alt="Result Image">
+        <div id="result-text">${correctAnswers === shuffledQuestions.length
+        ? "Alles richtig, viel Spaß mit deinem Preis!"
+        : "Da musst du wohl nochmal üben, versuchs nochmal!"}</div>
+        <button class="btn" id="result-button">
+            ${correctAnswers === shuffledQuestions.length ? 'Preis abholen' : 'Zurück zum Start'}
+        </button>`;
 
-    const score = (correctAnswers / shuffledQuestions.length) * 100;
-    questionText.innerText = `Dein Ergebnis: ${correctAnswers} von ${shuffledQuestions.length} (${score}%)`;
-
-    let imageUrl, buttonText, buttonOnClick, resultText;
-
-    if (correctAnswers === shuffledQuestions.length) {
-        imageUrl = 'LOGO.svg';
-        resultText = "Alles richtig, viel Spaß mit deinem Preis!";
-        buttonText = 'Preis abholen';
-        buttonOnClick = () => {
-            window.parent.postMessage('prizeCollected', '*');
-            window.parent.location.href = '../../Automat.html';
-        };
-    } else {
-        imageUrl = 'LOGO.svg';
-        resultText = "Da musst du wohl nochmal üben, versuchs nochmal!";
-        buttonText = 'Zurück zum Start';
-        buttonOnClick = () => {
-            window.parent.postMessage('quizFailed', '*');
-            window.parent.location.href = '../../Automat.html';
-        };
-    }
-
-    if (imageUrl) {
-        const resultImage = document.createElement('img');
-        resultImage.src = imageUrl;
-        resultImage.id = 'result-image';
-        questionContainer.appendChild(resultImage);
-    }
-
-    const resultTextElement = document.createElement('div');
-    resultTextElement.id = 'result-text';
-    resultTextElement.innerText = resultText;
-    questionContainer.appendChild(resultTextElement);
-
-    const resultButton = document.createElement('button');
-    resultButton.innerText = buttonText;
-    resultButton.classList.add('btn');
-    resultButton.addEventListener('click', buttonOnClick);
-    questionContainer.appendChild(resultButton);
+    // Redirect to the parent page when the button is clicked
+    document.getElementById('result-button').addEventListener('click', () => {
+        window.top.location.href = '../../Automat.html'; // Redirect parent window
+    });
 }
+
 
 function updateProgressBar() {
     const progressBar = document.getElementById('progress-bar');
     const progressText = document.getElementById('progress-text');
-    const currentQuestionNumber = currentQuestionIndex + 1;
-    const totalQuestions = shuffledQuestions.length;
-    const progressPercentage = (currentQuestionNumber / totalQuestions) * 100;
+    const progress = ((currentQuestionIndex + 1) / shuffledQuestions.length) * 100;
 
-    progressBar.style.width = `${progressPercentage}%`;
-    progressText.innerText = `${currentQuestionNumber}/${totalQuestions}`;
+    progressBar.style.width = `${progress}%`;
+    progressText.textContent = `${currentQuestionIndex + 1}/${shuffledQuestions.length}`;
 }
 
 function blurPage() {
@@ -227,5 +184,14 @@ function resetInactivityTimer() {
 }
 
 function setupInactivityListeners() {
-    document.addEventListener('click', resetInactivityTimer);
+    document.addEventListener('click', debounce(resetInactivityTimer, 300));
+}
+
+// Helper: Debounce function to limit rapid-fire events
+function debounce(func, wait) {
+    let timeout;
+    return function (...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+    };
 }

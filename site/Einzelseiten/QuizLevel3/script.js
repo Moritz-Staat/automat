@@ -505,7 +505,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function startGame() {
-    shuffledQuestions = questions.sort(() => Math.random() - 0.5).slice(0, 10);
+    shuffledQuestions = questions.sort(() => Math.random() - 0.5).slice(0, 5);
     currentQuestionIndex = 0;
     correctAnswers = 0;
     showQuestion(shuffledQuestions[currentQuestionIndex]);
@@ -585,21 +585,21 @@ function showResults() {
 
     let imageUrl, buttonText, buttonOnClick, resultText;
 
-    if (correctAnswers >= 9) {
+    if (correctAnswers === 5) {
         imageUrl = 'LOGO.svg';
         resultText = "Wow,das war spitze! Vielleicht solltest du dich als Trainer bei uns bewerben!";
         buttonText = 'Preis abholen';
         buttonOnClick = () => {
             window.parent.postMessage('prizeCollected', '*');
         };
-    } else if (correctAnswers >= 7) {
+    } else if (correctAnswers === 4) {
         imageUrl = 'LOGO.svg';
         resultText = "Du scheinst dein Zeug zu können! Ein letztes Signal und du wirst zum Profi!";
         buttonText = 'Zurück zum Start';
         buttonOnClick = () => {
             window.parent.postMessage('quizFailed', '*');
         };
-    } else if (correctAnswers >= 3) {
+    } else if (correctAnswers === 3) {
         imageUrl = 'LOGO.svg';
         resultText = "Ein paar Weichen musst du wohl noch richtig stellen!";
         buttonText = 'Zurück zum Start';

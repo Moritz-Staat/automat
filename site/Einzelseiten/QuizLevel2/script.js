@@ -632,7 +632,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function startGame() {
-    shuffledQuestions = questions.sort(() => Math.random() - 0.5).slice(0, 10);
+    shuffledQuestions = questions.sort(() => Math.random() - 0.5).slice(0, 5);
     currentQuestionIndex = 0;
     correctAnswers = 0;
     showQuestion(shuffledQuestions[currentQuestionIndex]);
@@ -712,21 +712,21 @@ function showResults() {
 
     let imageUrl, buttonText, buttonOnClick, resultText;
 
-    if (correctAnswers >= 8) {
+    if (correctAnswers === 5) {
         imageUrl = 'LOGO.svg';
         resultText = "Weichen perfekt eingestellt! Du beherrschst das Bahnwissen wie ein Profi!";
         buttonText = 'Preis abholen';
         buttonOnClick = () => {
             window.parent.postMessage('prizeCollected', '*');
         };
-    } else if (correctAnswers >= 6) {
+    } else if (correctAnswers === 4) {
         imageUrl = 'LOGO.svg';
-        resultText = "Du bist auf dem Überholgleis, das war richtig gut!";
+        resultText = "Du bist auf dem Überholgleis, das war schon richtig gut!";
         buttonText = 'Zurück zum Start';
         buttonOnClick = () => {
             window.parent.postMessage('quizFailed', '*');
         };
-    } else if (correctAnswers >= 4) {
+    } else if (correctAnswers === 3) {
         imageUrl = 'LOGO.svg';
         resultText = "Die Ampel steht auf gelb - du hast einen soliden Start hingelegt, aber da ist noch Platz nach oben!";
         buttonText = 'Zurück zum Start';

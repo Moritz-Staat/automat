@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontaktformular</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+        }
+        input, button, label {
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+<h1>Newsletter Anmeldung</h1>
+<p>Bitte fülle das folgende Formular aus, um dein Geschenk zu erhalten.</p>
+<form id="contactForm">
+    <input type="text" id="name" placeholder="Name (optional)">
+    <input type="email" id="email" placeholder="E-Mail (optional)">
+
+    <div class="checkbox-container">
+        <input type="checkbox" id="privacyCheck" required>
+        <label for="privacyCheck">
+            Ich habe die <a href="https://www.wus-technik.com/datenschutz/" target="_blank">Datenschutzbedingungen</a> zur Kenntnis genommen und stimme diesen zu.
+        </label>
+    </div>
+
+    <button type="submit">Absenden</button>
+</form>
+<p id="statusMessage"></p>
+
+<script>
+    async function submitForm(event) {
+        event.preventDefault();
+        const urlParams = new URLSearchParams(window.location.search);
+        const entryId = urlParams.get('id');
+
+        if (!entryId) {
+            document.getElementById('statusMessage').innerText = "Fehler: Keine gültige ID.";
+            return;
+        }
+
+        const response = await fetch(`http://10.1.10.204:8100/api/collections/kontaktbestätigungen/records/${entryId}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ bestätigt: true })
+        });
+
+        if (response.ok) {
+            document.getElementById('statusMessage').innerText = "Erfolgreich! Dein Geschenk wird vorbereitet.";
+        } else {
+            document.getElementById('statusMessage').innerText = "Fehler beim Absenden. Versuche es erneut.";
+        }
+    }
+
+    document.getElementById('contactForm').addEventListener('submit', submitForm);
+</script>
+</body>
+</html>

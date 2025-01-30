@@ -225,3 +225,66 @@ h3{
     color:black;
     font-family: 'Rajdhani-SemiBold';
 }
+
+
+.gift-animation {
+    width: 200px;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    animation: wobble 2s infinite ease-in-out;
+    position: absolute;
+    bottom: 5%; /* Geschenk sitzt jetzt unten */
+    left: 46%; /* Geschenk horizontal mittig */
+    transform: translateX(-50%);
+}
+
+.gift-animation:hover {
+    transform: scale(1.1);
+}
+
+@keyframes wobble {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(3deg); }
+    50% { transform: rotate(-3deg); }
+    75% { transform: rotate(3deg); }
+    100% { transform: rotate(0deg); }
+}
+
+#qrOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    z-index: 9999;
+}
+
+/* QR-Code und Text */
+.qr-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.qr-content h1 {
+    font-size: 6rem;
+    font-family: 'Roboto-Bold';
+    margin-top: 15px;
+    color: black;
+}
+
+/* QR-Code Bild */
+#qrImage {
+    width: 450px;
+    height: 450px;
+}

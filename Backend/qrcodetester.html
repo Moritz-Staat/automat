@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gratis Snack</title>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script> <!-- QR-Code-Bibliothek -->
+
+  <style>
+    @font-face {
+      font-family: 'Roboto-Bold';
+      src: url('./fonts/Roboto-Bold.ttf') format('truetype');
+    }
+
+    body {
+      font-family: 'Roboto-Bold', Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      background-color: #f4f4f4;
+    }
+
+    .gift-container {
+      position: relative;
+      cursor: pointer;
+      animation: bounce 1.5s infinite;
+    }
+
+    .gift-container img {
+      width: 150px;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .qr-popup {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .qr-popup p {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    #qrcode {
+      margin: 10px auto;
+      padding: 10px;
+      background: white;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Hol dir deinen Gratis-Snack!</h1>
+
+<!-- Geschenk Animation -->
+<div class="gift-container" onclick="showQRCode()">
+  <img src="gift.png" alt="Geschenk" />
+</div>
+
+<!-- QR-Code Popup -->
+<div id="qrPopup" class="qr-popup">
+  <p>Scanne den QR-Code für einen gratis Snack!</p>
+  <div id="qrcode"></div>
+</div>
+
+<script>
+  function showQRCode() {
+    const popup = document.getElementById("qrPopup");
+    popup.style.display = "block";
+
+    // QR-Code generieren (Webserver-Link zu kontaktformular.html)
+    const qrUrl = "https://mein-webserver.de/kontaktformular.html";
+    new QRCode(document.getElementById("qrcode"), {
+      text: qrUrl,
+      width: 200,
+      height: 200
+    });
+
+    // Nach 10 Sekunden QR-Code ausblenden
+    setTimeout(() => {
+      popup.style.display = "none";
+    }, 10000);
+  }
+</script>
+
+</body>
+</html>

@@ -158,24 +158,34 @@ function closeModal() {
     document.getElementById('wholepage').classList.remove('blurred');
 }
 
-function birnenwechsler() {
+function geschenkWechsler() {
     const data = {
-        level1: getFromLocalStorage('level1win'), /*Andere Level darunter*/
+        level1: getFromLocalStorage('level1win'),
         level2: getFromLocalStorage('level2win'),
         level3: getFromLocalStorage('level3win'),
         loses: getFromLocalStorage('loses'),
         kontakt: getFromLocalStorage('kontaktdaten')
+    };
+
+    const giftImage = document.getElementById('giftImage');
+
+    if (!giftImage) {
+        console.error("❌ Fehler: 'giftImage' existiert nicht!");
+        return;
     }
+
     if (data.level1 > 15 || data.level2 > 25 || data.level3 > 15 || data.loses > 13 || data.kontakt > 5) {
-        document.getElementById('zählstand').src = "../images/orangebirne.svg"
+        giftImage.src = "../Images/orangesgeschenk.png";
     } else if (data.level1 > 25 || data.level2 > 35 || data.level3 > 25 || data.loses > 18 || data.kontakt > 10) {
-        document.getElementById('zählstand').src = "../images/rotebirne.svg"
+        giftImage.src = "../Images/rotesgeschenk.png";
     } else {
-        document.getElementById('zählstand').src = "../images/grünebirne.svg"
+        giftImage.src = "../Images/grünesgeschenk.png";
     }
 }
 
-birnenwechsler()
+// Funktion direkt beim Laden aufrufen
+geschenkWechsler();
+
 
 // Überschrift Animation
 
@@ -197,4 +207,35 @@ window.addEventListener('load', () => {
 
     // Wiederhole die Animation alle 10 Sekunden
     setInterval(animateHeading, 10000); // 10.000 Millisekunden = 10 Sekunden
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    console.log("✅ DOM vollständig geladen – Skript läuft!");
+
+    const giftImage = document.getElementById("giftImage");
+    const qrOverlay = document.getElementById("qrOverlay");
+
+    if (!giftImage || !qrOverlay) {
+        console.error("❌ Fehler: Ein benötigtes Element fehlt!");
+        console.log("giftImage:", giftImage);
+        console.log("qrOverlay:", qrOverlay);
+        return;
+    }
+
+    console.log("🎁 Geschenk-GIF gefunden, Event-Listener wird gesetzt...");
+
+    giftImage.addEventListener("click", function () {
+        console.log("🎯 Geschenk wurde geklickt, QR-Code wird angezeigt!");
+
+        // Vollbild-Overlay aktivieren
+        qrOverlay.style.opacity = "1";
+        qrOverlay.style.visibility = "visible";
+
+        // Nach 10 Sekunden Overlay ausblenden
+        setTimeout(() => {
+            console.log("⏳ QR-Code wird ausgeblendet...");
+            qrOverlay.style.opacity = "0";
+            qrOverlay.style.visibility = "hidden";
+        }, 10000);
+    });
 });

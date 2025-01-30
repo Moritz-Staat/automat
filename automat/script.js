@@ -7,9 +7,9 @@ function showScreensaver() {
     const video = document.getElementById('screensaverVideo');
 
     const videos = [
-        '../Images/RZ_ChrisOmat_Bildschirmschonervideo_3er_v1.mp4',
-        '../Images/RZ_ChrisOmat_Bildschirmschonervideo_3er_v2.mp4',
-        '../Images/RZ_ChrisOmat_Bildschirmschonervideo_3er_v3.mp4',
+        'Images/RZ_ChrisOmat_Bildschirmschonervideo_3er_v1.mp4',
+        'Images/RZ_ChrisOmat_Bildschirmschonervideo_3er_v2.mp4',
+        'Images/RZ_ChrisOmat_Bildschirmschonervideo_3er_v3.mp4',
     ];
 
     const randomVideo = videos[Math.floor(Math.random() * videos.length)];
@@ -175,11 +175,11 @@ function geschenkWechsler() {
     }
 
     if (data.level1 > 15 || data.level2 > 25 || data.level3 > 15 || data.loses > 13 || data.kontakt > 5) {
-        giftImage.src = "../Images/orangesgeschenk.svg";
+        giftImage.src = "Images/orangesgeschenk.svg";
     } else if (data.level1 > 25 || data.level2 > 35 || data.level3 > 25 || data.loses > 18 || data.kontakt > 10) {
-        giftImage.src = "../Images/rotesgeschenk.svg";
+        giftImage.src = "Images/rotesgeschenk.svg";
     } else {
-        giftImage.src = "../Images/grünesgeschenk.svg";
+        giftImage.src = "Images/grünesgeschenk.svg";
     }
 }
 

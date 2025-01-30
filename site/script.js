@@ -175,11 +175,11 @@ function geschenkWechsler() {
     }
 
     if (data.level1 > 15 || data.level2 > 25 || data.level3 > 15 || data.loses > 13 || data.kontakt > 5) {
-        giftImage.src = "../Images/orangesgeschenk.png";
+        giftImage.src = "../Images/orangesgeschenk.svg";
     } else if (data.level1 > 25 || data.level2 > 35 || data.level3 > 25 || data.loses > 18 || data.kontakt > 10) {
-        giftImage.src = "../Images/rotesgeschenk.png";
+        giftImage.src = "../Images/rotesgeschenk.svg";
     } else {
-        giftImage.src = "../Images/grünesgeschenk.png";
+        giftImage.src = "../Images/grünesgeschenk.svg";
     }
 }
 

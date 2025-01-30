@@ -189,7 +189,7 @@ geschenkWechsler();
 
 // Überschrift Animation
 
-window.addEventListener('load', () => {
+/*window.addEventListener('load', () => {
     const h1 = document.getElementById('animated-h1');
 
     // Funktion zum Ausführen der Animation
@@ -207,7 +207,7 @@ window.addEventListener('load', () => {
 
     // Wiederhole die Animation alle 10 Sekunden
     setInterval(animateHeading, 10000); // 10.000 Millisekunden = 10 Sekunden
-});
+});*/
 
 document.addEventListener("DOMContentLoaded", function () {
     console.log("✅ DOM vollständig geladen – Skript läuft!");

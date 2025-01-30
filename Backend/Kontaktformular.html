@@ -3,77 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kontaktformular</title>
+    <title>Gratis-Snack Anmeldung</title>
+    <script src="https://cdn.jsdelivr.net/npm/pocketbase@latest/dist/pocketbase.umd.js"></script>
+
     <style>
+        @font-face {
+            font-family: 'Roboto-Bold';
+            src: url('./fonts/Roboto-Bold.ttf') format('truetype');
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto-Bold', Arial, sans-serif;
+            background-color: #f4f4f4;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
             text-align: center;
+            color: #333;
         }
+
+        h1 {
+            color: #62b55a;
+            font-size: 28px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
         form {
             display: flex;
             flex-direction: column;
-            width: 300px;
+            width: 320px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
-        input, button, label {
-            margin: 10px 0;
+
+        input {
+            border: 2px solid #62b55a;
+            border-radius: 5px;
             padding: 10px;
             font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+            margin-bottom: 15px; /* Abstand zwischen Name und E-Mail vergrößert */
         }
+
+        input:focus {
+            border-color: #4a9448;
+            box-shadow: 0px 0px 8px rgba(98, 181, 90, 0.5);
+        }
+
         .checkbox-container {
             display: flex;
             align-items: center;
             justify-content: center;
+            margin: 15px 0;
+        }
+
+        button {
+            background-color: #62b55a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #4a9448;
+            transform: scale(1.05);
+        }
+
+        #statusMessage {
+            margin-top: 15px;
+            font-size: 16px;
+            color: #62b55a;
         }
     </style>
+
 </head>
 <body>
-<h1>Newsletter Anmeldung</h1>
-<p>Bitte fülle das folgende Formular aus, um dein Geschenk zu erhalten.</p>
+
+<h1>Gratis-Snack Anmeldung</h1>
+<p>Gib deine Kontaktdaten ein und erhalte einen kostenlosen Snack!</p>
+
 <form id="contactForm">
-    <input type="text" id="name" placeholder="Name (optional)">
-    <input type="email" id="email" placeholder="E-Mail (optional)">
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="email" id="email" placeholder="E-Mail" required>
 
     <div class="checkbox-container">
         <input type="checkbox" id="privacyCheck" required>
         <label for="privacyCheck">
-            Ich habe die <a href="https://www.wus-technik.com/datenschutz/" target="_blank">Datenschutzbedingungen</a> zur Kenntnis genommen und stimme diesen zu.
+            Ich akzeptiere die <a href="https://www.wus-technik.com/datenschutz/" target="_blank">Datenschutzbestimmungen</a>.
         </label>
     </div>
 
     <button type="submit">Absenden</button>
 </form>
+
 <p id="statusMessage"></p>
 
 <script>
+    const pb = new PocketBase('http://10.1.10.204:8100');
+
     async function submitForm(event) {
         event.preventDefault();
-        const urlParams = new URLSearchParams(window.location.search);
-        const entryId = urlParams.get('id');
 
-        if (!entryId) {
-            document.getElementById('statusMessage').innerText = "Fehler: Keine gültige ID.";
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const privacyAccepted = document.getElementById('privacyCheck').checked;
+
+        if (!privacyAccepted) {
+            document.getElementById('statusMessage').innerText = "Bitte akzeptiere die Datenschutzbestimmungen.";
             return;
         }
 
-        const response = await fetch(`http://10.1.10.204:8100/api/collections/kontaktbestätigungen/records/${entryId}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ bestätigt: true })
-        });
+        try {
+            // 1️⃣ Prüfen, ob Nutzer bereits existiert
+            const existingUser = await pb.collection('kontaktbestaetigungen').getFirstListItem(`email="${email}"`)
+                .catch(() => null); // Falls kein Nutzer gefunden wird, ignorieren
 
-        if (response.ok) {
-            document.getElementById('statusMessage').innerText = "Erfolgreich! Dein Geschenk wird vorbereitet.";
-        } else {
-            document.getElementById('statusMessage').innerText = "Fehler beim Absenden. Versuche es erneut.";
+            let userId;
+
+            if (existingUser) {
+                // Nutzer existiert, aktualisieren
+                userId = existingUser.id;
+                await pb.collection('kontaktbestaetigungen').update(userId, {
+                    name: name,
+                    bestaetigt: true
+                });
+            } else {
+                // 2️⃣ Neuen Nutzer in PocketBase speichern
+                const newUser = await pb.collection('kontaktbestaetigungen').create({
+                    name: name,
+                    email: email,
+                    bestaetigt: true,
+                    snack_geholt: false
+                });
+                userId = newUser.id;
+            }
+
+            document.getElementById('statusMessage').innerText = "Erfolgreich! Dein Snack wird freigegeben.";
+
+            // 3️⃣ Snack-Automat auslösen
+            doPost('1', 'http://192.168.0.120/Expert');
+
+            // 4️⃣ Markieren, dass der Snack ausgegeben wurde
+            await pb.collection('kontaktbestaetigungen').update(userId, { snack_geholt: true });
+
+            // 5️⃣ Nach 3 Sekunden zur Startseite weiterleiten
+            setTimeout(() => {
+                window.location.href = "../Automat.html";
+            }, 3000);
+
+        } catch (error) {
+            console.error("Fehler:", error);
+            document.getElementById('statusMessage').innerText = "Fehler beim Absenden. Bitte später erneut versuchen.";
         }
+    }
+
+    function doPost(snackId, url) {
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `snack=${snackId}`
+        })
+            .then(response => {
+                if (response.ok) {
+                    console.log("Snack erfolgreich ausgelöst!");
+                } else {
+                    console.error("Fehler beim Snack-Auslösen.");
+                }
+            })
+            .catch(error => console.error("Netzwerkfehler:", error));
     }
 
     document.getElementById('contactForm').addEventListener('submit', submitForm);
 </script>
+
 </body>
 </html>

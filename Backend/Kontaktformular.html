@@ -127,21 +127,23 @@
         }
 
         try {
+            console.log("📨 Sende Daten an PocketBase...");
+
             // 1️⃣ Prüfen, ob Nutzer bereits existiert
             const existingUser = await pb.collection('kontaktbestaetigungen').getFirstListItem(`email="${email}"`)
-                .catch(() => null); // Falls kein Nutzer gefunden wird, ignorieren
+                .catch(() => null);
 
             let userId;
 
             if (existingUser) {
-                // Nutzer existiert, aktualisieren
+                console.log("✅ Nutzer existiert, aktualisiere Daten...");
                 userId = existingUser.id;
                 await pb.collection('kontaktbestaetigungen').update(userId, {
                     name: name,
                     bestaetigt: true
                 });
             } else {
-                // 2️⃣ Neuen Nutzer in PocketBase speichern
+                console.log("🆕 Neuer Nutzer wird in PocketBase erstellt...");
                 const newUser = await pb.collection('kontaktbestaetigungen').create({
                     name: name,
                     email: email,
@@ -152,44 +154,90 @@
             }
 
             document.getElementById('statusMessage').innerText = "Erfolgreich! Dein Snack wird freigegeben.";
+            console.log("🥨 Snack wird angefordert...");
 
-// 3️⃣ Snack-Automat auslösen
-            doPost('1', 'http://192.168.0.120/Expert');
+            // 3️⃣ Snack-Automat auslösen
+            const spssSuccess = await doPostDirect('1', 'http://192.168.0.120/Expert');
 
-// 4️⃣ Markieren, dass der Snack ausgegeben wurde
+            if (spssSuccess) {
+                console.log("✅ Snack wurde erfolgreich angefordert!");
+            } else {
+                console.error("❌ Direkte Verbindung zur SPS fehlgeschlagen. Versuche alternative Methode...");
+                await doPostProxy('1', 'http://10.1.10.204/spss_trigger.php');
+            }
+
+            // 4️⃣ Markieren, dass der Snack ausgegeben wurde
+            console.log("📝 Markiere in PocketBase, dass der Snack geholt wurde...");
             await pb.collection('kontaktbestaetigungen').update(userId, { snack_geholt: true });
 
-// 5️⃣ Nach 5 Sekunden Tab schließen
+            // 5️⃣ Nach 5 Sekunden Tab schließen
             setTimeout(() => {
+                console.log("🔒 Tab wird geschlossen...");
                 window.close();
             }, 5000);
 
-
-
         } catch (error) {
-            console.error("Fehler:", error);
+            console.error("❌ Fehler beim Absenden:", error);
             document.getElementById('statusMessage').innerText = "Fehler beim Absenden. Bitte später erneut versuchen.";
         }
     }
 
-    function doPost(snackId, url) {
-        fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: `snack=${snackId}`
-        })
-            .then(response => {
-                if (response.ok) {
-                    console.log("Snack erfolgreich ausgelöst!");
-                } else {
-                    console.error("Fehler beim Snack-Auslösen.");
-                }
-            })
-            .catch(error => console.error("Netzwerkfehler:", error));
+    // 🟢 1️⃣ Versuch: Direkte POST-Anfrage an die SPS senden
+    async function doPostDirect(snackId, url) {
+        console.log(`📡 Sende direkte POST-Anfrage an SPS (${url}) mit snackId=${snackId}...`);
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `snack=${snackId}`
+            });
+
+            console.log("🌍 Antwortstatus von SPS:", response.status, response.statusText);
+
+            if (!response.ok) {
+                throw new Error(`SPS hat Fehler zurückgegeben: ${response.status}`);
+            }
+
+            const data = await response.text();
+            console.log("📥 Antwort von SPS:", data);
+            return true;
+
+        } catch (error) {
+            console.error("❌ Fehler bei direkter SPS-Anfrage:", error);
+            return false;
+        }
+    }
+
+    // 🔴 2️⃣ Falls direkte SPS-Anfrage fehlschlägt → PHP-Proxy verwenden
+    async function doPostProxy(snackId, url) {
+        console.log(`🔄 Verwende PHP-Proxy für SPS-Anfrage: ${url}`);
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `snack=${snackId}`
+            });
+
+            console.log("🌍 Antwortstatus vom Proxy:", response.status, response.statusText);
+
+            if (!response.ok) {
+                throw new Error(`Proxy hat Fehler zurückgegeben: ${response.status}`);
+            }
+
+            const data = await response.text();
+            console.log("📥 Antwort vom Proxy:", data);
+
+        } catch (error) {
+            console.error("❌ Proxy-Verbindung fehlgeschlagen:", error);
+        }
     }
 
     document.getElementById('contactForm').addEventListener('submit', submitForm);
 </script>
+
+
 
 </body>
 </html>
